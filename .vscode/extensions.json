@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        "redhat.java",                 // Language Support for Java
+        "vscjava.vscode-java-debug",   // Debugger for Java
+        "vscjava.vscode-java-pack"     // Java Extension Pack
+    ],
+}
