@@ -114,17 +114,18 @@ cd IUT-SAE1.02/
 ## Exemple de gameplay
 Exemple d'affichage en cours de jeu
 ```bash
-Tour 3 : Vous êtes le maire d’EcoVille.
-Budget : 450€
-Pollution : 12%
-Citoyens heureux : 85%
-
-Que voulez-vous faire ?
-1. Construire une usine (+100€/tour, +5% pollution, coût : 200€)
-2. Planter des arbres (-2% pollution, coût : 50€)
-3. Organiser un festival (+10% bonheur, coût : 100€)
-
-Votre choix : 
+-------------------------
+Tour 1
+Budget : 45000 €
+Pollution : 20 %
+Bonheur : 85 %
+-------------------------
+Actions disponibles :
+1. Construire une usine (-5000 €, +20% pollution, -10% bonheur)
+2. Planter des arbres (-2000 €, -10% pollution, +15% bonheur)
+3. Organiser un festival (-3000 €, +5% bonheur)
+-------------------------
+Choisissez une action (1-3) :
 ```
 
 ## Structure des fichiers

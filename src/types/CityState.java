@@ -1,0 +1,17 @@
+/**
+ * CityState.java
+ * 
+ * Représente l'état actuel de la ville dans EcoManager.
+ * 
+ * Attributs :
+ * - Budget disponible.
+ * - Niveau de pollution.
+ * - Satisfaction des citoyens.
+ * 
+ * Responsabilités :
+ * - Stocker et mettre à jour les variables globales du jeu.
+ * - Fournir des méthodes pour vérifier les conditions de victoire ou de défaite.
+ * 
+ * Auteur(s) : Yann RENARD, Yanis MEKKI
+ */
+
