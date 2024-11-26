@@ -98,12 +98,11 @@ cd IUT-SAE1.02/
 ```
 3. Compilation et Exécution
 ```bash
-Copier le code
 # Compilation
-javac -d bin src/*.java
+./compile.sh
 
 # Exécution
-java -cp bin Main
+./run.sh
 ```
 
 ## Guide d'utilisation
