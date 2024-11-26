@@ -13,3 +13,6 @@
  * Auteur(s) : Yann RENARD, Yanis MEKKI
  */
 
+class Decisions{
+
+}

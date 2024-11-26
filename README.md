@@ -149,10 +149,11 @@ IUT-SAE1.02/
 │   │   ├── Main.java              # Point d'entrée principal du programme.
 │   │   └── GameEngine.java        # Logique principale du jeu (boucle, gestion des tours).
 │   ├── types/
-│   │   ├── Decision.java          # Classe pour représenter une décision.
-│   │   ├── Evenement.java         # Classe pour représenter un événement.
+│   │   ├── CityState.java         # Classe pour représenter l'état actuel de la ville.
 │   │   ├── Configuration.java     # Classe pour stocker les paramètres initiaux du jeu.
-│   │   └──CityState.java         # Classe pour représenter l'état actuel de la ville.
+│   │   ├── Decision.java          # Classe pour représenter une décision.
+│   │   ├── DisplayManager.java    # Classe pour gérer l'affichage dans le terminal.
+│   │   └── Evenement.java         # Classe pour représenter un événement.
 ├── .gitignore                   # Liste des fichiers/dossiers à ignorer par Git.
 ├── compile.sh                   # Script de compilation.
 ├── LICENSE                      # Licence du projet.
