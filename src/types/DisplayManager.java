@@ -10,3 +10,20 @@
  * 
  * Auteur(s) : Yann RENARD, Yanis MEKKI
  */
+
+class DisplayManager {
+    void afficherEtatJeu(int tour, int budget, int pollution, int bonheur) {
+        println("-------------------------");
+        println("Tour " + tour);
+        println("Budget : " + budget + " €");
+        println("Pollution : " + pollution + " %");
+        println("Bonheur : " + bonheur + " %");
+        println("-------------------------");
+        println("Actions disponibles :");
+        println("...");
+        println("...");
+        println("...");
+        println("-------------------------");
+        print("Choisissez une action (1-3) : ");
+    }
+}
