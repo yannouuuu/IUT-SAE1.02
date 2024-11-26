@@ -1,0 +1,3 @@
+action,description,impact_argent,impact_pollution,impact_bonheur
+construire_usine,Construire une nouvelle usine,-5000,+20,-10
+planter_arbres,Planter des arbres,-2000,-10,+15
