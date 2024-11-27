@@ -8,17 +8,12 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      
-      - name: Set up SSH
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Sync to GitLab
+        env:
+          GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.GITLAB_SSH_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
-      
-      - name: Push to GitLab
-        run: |
-          git remote add gitlab git@gitlab.univ-lille.fr:yann.renard.etu/iut-sae1.02.git
-          git push -u gitlab main --force
+          git remote add gitlab https://gitlab.univ-lille.fr/yann.renard.etu/iut-sae1.02.git
+          git push --mirror gitlab
