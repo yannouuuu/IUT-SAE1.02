@@ -11,7 +11,5 @@ jobs:
           fetch-depth: 0
       - uses: pixta-dev/repository-mirroring-action@v1
         with:
-          target_repo_url: 
-            git@gitlab.univ-lille.fr:yann.renard.etu/iut-sae1.02.git
-          ssh_private_key: 
-            ${{ secrets.GITLAB_TOKEN }}
+          target_repo_url: git@gitlab-ssh.univ-lille.fr:yann.renard.etu/iut-sae1.02.git
+          ssh_private_key: ${{ secrets.GITLAB_TOKEN }}
