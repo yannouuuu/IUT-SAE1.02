@@ -1,22 +1,17 @@
-name: Sync with GitLab
-on:
-  push:
-    branches:
-      - main
+name: Mirroring
+
+on: [push, delete]
 
 jobs:
-  sync:
+  to_gitlab:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Sync to GitLab
-        env:
-          GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
-        run: |
-          git remote add gitlab https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.univ-lille.fr/yann.renard.etu/iut-sae1.02.git
-          git push --mirror gitlab :main
-          git push gitlab main:new-branch
+      - uses: pixta-dev/repository-mirroring-action@v1
+        with:
+          target_repo_url: 
+            git@gitlab.univ-lille.fr:yann.renard.etu/iut-sae1.02.git
+          ssh_private_key: 
+            ${{ secrets.GITLAB_TOKEN }}
