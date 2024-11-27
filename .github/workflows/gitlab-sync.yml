@@ -20,5 +20,5 @@ jobs:
       
       - name: Push to GitLab
         run: |
-          git remote add gitlab git@gitlab.univ-lille.fr:yann.renard.etu/iut-sae1.02#.git
+          git remote add gitlab git@gitlab.univ-lille.fr:yann.renard.etu/iut-sae1.02.git
           git push -u gitlab main --force
