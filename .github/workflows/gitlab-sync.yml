@@ -15,5 +15,5 @@ jobs:
         env:
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
         run: |
-          git remote add gitlab https://gitlab.univ-lille.fr/yann.renard.etu/iut-sae1.02.git
+          git remote add gitlab https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.univ-lille.fr/yann.renard.etu/iut-sae1.02.git
           git push --mirror gitlab
