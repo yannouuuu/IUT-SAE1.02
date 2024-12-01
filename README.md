@@ -47,7 +47,7 @@ Ce projet s'inscrit dans le cadre de la SAE 1.02 du BUT Informatique et vise à 
   - [ ] Pollution.  
   - [ ] Population heureuse.  
 - [ ] Détection des fins possibles :  
-  - [ ] Victoire (budget positif, pollution maîtrisée <50%, citoyens heureux >70% après 10 tours).  
+  - [ ] Victoire (budget positif, pollution maîtrisée <50%, citoyens heureux >70%).  
   - [ ] Défaite (pollution >100%, argent à 0, bonheur <50%).  
 
 ### **Envisagé (fonctionnalités bonus si le temps le permet) :**
