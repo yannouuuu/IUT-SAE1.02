@@ -17,14 +17,12 @@ class App extends Program {
     final String DESSIN = "ressources/art_ascii.txt";
     final int TEMPS_PAUSE = 500;
 
-
     void algorithm() {
         // Initialisation des variables de jeu (A EQUILIBRER)
         int tour = 1;
         int budget = 45000;
         int pollution = 20;
         int bonheur = 85;
-        https://prod.liveshare.vsengsaas.visualstudio.com/join?81210A5EAEBB322520A4EC8B6065BD617C34
 
 
         // // Boucle principale du jeu
@@ -37,8 +35,4 @@ class App extends Program {
     // Affichage de l'état du jeu
     void afficherEtatJeu(int tour, int budget, int pollution, int bonheur) {
     }
-
-
-
 }
-
