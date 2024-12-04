@@ -14,4 +14,8 @@
  * 
  * Auteur(s) : Yann RENARD, Yanis MEKKI
  */
-
+class City{    
+    int budget;
+    int pollution;
+    int bonnheur;
+}
