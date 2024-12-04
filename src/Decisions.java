@@ -14,5 +14,9 @@
  */
 
 class Decisions{
-
+    String nom;
+    String desc;
+    int argent;
+    int pollution;
+    int bonheur;
 }

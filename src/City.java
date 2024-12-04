@@ -14,8 +14,10 @@
  * 
  * Auteur(s) : Yann RENARD, Yanis MEKKI
  */
-class City{    
+class City{
+    String nom;
+    int tour;    
     int budget;
     int pollution;
-    int bonnheur;
+    int bonheur;
 }

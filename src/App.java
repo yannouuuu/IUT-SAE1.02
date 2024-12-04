@@ -8,39 +8,40 @@
  */
 
 import extensions.File;
-
-import extensions.CSV;
+import extensions.CSVFile;
 
 class App extends Program {
 
     final String NOM = "EcoManager";
-    final String DESSIN = "ressources/art_ascii.txt";
+    final String TITRE = "../ressources/titre_ascii.txt";
 
     void algorithm(){
-        afficherTitreJeu(DESSIN); // Yann
-        int choix=readInt();
-        while(choix!=1 || choix!=2 || choix!=3 || choix!=4){
-            println("La saisie est invalide veuillez recommencez !");
-            choix=readInt();
-        }
-        if(choix==1){
+        afficherTitreJeu(TITRE); // Affiche le titre du jeu
+        afficherMenu(); // Affiche le menu principal
+        int choix = -1;
+        while (choix < 1 || choix > 4) {
+            print("Entrez votre choix (1-4) : ");
+            choix = readInt();
+        }        if(choix == 1){
             println("Quel est le nom de votre ville ?");
-            String nomville=readString();
-            City ville=creerpartie(nomville);
+            String nomville = readString();
+            City ville = creerpartie(nomville);
         }
-        else if(choix==2){
+        else if(choix == 2){
             println("Systeme de chargement de sauvegarde pas encore disponible");
-            //Charger partie quand dispo ville=""
         }
-        else if(choix==3){
+        else if(choix == 3){
             println("Règles");
+        } 
+        else if(choix == 4){
+            println("A bientôt !");
         }
-        if(choix==1 || choix==2){
-            while((ville.tour<70) || (ville.bonheur>50) || (ville.pollution<100) || (ville.budget>0)){
-                afficherEtatJeu(ville);
-                
+ //       if(choix==1 /*choix2 */){
+ //           while(ville.tour<70 || ville.bonheur>50 || ville.pollution<100 || ville.budget>0){
+ //               afficherEtatJeu(ville);
 
-            }
+
+ //          }
         }
         
         
@@ -52,14 +53,21 @@ class App extends Program {
         //     afficherEtatJeu(tour, budget, pollution, bonheur);
         //     tour++;
         // }
-    }
+    
+    void afficherMenu(){
+        println("Choisissez une option :");
+        println("1. Nouvelle ville");
+        println("2. Charger une partie");
+        println("3. Afficher les règles du jeu");
+        println("4. Quitter");
 
+    }
     
 
     // Affichage de l'état du jeu
     void afficherEtatJeu(City ville) {
-        println(ville.nom)
-        println("---------------------------------")
+        println(ville.nom);
+        println("---------------------------------");
         println("Tour : " + ville.tour);
         println("Budget : " + ville.budget + " €");
         println("Pollution : " + ville.pollution + "%");
@@ -68,8 +76,8 @@ class App extends Program {
 
     void afficherTitreJeu(String dessin){
         File file = newFile(dessin);
-        while(ready(files)){
-            println(readLine(files));
+        while(ready(file)){
+            println(readLine(file));
         }
     }  
     
@@ -82,5 +90,11 @@ class App extends Program {
         ville.bonheur=85;
         return ville;
     }
+
+    //Decisions decision(){
+        
+
+        
+    //}
 }
 

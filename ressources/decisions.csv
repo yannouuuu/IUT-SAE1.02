@@ -1,3 +1,11 @@
 action,description,impact_argent,impact_pollution,impact_bonheur
-construire_usine,Construire une nouvelle usine,-5000,+20,-10
-planter_arbres,Planter des arbres,-2000,-10,+15
+subvention_verte,Subventionner des initiatives écologiques,-3000,-15,+10
+augmenter_salaires,Augmenter les salaires des employés,-4000,+5,+20
+taxer_pollution,Imposer une taxe sur la pollution,+2000,-20,-5
+organiser_festival,Organiser un festival pour la communauté,-2500,+5,+25
+rénover_bâtiments,Rénover des bâtiments pour améliorer l’efficacité énergétique,-6000,-25,+10
+créer_parc_public,Créer un parc public,-4500,-5,+30
+investir_recherche,Investir dans la recherche sur les énergies renouvelables,-7000,-30,+15
+importer_matériaux,Importer des matériaux peu chers,+1000,+10,-5
+exporter_produits,Exporter des produits locaux,+5000,+5,+10
+réduire_coût_production,Réduire les coûts de production par l’automatisation,-3000,+15,-10
