@@ -125,7 +125,7 @@ Actions disponibles :
 2. Planter des arbres (-2000 €, -10% pollution, +15% bonheur)
 3. Organiser un festival (-3000 €, +5% bonheur)
 -------------------------
-Choisissez une action (1-3) :
+Choisissez une action (1-3 ou 'q' pour sauvegarder la partie) : 1
 ```
 
 ## Structure des fichiers
