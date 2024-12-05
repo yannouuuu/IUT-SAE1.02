@@ -18,11 +18,9 @@ class App extends Program {
     void algorithm(){
         afficherTitreJeu(TITRE); // Affiche le titre du jeu
         afficherMenu(); // Affiche le menu principal
-        int choix = -1;
-       while (choix < 1 || choix > 4) {
-            print("Entrez votre choix (1-4) : "); 
-            choix = readInt();
-        }        if(choix == 1){
+        int choix = choixvalide(4);
+
+        if(choix == 1){
             println("Quel est le nom de votre ville ?");
             String nomville = readString();
             City ville = creerpartie(nomville);
@@ -64,7 +62,8 @@ class App extends Program {
     }
 
     int choixvalide(int nbrchoix){
-        int choix=-1;
+        print("Entrez votre choix (1-"+nbrchoix+") : ");
+        int choix=readInt();
         while(choix<1 || choix>nbrchoix){
             println("La saisie est invalide veuillez recommencez !");
             choix=readInt();
