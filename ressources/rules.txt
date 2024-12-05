@@ -1,0 +1,23 @@
+
+🌿 Bienvenue dans EcoManager ! 🌍
+
+Prenez les commandes d’une ville en plein essor !
+Devenez le maire visionnaire de votre petite ville et relevez un défi passionnant : équilibrer la croissance économique, protéger l’environnement et garantir le bien-être des citoyens. 
+
+Un jeu simple, amusant, et éducatif :
+- Initiez-vous aux bases de l’écologie, de l’économie et de la gestion tout en vous divertissant.
+- Chaque décision compte : saurez-vous bâtir une ville prospère et durable ?
+
+Conditions de victoire :
+🏆 Gagnez en atteignant 10 tours avec :
+- Un budget positif 🪙.
+- Une pollution maîtrisée (<50%) 🌱
+- Des citoyens heureux (>70%) 😊
+
+Attention aux risques :
+☠️ Échec si votre ville :
+- Dépasse 100% de pollution 🌪️
+- Tombe en faillite 💸
+- Descend sous 50% de bonheur 😔
+
+Plongez dans l'aventure EcoManager dès maintenant !

@@ -14,6 +14,7 @@ class App extends Program {
 
     final String NOM = "EcoManager";
     final String TITRE = "../ressources/titre_ascii.txt";
+    final String RULES = "../ressources/rules.txt";
 
     void algorithm(){
         start();
@@ -40,7 +41,7 @@ class App extends Program {
         println("1. Nouvelle ville");
         println("2. Charger une partie");
         println("3. Afficher les règles du jeu");
-        println("4. Quitter");
+        //Un mec voulait un option de quitter mais il me clc
 
     }
     void StartSelect(int choix){
@@ -53,13 +54,12 @@ class App extends Program {
             println("Systeme de chargement de sauvegarde pas encore disponible");
         }
         else if(choix == 3){
-            println("Règles");
+            afficherTxT(RULES);
             choixdeq();
             start();
         } 
-        else if(choix == 4){
-            println("A bientôt !");            
-        }
+          
+        
     }
 
     int choixvalidenbr(int nbrchoix){
@@ -93,12 +93,13 @@ class App extends Program {
         println("Bonheur : " + ville.bonheur + "%");
     }
 
-    void afficherTitreJeu(String dessin){
+    void afficherTxT(String dessin){
         File file = newFile(dessin);
         while(ready(file)){
             println(readLine(file));
         }
     }  
+    
     
     City creerpartie(String nom){
         City ville= new City();
@@ -113,9 +114,9 @@ class App extends Program {
 		return (int) (random()*max) ;
     }
     void start(){
-        afficherTitreJeu(TITRE); // Affiche le titre du jeu
+        afficherTxT(TITRE); // Affiche le titre du jeu
         afficherMenuStart(); // Affiche le menu principal
-        int choix = choixvalidenbr(4);
+        int choix = choixvalidenbr(3);
         StartSelect(choix);
     }
 
