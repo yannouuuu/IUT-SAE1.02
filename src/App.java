@@ -19,8 +19,8 @@ class App extends Program {
         afficherTitreJeu(TITRE); // Affiche le titre du jeu
         afficherMenu(); // Affiche le menu principal
         int choix = -1;
-        while (choix < 1 || choix > 4) {
-            print("Entrez votre choix (1-4) : ");
+       while (choix < 1 || choix > 4) {
+            print("Entrez votre choix (1-4) : "); 
             choix = readInt();
         }        if(choix == 1){
             println("Quel est le nom de votre ville ?");
@@ -61,6 +61,15 @@ class App extends Program {
         println("3. Afficher les règles du jeu");
         println("4. Quitter");
 
+    }
+
+    int choixvalide(int nbrchoix){
+        int choix=-1;
+        while(choix<1 || choix>nbrchoix){
+            println("La saisie est invalide veuillez recommencez !");
+            choix=readInt();
+        }
+        return choix;
     }
     
 
