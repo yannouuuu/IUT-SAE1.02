@@ -100,6 +100,9 @@ class App extends Program {
         ville.bonheur=85;
         return ville;
     }
+    int tirerAuHasard(int max){
+		return (int) (random()*max) ;
+    }
 
     //Decisions decision(){
         
