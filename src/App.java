@@ -17,23 +17,9 @@ class App extends Program {
 
     void algorithm(){
         afficherTitreJeu(TITRE); // Affiche le titre du jeu
-        afficherMenu(); // Affiche le menu principal
+        afficherMenuStart(); // Affiche le menu principal
         int choix = choixvalide(4);
-
-        if(choix == 1){
-            println("Quel est le nom de votre ville ?");
-            String nomville = readString();
-            City ville = creerpartie(nomville);
-        }
-        else if(choix == 2){
-            println("Systeme de chargement de sauvegarde pas encore disponible");
-        }
-        else if(choix == 3){
-            println("Règles");
-        } 
-        else if(choix == 4){
-            println("A bientôt !");
-        }
+        StartSelect(choix);
  //       if(choix==1 /*choix2 */){
  //           while(ville.tour<70 || ville.bonheur>50 || ville.pollution<100 || ville.budget>0){
  //               afficherEtatJeu(ville);
@@ -52,13 +38,29 @@ class App extends Program {
         //     tour++;
         // }
     
-    void afficherMenu(){
+    void afficherMenuStart(){
         println("Choisissez une option :");
         println("1. Nouvelle ville");
         println("2. Charger une partie");
         println("3. Afficher les règles du jeu");
         println("4. Quitter");
 
+    }
+    void StartSelect(int choix){
+        if(choix == 1){
+            println("Quel est le nom de votre ville ?");
+            String nomville = readString();
+            City ville = creerpartie(nomville);
+        }
+        else if(choix == 2){
+            println("Systeme de chargement de sauvegarde pas encore disponible");
+        }
+        else if(choix == 3){
+            println("Règles");
+        } 
+        else if(choix == 4){
+            println("A bientôt !");
+        }
     }
 
     int choixvalide(int nbrchoix){
