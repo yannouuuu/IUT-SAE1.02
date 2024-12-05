@@ -16,10 +16,7 @@ class App extends Program {
     final String TITRE = "../ressources/titre_ascii.txt";
 
     void algorithm(){
-        afficherTitreJeu(TITRE); // Affiche le titre du jeu
-        afficherMenuStart(); // Affiche le menu principal
-        int choix = choixvalide(4);
-        StartSelect(choix);
+        start();
  //       if(choix==1 /*choix2 */){
  //           while(ville.tour<70 || ville.bonheur>50 || ville.pollution<100 || ville.budget>0){
  //               afficherEtatJeu(ville);
@@ -57,13 +54,15 @@ class App extends Program {
         }
         else if(choix == 3){
             println("Règles");
+            choixdeq();
+            start();
         } 
         else if(choix == 4){
-            println("A bientôt !");
+            println("A bientôt !");            
         }
     }
 
-    int choixvalide(int nbrchoix){
+    int choixvalidenbr(int nbrchoix){
         print("Entrez votre choix (1-"+nbrchoix+") : ");
         int choix=readInt();
         while(choix<1 || choix>nbrchoix){
@@ -71,6 +70,16 @@ class App extends Program {
             choix=readInt();
         }
         return choix;
+    }
+
+    char choixdeq(){
+        println("pour quitter la page de règles du jeu, appuyez sur 'q')");
+        char choix_q=readChar();
+        while(choix_q!='q'){
+            println("La saisie est invalide veuillez recommencez !");
+            choix_q=readChar();
+        }
+        return choix_q;
     }
     
 
@@ -102,6 +111,12 @@ class App extends Program {
     }
     int tirerAuHasard(int max){
 		return (int) (random()*max) ;
+    }
+    void start(){
+        afficherTitreJeu(TITRE); // Affiche le titre du jeu
+        afficherMenuStart(); // Affiche le menu principal
+        int choix = choixvalidenbr(4);
+        StartSelect(choix);
     }
 
     //Decisions decision(){
