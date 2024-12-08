@@ -16,6 +16,8 @@ class App extends Program {
     final String TITRE = "../ressources/titre_ascii.txt";
     final String RULES = "../ressources/rules.txt";
     final String DECISIONS="../ressources/decisions.csv";
+    final String WIN="../ressources/win.txt";
+    final String LOOSE="../ressources/win.txt";
 
 
 
@@ -23,7 +25,7 @@ class App extends Program {
         Decisions[] liste_decisions=loadcsv(DECISIONS);
         City ville= creerpartie();
         start(ville);
-        while(ville.tour<70 && ville.bonheur>=50 && ville.pollution<=100 && ville.budget>=0){
+        while(ville.tour<5 && ville.bonheur>=50 && ville.pollution<=100 && ville.budget>=0){
             afficherEtatJeu(ville);
             Decisions num1=liste_decisions[0];
             Decisions num2=liste_decisions[1];
@@ -68,10 +70,10 @@ class App extends Program {
 
              }
         if (ville.bonheur<50 || ville.pollution>100 || ville.budget<0){
-            println("Votre ville est devenue invivable... Vous avez été remplacé par un nouveau maire.");
+            afficherTxT(LOOSE);
         }
-        else if(ville.tour>=70){
-            println("Victoire");
+        else if(ville.tour>=5){
+            afficherTxT(WIN);
         }
         }
         
@@ -113,10 +115,11 @@ class App extends Program {
 
     int choixvalidenbr(int nbrchoix){
         print("Entrez votre choix (1-"+nbrchoix+") : ");
-        int choix=readInt();
+        int choix=-1;
         while(choix<1 || choix>nbrchoix){
+            String saisie=readString();
+            choix=stringToInt(saisie);
             println("La saisie est invalide veuillez recommencez !");
-            choix=readInt();
         }
         return choix;
     }
