@@ -19,4 +19,5 @@ class Decisions{
     int argent;
     int pollution;
     int bonheur;
+    String message;
 }
