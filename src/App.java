@@ -23,17 +23,56 @@ class App extends Program {
         Decisions[] liste_decisions=loadcsv(DECISIONS);
         City ville= creerpartie();
         start(ville);
-        while(ville.tour<70 || ville.bonheur>50 || ville.pollution<100 || ville.budget>0){
+        while(ville.tour<70 && ville.bonheur>=50 && ville.pollution<=100 && ville.budget>=0){
             afficherEtatJeu(ville);
             Decisions num1=liste_decisions[0];
             Decisions num2=liste_decisions[1];
             Decisions num3=liste_decisions[2];
+            Decisions num4=liste_decisions[3];
             println("1. "+num1.desc+" ("+num1.argent+" €, "+num1.pollution+" pollution, "+num1.bonheur+" bonheur)");
             println("2. "+num2.desc+" ("+num2.argent+" €, "+num2.pollution+" pollution, "+num2.bonheur+" bonheur)");
             println("3. "+num3.desc+" ("+num3.argent+" €, "+num3.pollution+" pollution, "+num3.bonheur+" bonheur)");
+            println("4. "+num4.desc+" ("+num4.argent+" €, "+num4.pollution+" pollution, "+num4.bonheur+" bonheur)");
+            println("Choisissez une action (1-4)");
+            int choix=choixvalidenbr(4);
+            if (choix==1){
+                ville.tour++;
+                ville.budget=ville.budget+num1.argent;
+                ville.pollution=ville.pollution+num1.pollution;
+                ville.bonheur=ville.bonheur+num1.bonheur;
+                println(num1.message);
+            }
+            if (choix==2){
+                ville.tour++;
+                ville.budget=ville.budget+num2.argent;
+                ville.pollution=ville.pollution+num2.pollution;
+                ville.bonheur=ville.bonheur+num2.bonheur;
+                println(num2.message);
+            }
+            if (choix==3){
+                ville.tour++;
+                ville.budget=ville.budget+num3.argent;
+                ville.pollution=ville.pollution+num3.pollution;
+                ville.bonheur=ville.bonheur+num3.bonheur;
+                println(num3.message);
+            }
+            if (choix==4){
+                ville.tour++;
+                ville.budget=ville.budget+num4.argent;
+                ville.pollution=ville.pollution+num4.pollution;
+                ville.bonheur=ville.bonheur+num4.bonheur;
+                println(num4.message);
+
+            }
 
 
              }
+        if (ville.bonheur<50 || ville.pollution>100 || ville.budget<0){
+            println("Votre ville est devenue invivable... Vous avez été remplacé par un nouveau maire.");
+        }
+        else if(ville.tour>=70){
+            println("Victoire");
+        }
         }
         
         
@@ -145,7 +184,7 @@ class App extends Program {
     Decisions[] loadcsv(String nom_file) {
         CSVFile deciAsString = loadCSV(nom_file);
         Decisions[] decisions= new Decisions[rowCount(deciAsString)-1];
-        for (int idxD=1; idxD<length(decisions); idxD++){
+        for (int idxD=1; idxD<length(decisions)+1; idxD++){
             String nom = getCell(deciAsString,idxD,0);
             String desc = getCell(deciAsString,idxD,1);
             int argent = stringToInt(getCell(deciAsString,idxD,2));
