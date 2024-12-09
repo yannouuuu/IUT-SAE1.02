@@ -72,7 +72,7 @@ class App extends Program {
         if (ville.bonheur<50 || ville.pollution>100 || ville.budget<0){
             afficherTxT(LOOSE);
         }
-        else if(ville.tour>=5){
+        else if(ville.tour>=30){
             afficherTxT(WIN);
         }
         }
