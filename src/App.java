@@ -115,11 +115,10 @@ class App extends Program {
 
     int choixvalidenbr(int nbrchoix){
         print("Entrez votre choix (1-"+nbrchoix+") : ");
-        int choix=-1;
+        int choix=readInt();
         while(choix<1 || choix>nbrchoix){
-            String saisie=readString();
-            choix=stringToInt(saisie);
             println("La saisie est invalide veuillez recommencez !");
+            choix=readInt();
         }
         return choix;
     }
