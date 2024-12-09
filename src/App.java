@@ -25,7 +25,7 @@ class App extends Program {
         Decisions[] liste_decisions=loadcsv(DECISIONS);
         City ville= creerpartie();
         start(ville);
-        while(ville.tour<5 && ville.bonheur>=50 && ville.pollution<=100 && ville.budget>=0){
+        while(ville.tour<30 && ville.bonheur>=50 && ville.pollution<=100 && ville.budget>=0){
             afficherEtatJeu(ville);
             Decisions num1=liste_decisions[0];
             Decisions num2=liste_decisions[1];
