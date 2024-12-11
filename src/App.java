@@ -19,8 +19,6 @@ class App extends Program {
     final String WIN="../ressources/win.txt";
     final String LOOSE="../ressources/win.txt";
 
-
-
     void algorithm(){
         Decisions[] liste_decisions=loadcsv(DECISIONS);
         City ville= creerpartie();
