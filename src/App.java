@@ -20,7 +20,7 @@ class App extends Program {
     final String LOSE = "../ressources/lose.txt";
 
     void algorithm() {
-        Decisions[] listeDecisions = loadCSV(DECISIONS);
+        Decisions[] listeDecisions = loadDecision(DECISIONS);
         City ville = creerPartie();
         start(ville);
         while (ville.tour < 30 && ville.bonheur >= 50 && ville.pollution <= 100 && ville.budget >= 0) {
@@ -163,7 +163,7 @@ class App extends Program {
         startSelect(choix, ville);
     }
 
-    Decisions[] loadCSV(String nomFile) {
+    Decisions[] loadDecision(String nomFile) {
         CSVFile deciAsString = loadCSV(nomFile);
         Decisions[] decisions = new Decisions[rowCount(deciAsString) - 1];
         for (int idxD = 1; idxD < length(decisions) + 1; idxD++) {
