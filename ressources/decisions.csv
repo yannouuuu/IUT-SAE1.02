@@ -1,6 +1,6 @@
 action,description,impact_argent,impact_pollution,impact_bonheur,message
-construire_usine,Construction d'une Usine,-5000,+20,-10,Vous avez Construit une Usine
-organiser_festival,Organiser un festival pour la communauté,-2500,+5,+25,Vous avez organiser un festival
-planter_arbre,Planter un arbre,-2000,-15,+15,Vous avez planter un arbre
-taxer,Taxer les industries,+2000,0,-10,Vous avez taxer les industries
+construire_usine,Construction d'une Usine,-5000,+20,-10,Vous avez construit une usine
+organiser_festival,Organiser un festival pour la communauté,-2500,+5,+25,Vous avez organisé un festival
+planter_arbre,Planter un arbre,-2000,-15,+15,Vous avez planté un arbre
+taxer,Taxer les industries,+2000,0,-10,Vous avez taxé les industries
 

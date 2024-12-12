@@ -28,6 +28,8 @@ class App extends Program {
         City ville = creerPartie();
         start(ville);
         while (ville.tour < 30 && ville.bonheur >= 50 && ville.pollution <= 100 && ville.budget >= 0) {
+            clearScreen();
+            afficherTxt(TITRE);
             afficherEtatJeu(ville);
             Decisions num1 = listeDecisions[0];
             Decisions num2 = listeDecisions[1];
@@ -123,7 +125,7 @@ class App extends Program {
     }
 
     void afficherEtatJeu(City ville) {
-        println(ville.nom);
+        println("Nom de ma ville : " + ville.nom);
         println("---------------------------------");
         println("Tour : " + ville.tour);
         println("Budget : " + ville.budget + " €");
@@ -133,7 +135,7 @@ class App extends Program {
 
     void afficherTxt(String dessin) {
         File file = newFile(dessin);
-        while (ready(file)) {
+        while (ready(file)){
             println(readLine(file));
         }
     }
