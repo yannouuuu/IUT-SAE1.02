@@ -95,6 +95,7 @@ class App extends Program {
     }
 
     int choixValideNbr(int nbrChoix) {
+        println("---------------------------------")
         print("Choisissez une action (1-" + nbrChoix + ") : ");
         int choix = readInt();
         while (choix < 1 || choix > nbrChoix) {
