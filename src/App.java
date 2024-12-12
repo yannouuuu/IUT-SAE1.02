@@ -83,6 +83,7 @@ class App extends Program {
     void startSelect(int choix, City ville) {
         if (choix == 1) {
             println("Quel est le nom de votre ville ?");
+            print("> ")
             String nom = readString();
             ville.nom = nom;
         } else if (choix == 2) {
