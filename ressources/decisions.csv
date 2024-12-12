@@ -1,9 +1,8 @@
 action,description,impact_argent,impact_pollution,impact_bonheur,message
-<<<<<<< HEAD
-construire_usine,Construction d'une Usine,-5000,+20,-10,Vous avez Construit une Usine
-organiser_festival,Organiser un festival pour la communauté,-2500,+5,+25,Vous avez organiser un festival
-planter_arbre,Planter un arbre,-2000,-15,+15,Vous avez planter un arbre
-taxer,Taxer les industries,+2000,0,-10,Vous avez taxer les industries
+construire_usine,Construction d'une Usine,-5000,+20,-10,Vous avez construit une usine
+organiser_festival,Organiser un festival pour la communauté,-2500,+5,+25,Vous avez organisé un festival
+planter_arbre,Planter un arbre,-2000,-15,+15,Vous avez planté un arbre
+taxer,Taxer les industries,+2000,0,-10,Vous avez taxé les industries
 installer_panneaux_solaires,Installation de panneaux solaires,-10000,-30,+20,Vous avez installé des panneaux solaires
 construire_ecole,Construction d'une nouvelle école,-8000,0,+35,Vous avez construit une école
 lancer_campagne_recyclage,Lancer une campagne de recyclage,-1500,-25,+15,Vous avez lancé une campagne de recyclage
@@ -73,35 +72,3 @@ developper_intelligence_artificielle,Développement de l'intelligence artificiel
 moderniser_systeme_juridique,Modernisation du système juridique,-10000,0,+15,Vous avez modernisé le système juridique
 subventionner_culture,Subvention à la culture,-6000,0,+35,Vous avez subventionné la culture
 lancer_programme_sante_mentale,Lancement d'un programme de santé mentale,-5500,0,+40,Vous avez lancé un programme de santé mentale
-creer_centre_international,Création d'un centre international,-8000,0,+25,Vous avez créé un centre international
-investir_technologies_propres,Investissement dans les technologies propres,-13000,-45,+30,Vous avez investi dans les technologies propres
-construire_centre_resilience,Construction d'un centre de résilience communautaire,-6500,0,+35,Vous avez construit un centre de résilience communautaire
-lancer_programme_agriculture_durable,Lancement d'un programme d'agriculture durable,-5000,-25,+25,Vous avez lancé un programme d'agriculture durable
-developper_energies_renouvelables_locales,Développement des énergies renouvelables locales,-11000,-40,+30,Vous avez développé les énergies renouvelables locales
-creer_centre_entrepreneuriat_social,Création d'un centre d'entrepreneuriat social,-4000,0,+25,Vous avez créé un centre d'entrepreneuriat social
-moderniser_systeme_transport,Modernisation du système de transport,-16000,-20,+20,Vous avez modernisé le système de transport
-subventionner_innovation_verte,Subvention pour l'innovation verte,-7500,-30,+35,Vous avez subventionné l'innovation verte
-lancer_programme_economie_sociale,Lancement d'un programme d'économie sociale,-5500,0,+40,Vous avez lancé un programme d'économie sociale
-proteger_ecosystemes_urbains,Protection des écosystèmes urbains,-4500,-35,+25,Vous avez protégé les écosystèmes urbains
-creer_centre_transition_ecologique,Création d'un centre de transition écologique,-6000,-40,+30,Vous avez créé un centre de transition écologique
-developper_commerce_equitable,Développement du commerce équitable,+4500,0,+25,Vous avez développé le commerce équitable
-investir_technologies_durables,Investissement dans les technologies durables,-12000,-35,+35,Vous avez investi dans les technologies durables
-construire_centre_economie_circulaire,Construction d'un centre d'économie circulaire,-7000,-25,+30,Vous avez construit un centre d'économie circulaire
-lancer_programme_neutralite_carbone,Lancement d'un programme de neutralité carbone,-9000,-50,+40,Vous avez lancé un programme de neutralité carbone
-creer_centre_resilience_climatique,Création d'un centre de résilience climatique,-8500,-45,+35,Vous avez créé un centre de résilience climatique
-moderniser_systeme_gestion_eau,Modernisation du système de gestion de l'eau,-14000,-30,+25,Vous avez modernisé le système de gestion de l'eau
-subventionner_mobilite_durable,Subvention pour la mobilité durable,-6500,-35,+30,Vous avez subventionné la mobilité durable
-lancer_programme_education_environnementale,Lancement d'un programme d'éducation environnementale,-5000,-20,+35,Vous avez lancé un programme d'éducation environnementale
-developper_energies_propres_communaute,Développement des énergies propres communautaires,-10000,-45,+40,Vous avez développé les énergies propres communautaires
-creer_centre_adaptation_climatique,Création d'un centre d'adaptation climatique,-7500,-40,+35,Vous avez créé un centre d'adaptation climatique
-investir_technologies_regeneratives,Investissement dans les technologies régénératives,-13000,-50,+45,Vous avez investi dans les technologies régénératives
-construire_centre_biodiversite_urbaine,Construction d'un centre de biodiversité urbaine,-6000,-35,+30,Vous avez construit un centre de biodiversité urbaine
-lancer_programme_protection_oceans,Lancement d'un programme de protection des océans,-8000,-45,+35,Vous avez lancé un programme de protection des océans
-developper_agriculture_regenerative,Développement de l'agriculture régénérative,-7000,-30,+40,Vous avez développé l'agriculture régénérative
-=======
-construire_usine,Construction d'une Usine,-5000,+20,-10,Vous avez construit une usine
-organiser_festival,Organiser un festival pour la communauté,-2500,+5,+25,Vous avez organisé un festival
-planter_arbre,Planter un arbre,-2000,-15,+15,Vous avez planté un arbre
-taxer,Taxer les industries,+2000,0,-10,Vous avez taxé les industries
-
->>>>>>> 6fe0fbd44dae2dcdeb088d29054822c4ef1dc3df

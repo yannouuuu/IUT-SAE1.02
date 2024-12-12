@@ -104,11 +104,12 @@ class App extends Program {
     }
 
     int choixValideNbr(int nbrChoix) {
-        println("---------------------------------");
+        println("- - - - - - - - - - - - - - - - -");
         print("Choisissez une action (1-" + nbrChoix + ") : ");
         int choix = readInt();
         while (choix < 1 || choix > nbrChoix) {
             println("La saisie est invalide, veuillez recommencer !");
+            print("Choisissez une action (1-" + nbrChoix + ") : ");
             choix = readInt();
         }
         return choix;
@@ -125,12 +126,14 @@ class App extends Program {
     }
 
     void afficherEtatJeu(City ville) {
-        println("Nom de ma ville : " + ville.nom);
+        println("Nom de la ville");        
+        println("╰┈➤ " + ville.nom);
         println("---------------------------------");
-        println("Tour : " + ville.tour);
-        println("Budget : " + ville.budget + " €");
-        println("Pollution : " + ville.pollution + "%");
-        println("Bonheur : " + ville.bonheur + "%");
+        println(" ❈ Tour : " + ville.tour);
+        println(" ❈ Budget : " + ville.budget + " €");
+        println(" ❈ Pollution : " + ville.pollution + "%");
+        println(" ❈ Bonheur : " + ville.bonheur + "%"); 
+        println("---------------------------------");
     }
 
     void afficherTxt(String dessin) {
