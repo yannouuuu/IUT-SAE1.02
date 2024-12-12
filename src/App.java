@@ -7,6 +7,9 @@
  * Auteur(s) : Yann RENARD, Yanis MEKKI
  */
 
+// System.exit(0);
+// 
+
 import extensions.File;
 import extensions.CSVFile;
 
@@ -20,6 +23,7 @@ class App extends Program {
     final String LOSE = "../ressources/lose.txt";
 
     void algorithm() {
+        clearScreen();
         Decisions[] listeDecisions = loadDecision(DECISIONS);
         City ville = creerPartie();
         start(ville);
@@ -33,8 +37,8 @@ class App extends Program {
             println("2. " + num2.desc + " (" + num2.argent + " €, " + num2.pollution + " pollution, " + num2.bonheur + " bonheur)");
             println("3. " + num3.desc + " (" + num3.argent + " €, " + num3.pollution + " pollution, " + num3.bonheur + " bonheur)");
             println("4. " + num4.desc + " (" + num4.argent + " €, " + num4.pollution + " pollution, " + num4.bonheur + " bonheur)");
-            int choix = choixValideNbr(4);
             
+            int choix = choixValideNbr(4);       
             if (choix == 1) {
                 ville.tour++;
                 ville.budget = ville.budget + num1.argent;
@@ -77,13 +81,13 @@ class App extends Program {
         println("1. Nouvelle ville");
         println("2. Charger une partie");
         println("3. Afficher les règles du jeu");
-        println("Ctrl + C. pour quitter le jeu");
+        println("4. Quitter");
     }
 
     void startSelect(int choix, City ville) {
         if (choix == 1) {
             println("Quel est le nom de votre ville ?");
-            print("> ")
+            print("> ");
             String nom = readString();
             ville.nom = nom;
         } else if (choix == 2) {
@@ -92,6 +96,8 @@ class App extends Program {
             afficherTxt(RULES);
             choixDeQuitter();
             start(ville);
+        } else if (choix == 4) {
+            System.exit(0);
         }
     }
 
@@ -160,7 +166,7 @@ class App extends Program {
     void start(City ville) {
         afficherTxt(TITRE);
         afficherMenuStart();
-        int choix = choixValideNbr(3);
+        int choix = choixValideNbr(4);
         startSelect(choix, ville);
     }
 
@@ -179,4 +185,11 @@ class App extends Program {
         }
         return decisions;
     }
+
+/*     void botVerification(City ville) {
+        // choix random pour le bot entre 1 et 4 pour tester le jeu
+        int choix = tirerAuHasard(4) + 1;
+
+        
+    } */
 }
