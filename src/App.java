@@ -16,11 +16,11 @@ import extensions.CSVFile;
 class App extends Program {
 
     final String NOM = "EcoManager";
-    final String TITRE = "../ressources/titre_ascii.txt";
-    final String RULES = "../ressources/rules.txt";
-    final String DECISIONS = "../ressources/decisions.csv";
-    final String WIN = "../ressources/win.txt";
-    final String LOSE = "../ressources/lose.txt";
+    final String TITRE = "./ressources/titre_ascii.txt";
+    final String RULES = "./ressources/rules.txt";
+    final String DECISIONS = "./ressources/decisions.csv";
+    final String WIN = "./ressources/win.txt";
+    final String LOSE = "./ressources/lose.txt";
 
     void algorithm() {
         clearScreen();
