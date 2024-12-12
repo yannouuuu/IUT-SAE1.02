@@ -33,7 +33,6 @@ class App extends Program {
             println("2. " + num2.desc + " (" + num2.argent + " €, " + num2.pollution + " pollution, " + num2.bonheur + " bonheur)");
             println("3. " + num3.desc + " (" + num3.argent + " €, " + num3.pollution + " pollution, " + num3.bonheur + " bonheur)");
             println("4. " + num4.desc + " (" + num4.argent + " €, " + num4.pollution + " pollution, " + num4.bonheur + " bonheur)");
-            println("Choisissez une action (1-4)");
             int choix = choixValideNbr(4);
             
             if (choix == 1) {
@@ -96,7 +95,7 @@ class App extends Program {
     }
 
     int choixValideNbr(int nbrChoix) {
-        print("Entrez votre choix (1-" + nbrChoix + ") : ");
+        print("Choisissez une action (1-" + nbrChoix + ") : ");
         int choix = readInt();
         while (choix < 1 || choix > nbrChoix) {
             println("La saisie est invalide, veuillez recommencer !");
@@ -179,4 +178,3 @@ class App extends Program {
         return decisions;
     }
 }
-
