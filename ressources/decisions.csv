@@ -1,4 +1,5 @@
 action,description,impact_argent,impact_pollution,impact_bonheur,message
+<<<<<<< HEAD
 construire_usine,Construction d'une Usine,-5000,+20,-10,Vous avez Construit une Usine
 organiser_festival,Organiser un festival pour la communauté,-2500,+5,+25,Vous avez organiser un festival
 planter_arbre,Planter un arbre,-2000,-15,+15,Vous avez planter un arbre
@@ -97,3 +98,10 @@ investir_technologies_regeneratives,Investissement dans les technologies régén
 construire_centre_biodiversite_urbaine,Construction d'un centre de biodiversité urbaine,-6000,-35,+30,Vous avez construit un centre de biodiversité urbaine
 lancer_programme_protection_oceans,Lancement d'un programme de protection des océans,-8000,-45,+35,Vous avez lancé un programme de protection des océans
 developper_agriculture_regenerative,Développement de l'agriculture régénérative,-7000,-30,+40,Vous avez développé l'agriculture régénérative
+=======
+construire_usine,Construction d'une Usine,-5000,+20,-10,Vous avez construit une usine
+organiser_festival,Organiser un festival pour la communauté,-2500,+5,+25,Vous avez organisé un festival
+planter_arbre,Planter un arbre,-2000,-15,+15,Vous avez planté un arbre
+taxer,Taxer les industries,+2000,0,-10,Vous avez taxé les industries
+
+>>>>>>> 6fe0fbd44dae2dcdeb088d29054822c4ef1dc3df
