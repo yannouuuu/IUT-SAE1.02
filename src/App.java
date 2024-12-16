@@ -78,6 +78,7 @@ class App extends Program {
         }
     }
 
+// Fonction affichant le menu
     void afficherMenuStart() {
         println("Choisissez une option :");
         println("1. Nouvelle ville");
@@ -86,6 +87,7 @@ class App extends Program {
         println("4. Quitter");
     }
 
+// Fonction de la selection des choix du menu
     void startSelect(int choix, City ville) {
         if (choix == 1) {
             println("Quel est le nom de votre ville ?");
@@ -115,7 +117,13 @@ class App extends Program {
         return choix;
     }
 
+/*     void testChoixValideNbr(){
+        assertEquals();
+        assertEquals();
+    } */
+
     char choixDeQuitter() {
+        println("- - - - - - - - - - - - - - - - -");
         println("Pour quitter la page de règles du jeu, appuyez sur 'q'");
         char choixQ = readChar();
         while (choixQ != 'q') {
@@ -125,6 +133,11 @@ class App extends Program {
         return choixQ;
     }
 
+/*     void testChoixDeQuitter(){
+        assertEquals();
+        assertEquals();
+    }
+ */
     void afficherEtatJeu(City ville) {
         println("Nom de la ville");        
         println("╰┈➤ " + ville.nom);
@@ -193,8 +206,8 @@ class App extends Program {
 
 /*     void botVerification(City ville) {
         // choix random pour le bot entre 1 et 4 pour tester le jeu
+        
         int choix = tirerAuHasard(4) + 1;
 
-        
     } */
 }
