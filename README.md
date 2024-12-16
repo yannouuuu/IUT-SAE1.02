@@ -32,29 +32,29 @@ Ce projet s'inscrit dans le cadre de la SAE 1.02 du BUT Informatique et vise à 
 ## Fonctionnalités : To-Do List
 
 ### **À faire absolument (version minimale) :**
-- [ ] **Mode texte uniquement** pour le jeu.  
+- [x] **Mode texte uniquement** pour le jeu.  
 - [ ] Contrôle robuste de saisie pour éviter les erreurs/crashs.  
-- [ ] Présentation de choix simples :  
-  - [ ] Construire une usine.  
-  - [ ] Planter des arbres.  
-  - [ ] Organiser un festival (ou autre action sociale).  
-- [ ] Gestion des ressources principales :  
-  - [ ] Argent (budget).  
-  - [ ] Pollution.  
-  - [ ] Satisfaction des citoyens (bonheur).  
-- [ ] Affichage clair de l’état de la ville après chaque tour :  
-  - [ ] Points.  
-  - [ ] Pollution.  
-  - [ ] Population heureuse.  
+- [x] Présentation de choix simples :  
+  - [x] Construire une usine.  
+  - [x] Planter des arbres.  
+  - [x] Organiser un festival (ou autre action sociale).  
+- [x] Gestion des ressources principales :  
+  - [x] Argent (budget).  
+  - [x] Pollution.  
+  - [x] Satisfaction des citoyens (bonheur).  
+- [x] Affichage clair de l’état de la ville après chaque tour :  
+  - [x] Argent.  
+  - [x] Pollution.  
+  - [x] Population heureuse.  
 - [ ] Détection des fins possibles :  
   - [ ] Victoire (budget positif, pollution maîtrisée <50%, citoyens heureux >70%).  
   - [ ] Défaite (pollution >100%, argent à 0, bonheur <50%).  
 
 ### **Envisagé (fonctionnalités bonus si le temps le permet) :**
-- [ ] **Plus de types de décisions :**  
-  - [ ] Subventionner les transports en commun.  
-  - [ ] Taxer les industries.  
-  - [ ] Actions spécifiques selon le contexte.  
+- [x] **Plus de types de décisions :**  
+  - [x] Subventionner les transports en commun.  
+  - [x] Taxer les industries.  
+  - [x] Actions spécifiques selon le contexte.  
 - [ ] **Système d’événements aléatoires :**  
   - [ ] Grèves.  
   - [ ] Inondations.  
@@ -67,11 +67,11 @@ Ce projet s'inscrit dans le cadre de la SAE 1.02 du BUT Informatique et vise à 
   - [ ] Conseiller économique.  
   - [ ] Conseiller écologiste.  
   - [ ] Citoyens avec opinions variables.  
-- [ ] **Mode multijoueur compétitif :**  
+- [ ] **Mode comparaison des joueurs :**  
   - [ ] Comparaison des performances (scores ou villes).  
 - [ ] Simulation avancée avec :  
   - [ ] Bâtiments spécifiques (écoles, hôpitaux, industries, etc.).  
-  - [ ] Gestion fine des zones urbaines.  
+  - [ ] Gestion des zones urbaines.  
 
 ## Environnement de développement
 
