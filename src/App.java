@@ -7,8 +7,10 @@
  * Auteur(s) : Yann RENARD, Yanis MEKKI
  */
 
-// System.exit(0);
-// 
+// TODO 
+// [] Faire une vérification 
+// [] Faire quelques tests
+// [] 
 
 import extensions.File;
 import extensions.CSVFile;
@@ -28,10 +30,10 @@ class App extends Program {
         City ville = creerPartie();
         start(ville);
         while (ville.tour < 30 && ville.bonheur >= 50 && ville.pollution <= 100 && ville.budget >= 0) {
-            corrige_pourcentage(ville);
             clearScreen();
             afficherTxt(TITRE);
             afficherEtatJeu(ville);
+            pourcentageCorrect(ville);
             Decisions num1 = listeDecisions[0];
             Decisions num2 = listeDecisions[1];
             Decisions num3 = listeDecisions[2];
@@ -73,9 +75,11 @@ class App extends Program {
         }
 
         if (ville.bonheur < 50 || ville.pollution > 100 || ville.budget < 0) {
-            afficherTxt(LOSE);
+            afficherTxt(LOSE); 
+            delay(10000);
         } else if (ville.tour >= 30) {
             afficherTxt(WIN);
+            delay(10000);
         }
     }
 
@@ -106,17 +110,30 @@ class App extends Program {
         }
     }
 
-    int choixValideNbr(int nbrChoix) {
+     int choixValideNbr(int nbrChoix) {
         println("- - - - - - - - - - - - - - - - -");
         print("Choisissez une action (1-" + nbrChoix + ") : ");
-        int choix = readInt();
-        while (choix < 1 || choix > nbrChoix) {
-            println("La saisie est invalide, veuillez recommencer !");
-            print("Choisissez une action (1-" + nbrChoix + ") : ");
-            choix = readInt();
+        String choix=readString();
+        char choix1=charAt(choix,0);
+
+        while (verif(choix1,nbrChoix)){
+            println("La saisie est invalide !");
+            choix = readString();
+            choix1 = charAt(choix,0);
         }
-        return choix;
+        int choix2=choix1;
+        return choix2;
     }
+    
+    boolean verif(char choix, int nbrChoix){
+        if(nbrChoix>0 && nbrChoix <= 4){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    
 
 /*     void testChoixValideNbr(){
         assertEquals();
@@ -139,6 +156,7 @@ class App extends Program {
         assertEquals();
     }
  */
+
     void afficherEtatJeu(City ville) {
         println("Nom de la ville");        
         println("╰┈➤ " + ville.nom);
@@ -179,7 +197,7 @@ class App extends Program {
     }
 
     int tirerAuHasard(int max) {
-        return (int) (random() * max);
+        return (int)(random() * max);
     }
 
     void start(City ville) {
@@ -188,7 +206,8 @@ class App extends Program {
         int choix = choixValideNbr(4);
         startSelect(choix, ville);
     }
-    void corrige_pourcentage (City ville){
+    
+    void pourcentageCorrect(City ville){
         if(ville.bonheur>=100){
             ville.bonheur=100;
         }
