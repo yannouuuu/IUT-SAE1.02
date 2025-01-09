@@ -126,10 +126,10 @@ class App extends Program {
     }
     
     boolean verif(char choix, int nbrChoix){
-        if(nbrChoix>0 && nbrChoix <= 4){
-            return true;
-        } else {
+        if(choix>0 && choix <= nbrChoix){
             return false;
+        } else {
+            return true;
         }
     }
 
