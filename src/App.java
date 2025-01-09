@@ -28,6 +28,7 @@ class App extends Program {
         City ville = creerPartie();
         start(ville);
         while (ville.tour < 30 && ville.bonheur >= 50 && ville.pollution <= 100 && ville.budget >= 0) {
+            corrige_pourcentage(ville);
             clearScreen();
             afficherTxt(TITRE);
             afficherEtatJeu(ville);
@@ -186,6 +187,14 @@ class App extends Program {
         afficherMenuStart();
         int choix = choixValideNbr(4);
         startSelect(choix, ville);
+    }
+    void corrige_pourcentage (City ville){
+        if(ville.bonheur>=100){
+            ville.bonheur=100;
+        }
+        if(ville.pollution<=0){
+            ville.pollution=0;
+        }
     }
 
     Decisions[] loadDecision(String nomFile) {
