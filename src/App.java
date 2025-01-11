@@ -2,15 +2,15 @@
  * App.java
  * 
  * Point d'entrée principal pour l'application EcoManager.
- * Contient la méthode `main` qui initialise et démarre le jeu.
  *
- * Auteur(s) : Yann RENARD, Yanis MEKKI
+ * Auteurs : Yann RENARD, Yanis MEKKI
  */
 
 // TODO 
-// [] Faire une vérification 
 // [] Faire quelques tests
-// [] 
+// [] Systeme sauvegarde
+// [] Systeme de chargement de sauvegarde
+// [x] Systeme de bot
 
 import extensions.File;
 import extensions.CSVFile;
@@ -28,7 +28,7 @@ class App extends Program {
         clearScreen();
         Decisions[] listeDecisions = loadDecision(DECISIONS);
         City ville = creerPartie();
-        start(ville);
+        initialiserJeu(ville);
         while (ville.tour < 30 && ville.bonheur >= 50 && ville.pollution <= 100 && ville.budget >= 0) {
             clearScreen();
             afficherTxt(TITRE);
@@ -43,7 +43,7 @@ class App extends Program {
             println("3. " + num3.desc + " (" + num3.argent + " €, " + num3.pollution + " pollution, " + num3.bonheur + " bonheur)");
             println("4. " + num4.desc + " (" + num4.argent + " €, " + num4.pollution + " pollution, " + num4.bonheur + " bonheur)");
             
-            int choix = choixValideNbr(4);       
+            int choix = choixValideNbr(4); // Remplacer par botPlay(); pour activer le systeme de bot
             if (choix == 1) {
                 ville.tour++;
                 ville.budget = ville.budget + num1.argent;
@@ -80,10 +80,19 @@ class App extends Program {
         } else if (ville.tour >= 30) {
             afficherTxt(WIN);
             delay(10000);
+        } else {
+            sauvegarderPartie(ville);
         }
     }
 
-// Fonction affichant le menu
+    void initialiserJeu(City ville) {
+        afficherTxt(TITRE);
+        afficherMenuStart();
+        int choix = choixValideNbr(4);
+        startSelect(choix, ville);
+    }
+
+    // Fonction affichant le menu
     void afficherMenuStart() {
         println("Choisissez une option :");
         println("1. Nouvelle ville");
@@ -92,7 +101,7 @@ class App extends Program {
         println("4. Quitter");
     }
 
-// Fonction de la selection des choix du menu
+    // Fonction de la selection des choix du menu
     void startSelect(int choix, City ville) {
         if (choix == 1) {
             println("Quel est le nom de votre ville ?");
@@ -100,7 +109,7 @@ class App extends Program {
             String nom = readString();
             ville.nom = nom;
         } else if (choix == 2) {
-            println("Système de chargement de sauvegarde pas encore disponible mais ça va lancer une partie au nom default");
+            chargerPartie(ville);
         } else if (choix == 3) {
             afficherTxt(RULES);
             choixDeQuitter();
@@ -110,35 +119,25 @@ class App extends Program {
         }
     }
 
-     int choixValideNbr(int nbrChoix) {
+    int choixValideNbr(int nbrChoix) {
         println("- - - - - - - - - - - - - - - - -");
         print("Choisissez une action (1-" + nbrChoix + ") : ");
-        String choix=readString();
-        char choix1=charAt(choix,0);
-
-        while (verif(choix1,nbrChoix)){
+        
+        while (true) {
+            String input = readString();
+            // Vérifie si l'entrée est vide
+            if (length(input) > 0) {
+                // Convertit le caractère en ASCII
+                int choix = (int)charAt(input, 0) - '0';
+                
+                // Vérifie si le choix est dans la plage valide
+                if (choix >= 1 && choix <= nbrChoix) {
+                    return choix;
+                }
+            }
             println("La saisie est invalide !");
-            choix = readString();
-            choix1 = charAt(choix,0);
-        }
-        int choix2=choix1;
-        return choix2;
-    }
-    
-    boolean verif(char choix, int nbrChoix){
-        if(choix>0 && choix <= nbrChoix){
-            return false;
-        } else {
-            return true;
         }
     }
-
-    
-
-/*     void testChoixValideNbr(){
-        assertEquals();
-        assertEquals();
-    } */
 
     char choixDeQuitter() {
         println("- - - - - - - - - - - - - - - - -");
@@ -150,12 +149,6 @@ class App extends Program {
         }
         return choixQ;
     }
-
-/*     void testChoixDeQuitter(){
-        assertEquals();
-        assertEquals();
-    }
- */
 
     void afficherEtatJeu(City ville) {
         println("Nom de la ville");        
@@ -170,7 +163,7 @@ class App extends Program {
 
     void afficherTxt(String dessin) {
         File file = newFile(dessin);
-        while (ready(file)){
+        while (ready(file)) {
             println(readLine(file));
         }
     }
@@ -185,6 +178,19 @@ class App extends Program {
         return ville;
     }
 
+    int tirerAuHasard(int max) {
+        return (int)(random() * max);
+    }
+    
+    void pourcentageCorrect(City ville) {
+        if (ville.bonheur >= 100) {
+            ville.bonheur = 100;
+        }
+        if (ville.pollution <= 0) {
+            ville.pollution = 0;
+        }
+    }
+
     Decisions newDecisions(String nom, String desc, int argent, int pollution, int bonheur, String message) {
         Decisions decision = new Decisions();
         decision.nom = nom;
@@ -194,26 +200,6 @@ class App extends Program {
         decision.bonheur = bonheur;
         decision.message = message;
         return decision;
-    }
-
-    int tirerAuHasard(int max) {
-        return (int)(random() * max);
-    }
-
-    void start(City ville) {
-        afficherTxt(TITRE);
-        afficherMenuStart();
-        int choix = choixValideNbr(4);
-        startSelect(choix, ville);
-    }
-    
-    void pourcentageCorrect(City ville){
-        if(ville.bonheur>=100){
-            ville.bonheur=100;
-        }
-        if(ville.pollution<=0){
-            ville.pollution=0;
-        }
     }
 
     Decisions[] loadDecision(String nomFile) {
@@ -232,10 +218,48 @@ class App extends Program {
         return decisions;
     }
 
-/*     void botVerification(City ville) {
-        // choix random pour le bot entre 1 et 4 pour tester le jeu
-        
+    int botPlay() {
         int choix = tirerAuHasard(4) + 1;
+        println("Le bot a choisi l'option : " + choix);
+        return choix;
+    }
 
-    } */
+    void sauvegarderPartie(City ville) {
+        File saveFile = newFile("ressources/save.csv");
+        writeLine(saveFile, ville.nom + "," + ville.tour + "," + ville.budget + "," + ville.pollution + "," + ville.bonheur);
+        close(saveFile);
+        println("Partie sauvegardée !");
+    }
+
+    void chargerPartie(City ville) {
+        File saveFile = newFile("ressources/save.csv");
+        if (!ready(saveFile)) {
+            println("Aucune sauvegarde trouvée.");
+            return;
+        }
+        println("Parties sauvegardées :");
+        int index = 1;
+        while (ready(saveFile)) {
+            String line = readLine(saveFile);
+            println(index + ". " + line);
+            index++;
+        }
+        close(saveFile);
+
+        int choix = choixValideNbr(index - 1);
+        saveFile = newFile("ressources/save.csv");
+        for (int i = 0; i < choix; i++) {
+            String line = readLine(saveFile);
+            if (i == choix - 1) {
+                String[] data = split(line, ',');
+                ville.nom = data[0];
+                ville.tour = stringToInt(data[1]);
+                ville.budget = stringToInt(data[2]);
+                ville.pollution = stringToInt(data[3]);
+                ville.bonheur = stringToInt(data[4]);
+            }
+        }
+        close(saveFile);
+        println("Partie chargée !");
+    }
 }

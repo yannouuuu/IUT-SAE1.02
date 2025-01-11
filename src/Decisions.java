@@ -10,7 +10,7 @@
  * Responsabilités :
  * - Instanciation d'une décision à partir d'une ligne du fichier CSV.
  * 
- * Auteur(s) : Yann RENARD, Yanis MEKKI
+ * Auteurs : Yann RENARD, Yanis MEKKI
  */
 
 class Decisions{

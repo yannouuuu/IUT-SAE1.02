@@ -11,5 +11,5 @@
  * - Instanciation d'un événement à partir d'une ligne du fichier CSV.
  * - Gestion des effets de l'événement lorsqu'il est déclenché.
  * 
- * Auteur(s) : Yann RENARD, Yanis MEKKI
+ * Auteurs : Yann RENARD, Yanis MEKKI
  */

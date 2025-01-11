@@ -12,7 +12,7 @@
  * - Stocker et mettre à jour les variables globales du jeu.
  * - Fournir des méthodes pour vérifier les conditions de victoire ou de défaite.
  * 
- * Auteur(s) : Yann RENARD, Yanis MEKKI
+ * Auteurs : Yann RENARD, Yanis MEKKI
  */
 class City{
     String nom;
