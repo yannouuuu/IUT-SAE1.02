@@ -113,7 +113,7 @@ class App extends Program {
         } else if (choix == 3) {
             afficherTxt(RULES);
             choixDeQuitter();
-            start(ville);
+            initialiserJeu(ville);
         } else if (choix == 4) {
             System.exit(0);
         }
@@ -225,16 +225,14 @@ class App extends Program {
     }
 
     void sauvegarderPartie(City ville) {
-        File saveFile = newFile("ressources/save.csv");
         if (!ready(saveFile)) {
             // Créer le fichier s'il n'existe pas
-            saveFile = createFile("ressources/save.csv");
+            File saveFile = newFile("ressources/save.csv");
         }
         String contenu = ville.nom + "," + ville.tour + "," + ville.budget + "," + ville.pollution + "," + ville.bonheur + "\n";
         print(saveFile, contenu);
         println("Partie sauvegardée !");
     }
-
 
     void chargerPartie(City ville) {
         File saveFile = newFile("ressources/save.csv");
