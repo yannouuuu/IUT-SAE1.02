@@ -226,10 +226,15 @@ class App extends Program {
 
     void sauvegarderPartie(City ville) {
         File saveFile = newFile("ressources/save.csv");
-        writeLine(saveFile, ville.nom + "," + ville.tour + "," + ville.budget + "," + ville.pollution + "," + ville.bonheur);
-        close(saveFile);
+        if (!ready(saveFile)) {
+            // Créer le fichier s'il n'existe pas
+            saveFile = createFile("ressources/save.csv");
+        }
+        String contenu = ville.nom + "," + ville.tour + "," + ville.budget + "," + ville.pollution + "," + ville.bonheur + "\n";
+        print(saveFile, contenu);
         println("Partie sauvegardée !");
     }
+
 
     void chargerPartie(City ville) {
         File saveFile = newFile("ressources/save.csv");
@@ -244,22 +249,37 @@ class App extends Program {
             println(index + ". " + line);
             index++;
         }
-        close(saveFile);
 
         int choix = choixValideNbr(index - 1);
         saveFile = newFile("ressources/save.csv");
         for (int i = 0; i < choix; i++) {
             String line = readLine(saveFile);
             if (i == choix - 1) {
-                String[] data = split(line, ',');
-                ville.nom = data[0];
-                ville.tour = stringToInt(data[1]);
-                ville.budget = stringToInt(data[2]);
-                ville.pollution = stringToInt(data[3]);
-                ville.bonheur = stringToInt(data[4]);
+                ville.nom = extractionChamps(line, 0);
+                ville.tour = stringToInt(extractionChamps(line, 1));
+                ville.budget = stringToInt(extractionChamps(line, 2));
+                ville.pollution = stringToInt(extractionChamps(line, 3));
+                ville.bonheur = stringToInt(extractionChamps(line, 4));
             }
         }
-        close(saveFile);
         println("Partie chargée !");
+    }
+
+    String extractionChamps(String line, int fieldIndex) {
+        int currentIndex = 0;
+        int start = 0;
+        for (int i = 0; i < length(line); i++) {
+            if (charAt(line, i) == ',' || i == length(line) - 1) {
+                if (currentIndex == fieldIndex) {
+                    if (i == length(line) - 1) {
+                        return substring(line, start, i + 1);
+                    }
+                    return substring(line, start, i);
+                }
+                start = i + 1;
+                currentIndex++;
+            }
+        }
+        return ""; // En cas de problème (à priori impossible)
     }
 }
