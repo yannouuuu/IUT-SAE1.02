@@ -132,33 +132,44 @@ Choisissez une action (1-3 ou 'q' pour sauvegarder la partie) : 1
 ```plaintext
 IUT-SAE1.02/
 ├── .github/
-│   └── assets/
+│   ├── assets/                   
+│   └── workflows/
+│       └── gitlab-sync.yml       # Workflow GHA pour la synchronisation avec GitLab 
+├── .gitignore                    # Fichier gitignore
+├── .gitlab/
+│   └── assets/                   # Ressources pour GitLab
 ├── .vscode/
-│   ├── extensions.json
-│   ├── launch.json
-│   └── settings.json
+│   ├── extensions.json           # Configuration des extensions VSCode
+│   ├── launch.json               # Configuration de lancement VSCode
+│   └── settings.json             # Configuration des paramètres VSCode
+├── classes/
+│   ├── App.class                 
+│   ├── City.class                
+│   └── Decisions.class           
+├── compile.bat                   # Script batch pour compiler le projet sous Windows
+├── compile.sh                    # Script shell pour compiler le projet sous Linux
+├── docs/
+│   └── trace_exec.mdx            # Fichier de documentation
 ├── lib/
-│   └── program.jar
+│   └── program.jar               
+├── LICENSE                       
+├── README.md                     
 ├── ressources/
-│   ├── decisions.csv            # Contient les choix disponibles et leurs impacts.
-│   ├── evenements.csv           # Définit les événements aléatoires possibles.
-│   └── configuration.csv        # Paramètres de départ (budget, pollution, bonheur).
-├── shots/                       # Captures d'écran pour documenter le projet.
-├── src/ 
-│   ├── main/
-│   │   ├── Main.java              # Point d'entrée principal du programme.
-│   │   └── GameEngine.java        # Logique principale du jeu (boucle, gestion des tours).
-│   ├── types/
-│   │   ├── CityState.java         # Classe pour représenter l'état actuel de la ville.
-│   │   ├── Configuration.java     # Classe pour stocker les paramètres initiaux du jeu.
-│   │   ├── Decision.java          # Classe pour représenter une décision.
-│   │   ├── DisplayManager.java    # Classe pour gérer l'affichage dans le terminal.
-│   │   └── Evenement.java         # Classe pour représenter un événement.
-├── .gitignore                   # Liste des fichiers/dossiers à ignorer par Git.
-├── compile.sh                   # Script de compilation.
-├── LICENSE                      # Licence du projet.
-├── README.md                    # Documentation principale (ce fichier).
-└── run.sh                       # Script pour lancer le projet.
+│   ├── configuration.csv         # Données de configuration
+│   ├── decisions.csv             # Données de décisions
+│   ├── evenements.csv            # Données d'événements
+│   ├── lose.txt                  # Message de défaite
+│   ├── rules.txt                 # Règles du jeu
+│   ├── save.csv                  # Fichier de sauvegarde
+│   ├── titre_ascii.txt           # ASCII Art du titre
+│   └── win.txt                   # Message de victoire
+├── run.bat                       # Script batch pour exécuter le projet sous Windows
+├── run.sh                        # Script shell pour exécuter le projet sous Linux
+├── src/
+│   ├── App.java                  # Code source de la classe App
+│   ├── City.java                 # Code source de la classe City
+│   ├── Decisions.java            # Code source de la classe Decisions
+│   └── Evenements.java           # Code source de la classe Evenements
 ```
 
 ## Captures d'écran
