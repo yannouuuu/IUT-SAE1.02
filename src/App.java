@@ -225,12 +225,17 @@ class App extends Program {
     }
 
     void sauvegarderPartie(City ville) {
+        String[][] contenu = {
+            {ville.nom, "" + ville.tour, "" + ville.budget, "" + ville.pollution, "" + ville.bonheur}
+        };
+        
+        // Vérifier si le fichier est prêt, sinon il sera créé par saveCSV
+        File saveFile = newFile("ressources/save.csv");
         if (!ready(saveFile)) {
-            // Créer le fichier s'il n'existe pas
-            File saveFile = newFile("ressources/save.csv");
+            println("Création du fichier de sauvegarde...");
         }
-        String contenu = ville.nom + "," + ville.tour + "," + ville.budget + "," + ville.pollution + "," + ville.bonheur + "\n";
-        print(saveFile, contenu);
+        
+        saveCSV(contenu, "ressources/save.csv");
         println("Partie sauvegardée !");
     }
 
