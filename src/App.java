@@ -29,21 +29,24 @@ class App extends Program {
         Decisions[] listeDecisions = loadDecision(DECISIONS);
         City ville = creerPartie();
         initialiserJeu(ville);
-        while (ville.tour < 30 && ville.bonheur >= 50 && ville.pollution <= 100 && ville.budget >= 0) {
+        int choix=-1;
+        while (ville.tour < 30 && ville.bonheur >= 50 && ville.pollution <= 100 && ville.budget >= 0 && choix!=5) {
             clearScreen();
+            pourcentageCorrect(ville);
             afficherTxt(TITRE);
             afficherEtatJeu(ville);
-            pourcentageCorrect(ville);
-            Decisions num1 = listeDecisions[0];
-            Decisions num2 = listeDecisions[1];
-            Decisions num3 = listeDecisions[2];
-            Decisions num4 = listeDecisions[3];
+            Decisions num1 = listeDecisions[(int) (random()*73)];
+            Decisions num2 = listeDecisions[(int) (random()*73)];
+            Decisions num3 = listeDecisions[(int) (random()*73)];
+            Decisions num4 = listeDecisions[(int) (random()*73)];
             println("1. " + num1.desc + " (" + num1.argent + " €, " + num1.pollution + " pollution, " + num1.bonheur + " bonheur)");
             println("2. " + num2.desc + " (" + num2.argent + " €, " + num2.pollution + " pollution, " + num2.bonheur + " bonheur)");
             println("3. " + num3.desc + " (" + num3.argent + " €, " + num3.pollution + " pollution, " + num3.bonheur + " bonheur)");
             println("4. " + num4.desc + " (" + num4.argent + " €, " + num4.pollution + " pollution, " + num4.bonheur + " bonheur)");
+            println("---------------------------------");
+            println("5. Pour sauvegarder et quitter.");
             
-            int choix = choixValideNbr(4); // Remplacer par botPlay(); pour activer le systeme de bot
+            choix = choixValideNbr(5); // Remplacer par botPlay(); pour activer le systeme de bot
             if (choix == 1) {
                 ville.tour++;
                 ville.budget = ville.budget + num1.argent;
@@ -71,6 +74,10 @@ class App extends Program {
                 ville.pollution = ville.pollution + num4.pollution;
                 ville.bonheur = ville.bonheur + num4.bonheur;
                 println(num4.message);
+            }
+            if (choix == 5) {
+                sauvegarderPartie(ville);
+                System.exit(0);
             }
         }
 
@@ -120,6 +127,25 @@ class App extends Program {
     }
 
     int choixValideNbr(int nbrChoix) {
+        println("- - - - - - - - - - - - - - - - -");
+        print("Choisissez une action (1-" + nbrChoix + ") : ");
+        
+        while (true) {
+            String input = readString();
+            // Vérifie si l'entrée est vide
+            if (length(input) <= 1) {
+                // Convertit le caractère en ASCII
+                int choix = (int)charAt(input, 0) - '0';
+                
+                // Vérifie si le choix est dans la plage valide
+                if (choix >= 1 && choix <= nbrChoix) {
+                    return choix;
+                }
+            }
+            println("La saisie est invalide !");
+        }
+    }
+    int choixValideNbrforSave(int nbrChoix) {
         println("- - - - - - - - - - - - - - - - -");
         print("Choisissez une action (1-" + nbrChoix + ") : ");
         
@@ -201,6 +227,15 @@ class App extends Program {
         decision.message = message;
         return decision;
     }
+    City newCity(String nom, int tour, int budget, int pollution, int bonheur) {
+        City city = new City();
+        city.nom = nom;
+        city.tour = tour;
+        city.budget = budget;
+        city.pollution = pollution;
+        city.bonheur = bonheur;
+        return city;
+    }
 
     Decisions[] loadDecision(String nomFile) {
         CSVFile deciAsString = loadCSV(nomFile);
@@ -216,6 +251,20 @@ class App extends Program {
             decisions[idxD - 1] = courant;
         }
         return decisions;
+    }
+    City[] loadCity(String nomFile) {
+        CSVFile deciAsString = loadCSV(nomFile);
+        City[] city = new City[rowCount(deciAsString) - 1];
+        for (int idxD = 1; idxD < length(city) + 1; idxD++) {
+            String nom = getCell(deciAsString, idxD, 0);
+            int tour = stringToInt(getCell(deciAsString, idxD, 1));
+            int budget = stringToInt(getCell(deciAsString, idxD, 2));
+            int pollution = stringToInt(getCell(deciAsString, idxD, 3));
+            int bonheur = stringToInt(getCell(deciAsString, idxD, 4));
+            City courant = newCity(nom, tour, budget, pollution, bonheur);
+            city[idxD - 1] = courant;
+        }
+        return city;
     }
 
     int botPlay() {
@@ -249,11 +298,11 @@ class App extends Program {
         int index = 1;
         while (ready(saveFile)) {
             String line = readLine(saveFile);
-            println(index + ". " + line);
+            println(index + ". " + extractionChamps(line, 0));
             index++;
         }
 
-        int choix = choixValideNbr(index - 1);
+        int choix = choixValideNbrforSave(index - 1);
         saveFile = newFile("ressources/save.csv");
         for (int i = 0; i < choix; i++) {
             String line = readLine(saveFile);
