@@ -44,7 +44,7 @@ class App extends Program {
             println("2. " + num2.desc + " (" + num2.argent + " €, " + num2.pollution + " pollution, " + num2.bonheur + " bonheur)");
             println("3. " + num3.desc + " (" + num3.argent + " €, " + num3.pollution + " pollution, " + num3.bonheur + " bonheur)");
             println("4. " + num4.desc + " (" + num4.argent + " €, " + num4.pollution + " pollution, " + num4.bonheur + " bonheur)");
-            println("---------------------------------");
+            println("- - - - - - - - - - - - - - - - - - -");
             println("Pour revenir au menu, appuyez sur 'q'");
             
             choix = choixValideNbr(5); // Remplacer par botPlay(); pour activer le systeme de bot
@@ -244,21 +244,6 @@ class App extends Program {
             decisions[idxD - 1] = courant;
         }
         return decisions;
-    }
-
-    City[] loadCity(String nomFile) {
-        CSVFile deciAsString = loadCSV(nomFile);
-        City[] city = new City[rowCount(deciAsString) - 1];
-        for (int idxD = 1; idxD < length(city) + 1; idxD++) {
-            String nom = getCell(deciAsString, idxD, 0);
-            int tour = stringToInt(getCell(deciAsString, idxD, 1));
-            int budget = stringToInt(getCell(deciAsString, idxD, 2));
-            int pollution = stringToInt(getCell(deciAsString, idxD, 3));
-            int bonheur = stringToInt(getCell(deciAsString, idxD, 4));
-            City courant = newCity(nom, tour, budget, pollution, bonheur);
-            city[idxD - 1] = courant;
-        }
-        return city;
     }
 
     int botPlay() {
