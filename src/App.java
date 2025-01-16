@@ -194,6 +194,8 @@ class App extends Program {
         }
     }
 
+
+
     Decisions newDecisions(String nom, String desc, int argent, int pollution, int bonheur) {
         Decisions decision = new Decisions();
         decision.nom = nom;
@@ -202,6 +204,24 @@ class App extends Program {
         decision.pollution = pollution;
         decision.bonheur = bonheur;
         return decision;
+    }
+
+    Decisions[] loadDecision(String nomFile) {
+        CSVFile deciAsString = loadCSV(nomFile);
+        Decisions[] decisions = new Decisions[rowCount(deciAsString) - 1];
+        for (int idxD = 1; idxD < length(decisions) + 1; idxD++) {
+            String nom = getCell(deciAsString, idxD, 0);
+            String desc = getCell(deciAsString, idxD, 1);
+            int argent = stringToInt(getCell(deciAsString, idxD, 2));
+            int pollution = stringToInt(getCell(deciAsString, idxD, 3));
+            int bonheur = stringToInt(getCell(deciAsString, idxD, 4));
+            if (rowCount(deciAsString) > idxD) {
+                String message = getCell(deciAsString, idxD, 5);
+            }
+            Decisions courant = newDecisions(nom, desc, argent, pollution, bonheur);
+            decisions[idxD - 1] = courant;
+        }
+        return decisions;
     }
 
     Evenements newEvenements(String nom, String desc, int argent, int pollution, int bonheur) {
@@ -213,7 +233,7 @@ class App extends Program {
         evenement.bonheur = bonheur;
         return evenement;
     }
-
+    
     Evenements[] loadEvenements(String nomFile){
         CSVFile eventAsString = loadCSV(nomFile);
         Evenements[] evenements = new Evenements[rowCount(eventAsString) - 1];
@@ -229,25 +249,6 @@ class App extends Program {
         return evenements;
     }
 
-    Decisions[] loadDecision(String nomFile) {
-        CSVFile deciAsString = loadCSV(nomFile);
-        Decisions[] decisions = new Decisions[rowCount(deciAsString) - 1];
-        for (int idxD = 1; idxD < length(decisions) + 1; idxD++) {
-            String nom = getCell(deciAsString, idxD, 0);
-            String desc = getCell(deciAsString, idxD, 1);
-            int argent = stringToInt(getCell(deciAsString, idxD, 2));
-            int pollution = stringToInt(getCell(deciAsString, idxD, 3));
-            int bonheur = stringToInt(getCell(deciAsString, idxD, 4));
-            if (rowCount(deciAsString) > idxD) {
-                String message = getCell(deciAsString, idxD, 5);
-            } else {
-                String message = ""; // or handle the case where the message is not available
-            }
-            Decisions courant = newDecisions(nom, desc, argent, pollution, bonheur, message);
-            decisions[idxD - 1] = courant;
-        }
-        return decisions;
-    }
 
     int botPlay() {
         int choix = tirerAuHasard(4) + 1;
