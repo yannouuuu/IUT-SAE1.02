@@ -53,6 +53,40 @@ class App extends Program {
         }
         gererFinDePartie(ville);
     }
+    
+    void initialiserJeu(City ville) {
+        afficherTxt(TITRE);
+        afficherMenuStart();
+        int choix = choixValideNbr(4);
+        startSelect(choix, ville);
+    }
+
+    // Fonction affichant le menu
+    void afficherMenuStart() {
+        println("Choisissez une option :");
+        println("1. Nouvelle ville");
+        println("2. Charger une partie");
+        println("3. Afficher les règles du jeu");
+        println("4. Quitter");
+    }
+
+    // Fonction de la selection des choix du menu
+    void startSelect(int choix, City ville) {
+        if (choix == 1) {
+            println("Quel est le nom de votre ville ?");
+            print("> ");
+            String nom = readString();
+            ville.nom = nom;
+        } else if (choix == 2) {
+            chargerPartie(ville);
+        } else if (choix == 3) {
+            afficherTxt(RULES);
+            choixDeQuitter();
+            initialiserJeu(ville);
+        } else if (choix == 4) {
+            System.exit(0);
+        }
+    }
 
     void gererFinDePartie(City ville){
         if (ville.bonheur < 50 || ville.pollution > 100 || ville.budget < 0) {
@@ -97,39 +131,6 @@ class App extends Program {
         }
     }
 
-    void initialiserJeu(City ville) {
-        afficherTxt(TITRE);
-        afficherMenuStart();
-        int choix = choixValideNbr(4);
-        startSelect(choix, ville);
-    }
-
-    // Fonction affichant le menu
-    void afficherMenuStart() {
-        println("Choisissez une option :");
-        println("1. Nouvelle ville");
-        println("2. Charger une partie");
-        println("3. Afficher les règles du jeu");
-        println("4. Quitter");
-    }
-
-    // Fonction de la selection des choix du menu
-    void startSelect(int choix, City ville) {
-        if (choix == 1) {
-            println("Quel est le nom de votre ville ?");
-            print("> ");
-            String nom = readString();
-            ville.nom = nom;
-        } else if (choix == 2) {
-            chargerPartie(ville);
-        } else if (choix == 3) {
-            afficherTxt(RULES);
-            choixDeQuitter();
-            initialiserJeu(ville);
-        } else if (choix == 4) {
-            System.exit(0);
-        }
-    }
 
     int choixValideNbr(int nbrChoix) {
         println("- - - - - - - - - - - - - - - - -");
