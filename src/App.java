@@ -223,7 +223,7 @@ class App extends Program {
             int argent = stringToInt(getCell(eventAsString, idxE, 2));
             int pollution = stringToInt(getCell(eventAsString, idxE, 3));
             int bonheur = stringToInt(getCell(eventAsString, idxE, 4));
-            Evenements courant = newEvenements(nom, desc, argent, pollution, bonheur, "");
+            Evenements courant = newEvenements(nom, desc, argent, pollution, bonheur);
             evenements[idxE - 1] = courant;
         }
         return evenements;
