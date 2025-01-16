@@ -5,28 +5,32 @@
  *
  * Auteurs : Yann RENARD, Yanis MEKKI
  */
+
 // TODO 
 // [] Faire quelques tests
 // [] Systeme sauvegarde
 // [] Systeme de chargement de sauvegarde
 // [x] Systeme de bot
+
 import extensions.File;
 import extensions.CSVFile;
+
 class App extends Program {
+
     final String NOM = "EcoManager";
     final String TITRE = "./ressources/titre_ascii.txt";
     final String RULES = "./ressources/rules.txt";
     final String DECISIONS = "./ressources/decisions.csv";
     final String WIN = "./ressources/win.txt";
     final String LOSE = "./ressources/lose.txt";
-    final String EVENT = "./ressources/evenements.csv";
+
     void algorithm() {
         clearScreen();
         Decisions[] listeDecisions = loadDecision(DECISIONS);
         City ville = creerPartie();
         initialiserJeu(ville);
         int choix=-1;
-        while (ville.tour < 30 && ville.bonheur >= 50 && ville.pollution <= 100 && ville.budget >= 0) {
+        while (ville.tour < 30 && ville.bonheur >= 50 && ville.pollution <= 100 && ville.budget >= 0 && choix!=5) {
             clearScreen();
             pourcentageCorrect(ville);
             afficherTxt(TITRE);
@@ -41,7 +45,7 @@ class App extends Program {
             println("4. " + num4.desc + " (" + num4.argent + " €, " + num4.pollution + " pollution, " + num4.bonheur + " bonheur)");
             println("---------------------------------");
             println("Pour revenir au menu, appuyez sur 'q'");
-            
+
             choix = choixValideNbr(5); // Remplacer par botPlay(); pour activer le systeme de bot
             if (choix == 1) {
                 ville.tour++;
@@ -71,11 +75,12 @@ class App extends Program {
                 ville.bonheur = ville.bonheur + num4.bonheur;
                 println(num4.message);
             }
-            if (choix == 'q') {
+            if (choix == 5) {
                 sauvegarderPartie(ville);
-                initialiserJeu(ville);
+                System.exit(0);
             }
         }
+
         if (ville.bonheur < 50 || ville.pollution > 100 || ville.budget < 0) {
             afficherTxt(LOSE); 
             delay(10000);
@@ -93,6 +98,7 @@ class App extends Program {
         int choix = choixValideNbr(4);
         startSelect(choix, ville);
     }
+
     // Fonction affichant le menu
     void afficherMenuStart() {
         println("Choisissez une option :");
@@ -101,6 +107,7 @@ class App extends Program {
         println("3. Afficher les règles du jeu");
         println("4. Quitter");
     }
+
     // Fonction de la selection des choix du menu
     void startSelect(int choix, City ville) {
         if (choix == 1) {
@@ -122,7 +129,7 @@ class App extends Program {
     int choixValideNbr(int nbrChoix) {
         println("- - - - - - - - - - - - - - - - -");
         print("Choisissez une action (1-" + nbrChoix + ") : ");
-        
+
         while (true) {
             String input = readString();
             // Vérifie si l'entrée est non vide et contient un seul caractère numérique
@@ -162,6 +169,7 @@ class App extends Program {
             println(readLine(file));
         }
     }
+
     City creerPartie() {
         City ville = new City();
         ville.nom = "default";
@@ -171,11 +179,11 @@ class App extends Program {
         ville.bonheur = 85;
         return ville;
     }
-    
+
     int tirerAuHasard(int max) {
         return (int)(random() * max);
     }
-    
+
     void pourcentageCorrect(City ville) {
         if (ville.bonheur >= 100) {
             ville.bonheur = 100;
@@ -212,44 +220,6 @@ class App extends Program {
         return decisions;
     }
 
-    Evenements newEvenements(String nom, String desc, int argent, int pollution, int bonheur) {
-        Evenements evenement = new Evenements();
-        evenement.nom = nom;
-        evenement.desc = desc;
-        evenement.argent = argent;
-        evenement.pollution = pollution;
-        evenement.bonheur = bonheur;
-        return evenement;
-    }
-
-    Evenements[] loadEvenements(String nomFile){
-        CSVFile eventAsString = loadCSV(nomFile);
-        Evenements[] evenements = new Evenements[rowCount(eventAsString) - 1];
-        for (int idxE = 1; idxE < length(evenements) + 1; idxE++) {
-            String nom = getCell(eventAsString, idxE, 0);
-            String desc = getCell(eventAsString, idxE, 1);
-            int argent = stringToInt(getCell(eventAsString, idxE, 2));
-            int pollution = stringToInt(getCell(eventAsString, idxE, 3));
-            int bonheur = stringToInt(getCell(eventAsString, idxE, 4));
-            Evenements courant = newEvenements(nom, desc, argent, pollution, bonheur);
-            evenements[idxE - 1] = courant;
-        }
-        return evenements;
-    }
-
-
-    void eventRandom(City ville){
-        Evenements[] listeEvent=loadEvenements(EVENT);
-        int nb=tirerAuHasard(101);
-        if(nb<=20){
-            Evenements event=listeEvent[(int) (random()*length(listeEvent))];
-            println(event.desc);
-            ville.budget=ville.budget-event.argent;
-            ville.pollution=ville.pollution-event.pollution;
-            ville.bonheur=ville.bonheur-event.bonheur;
-        }
-    }
-
     int botPlay() {
         int choix = tirerAuHasard(4) + 1;
         println("Le bot a choisi l'option : " + choix);
@@ -260,19 +230,21 @@ class App extends Program {
         // Charger les saves existantes
         CSVFile existingSaves = loadCSV("ressources/save.csv");
         int existingRows = rowCount(existingSaves);
+
         String[][] contenu = new String[existingRows + 1][5];
-        
+
         for (int i = 0; i < existingRows; i++) {
             for (int j = 0; j < 5; j++) {
                 contenu[i][j] = getCell(existingSaves, i, j);
             }
         }
+
         contenu[existingRows - 1][0] = ville.nom;
         contenu[existingRows - 1][1] = "" + ville.tour;
         contenu[existingRows - 1][2] = "" + ville.budget;
         contenu[existingRows - 1][3] = "" + ville.pollution;
         contenu[existingRows - 1][4] = "" + ville.bonheur;
-        
+
         saveCSV(contenu, "ressources/save.csv");
         println("Partie sauvegardée !");
     }
@@ -280,24 +252,24 @@ class App extends Program {
     void chargerPartie(City ville) {
         CSVFile saveFile = loadCSV("ressources/save.csv");
         int totalSaves = rowCount(saveFile);
-        
+
         if (totalSaves == 0) {
             println("Aucune sauvegarde trouvée.");
             return;
         }
-        
+
         println("Parties sauvegardées :");
         for (int i = 0; i < totalSaves; i++) {
             println((i + 1) + ". " + getCell(saveFile, i, 0));
         }
-        
+
         int choix = choixValideNbr(totalSaves);
         ville.nom = getCell(saveFile, choix - 1, 0);
         ville.tour = stringToInt(getCell(saveFile, choix - 1, 1));
         ville.budget = stringToInt(getCell(saveFile, choix - 1, 2));
         ville.pollution = stringToInt(getCell(saveFile, choix - 1, 3));
         ville.bonheur = stringToInt(getCell(saveFile, choix - 1, 4));
-        
+
         println("Partie chargée !");
     }
 
