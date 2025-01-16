@@ -214,7 +214,7 @@ class App extends Program {
             int pollution = stringToInt(getCell(deciAsString, idxD, 3));
             int bonheur = stringToInt(getCell(deciAsString, idxD, 4));
             String message = getCell(deciAsString, idxD, 5);
-            Decisions courant = newDecisions(nom, desc, argent, pollution, bonheur, message);
+            Decisions courant = newDecisions(nom, desc, argent, pollution, bonheur);
             decisions[idxD - 1] = courant;
         }
         return decisions;
