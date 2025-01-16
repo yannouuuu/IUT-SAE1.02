@@ -5,18 +5,14 @@
  *
  * Auteurs : Yann RENARD, Yanis MEKKI
  */
-
 // TODO 
-// [] Faire quelques tests
+// [] Faire quelques tests
 // [] Systeme sauvegarde
 // [] Systeme de chargement de sauvegarde
 // [x] Systeme de bot
-
 import extensions.File;
 import extensions.CSVFile;
-
 class App extends Program {
-
     final String NOM = "EcoManager";
     final String TITRE = "./ressources/titre_ascii.txt";
     final String RULES = "./ressources/rules.txt";
@@ -24,7 +20,6 @@ class App extends Program {
     final String WIN = "./ressources/win.txt";
     final String LOSE = "./ressources/lose.txt";
     final String EVENT = "./ressources/evenements.csv";
-
     void algorithm() {
         clearScreen();
         Decisions[] listeDecisions = loadDecision(DECISIONS);
@@ -44,10 +39,10 @@ class App extends Program {
             println("2. " + num2.desc + " (" + num2.argent + " €, " + num2.pollution + " pollution, " + num2.bonheur + " bonheur)");
             println("3. " + num3.desc + " (" + num3.argent + " €, " + num3.pollution + " pollution, " + num3.bonheur + " bonheur)");
             println("4. " + num4.desc + " (" + num4.argent + " €, " + num4.pollution + " pollution, " + num4.bonheur + " bonheur)");
-            println("- - - - - - - - - - - - - - - - - - -");
+            println("---------------------------------");
             println("Pour revenir au menu, appuyez sur 'q'");
             
-            choix = choixValideNbr(4); // Remplacer par botPlay(); pour activer le systeme de bot
+            choix = choixValideNbr(5); // Remplacer par botPlay(); pour activer le systeme de bot
             if (choix == 1) {
                 ville.tour++;
                 ville.budget = ville.budget + num1.argent;
@@ -81,7 +76,6 @@ class App extends Program {
                 initialiserJeu(ville);
             }
         }
-
         if (ville.bonheur < 50 || ville.pollution > 100 || ville.budget < 0) {
             afficherTxt(LOSE); 
             delay(10000);
@@ -99,7 +93,6 @@ class App extends Program {
         int choix = choixValideNbr(4);
         startSelect(choix, ville);
     }
-
     // Fonction affichant le menu
     void afficherMenuStart() {
         println("Choisissez une option :");
@@ -108,7 +101,6 @@ class App extends Program {
         println("3. Afficher les règles du jeu");
         println("4. Quitter");
     }
-
     // Fonction de la selection des choix du menu
     void startSelect(int choix, City ville) {
         if (choix == 1) {
@@ -170,7 +162,6 @@ class App extends Program {
             println(readLine(file));
         }
     }
-
     City creerPartie() {
         City ville = new City();
         ville.nom = "default";
@@ -220,7 +211,7 @@ class App extends Program {
         }
         return decisions;
     }
-
+    
     Evenements newEvenements(String nom, String desc, int argent, int pollution, int bonheur) {
         Evenements evenement = new Evenements();
         evenement.nom = nom;
@@ -246,6 +237,7 @@ class App extends Program {
         return evenements;
     }
 
+
     void eventRandom(City ville){
         Evenements[] listeEvent=loadEvenements(EVENT);
         int nb=tirerAuHasard(101);
@@ -268,7 +260,6 @@ class App extends Program {
         // Charger les saves existantes
         CSVFile existingSaves = loadCSV("ressources/save.csv");
         int existingRows = rowCount(existingSaves);
-
         String[][] contenu = new String[existingRows + 1][5];
         
         for (int i = 0; i < existingRows; i++) {
@@ -276,7 +267,6 @@ class App extends Program {
                 contenu[i][j] = getCell(existingSaves, i, j);
             }
         }
-
         contenu[existingRows - 1][0] = ville.nom;
         contenu[existingRows - 1][1] = "" + ville.tour;
         contenu[existingRows - 1][2] = "" + ville.budget;
@@ -328,4 +318,3 @@ class App extends Program {
         }
         return ""; // En cas de problème (à priori impossible)
     }
-}
