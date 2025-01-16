@@ -30,7 +30,7 @@ class App extends Program {
         City ville = creerPartie();
         initialiserJeu(ville);
         int choix=-1;
-        while (ville.tour < 30 && ville.bonheur >= 50 && ville.pollution <= 100 && ville.budget >= 0 && choix!=5) {
+        while (ville.tour < 30 && ville.bonheur >= 50 && ville.pollution <= 100 && ville.budget >= 0) {
             clearScreen();
             pourcentageCorrect(ville);
             afficherTxt(TITRE);
@@ -75,9 +75,9 @@ class App extends Program {
                 ville.bonheur = ville.bonheur + num4.bonheur;
                 println(num4.message);
             }
-            if (choix == 5) {
+            if (choix == 'q') {
                 sauvegarderPartie(ville);
-                System.exit(0);
+                initialiserJeu(ville);
             }
         }
 
