@@ -53,7 +53,7 @@ class App extends Program {
         }
         gererFinDePartie(ville);
     }
-    
+
     void initialiserJeu(City ville) {
         afficherTxt(TITRE);
         afficherMenuStart();
@@ -130,7 +130,6 @@ class App extends Program {
             initialiserJeu(ville);
         }
     }
-
 
     int choixValideNbr(int nbrChoix) {
         println("- - - - - - - - - - - - - - - - -");
@@ -278,22 +277,31 @@ class App extends Program {
         CSVFile existingSaves = loadCSV("ressources/save.csv");
         int existingRows = rowCount(existingSaves);
 
-        String[][] contenu = new String[existingRows + 1][5];
+        String[][] contenu;
 
-        for (int i = 0; i < existingRows; i++) {
-            for (int j = 0; j < 5; j++) {
-                contenu[i][j] = getCell(existingSaves, i, j);
+        if (existingRows > 0) {
+            // Si des sauvegardes existent, on les charge dans un tableau
+            contenu = new String[existingRows][5];
+            for (int i = 0; i < existingRows; i++) {
+                for (int j = 0; j < 5; j++) {
+                    contenu[i][j] = getCell(existingSaves, i, j);
+                }
             }
+        } else {
+            // Sinon, on crée un nouveau tableau
+            contenu = new String[1][5];
         }
 
-        contenu[existingRows - 1][0] = ville.nom;
-        contenu[existingRows - 1][1] = "" + ville.tour;
-        contenu[existingRows - 1][2] = "" + ville.budget;
-        contenu[existingRows - 1][3] = "" + ville.pollution;
-        contenu[existingRows - 1][4] = "" + ville.bonheur;
+        // On écrase la sauvegarde sélectionnée
+        int saveIndex = choixValideNbr(existingRows); // On demande à l'utilisateur de choisir une sauvegarde à écraser
+        contenu[saveIndex - 1][0] = ville.nom;
+        contenu[saveIndex - 1][1] = "" + ville.tour;
+        contenu[saveIndex - 1][2] = "" + ville.budget;
+        contenu[saveIndex - 1][3] = "" + ville.pollution;
+        contenu[saveIndex - 1][4] = "" + ville.bonheur;
 
         saveCSV(contenu, "ressources/save.csv");
-        println("Partie sauvegardée !");
+        println("Partie sauvegardée !");
     }
 
     void chargerPartie(City ville) {
