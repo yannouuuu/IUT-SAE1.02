@@ -8,9 +8,10 @@
 
 // TODO 
 // [] Faire quelques tests
-// [] Systeme sauvegarde
-// [] Systeme de chargement de sauvegarde
+// [x] Systeme sauvegarde
+// [x] Systeme de chargement de sauvegarde
 // [x] Systeme de bot
+// [] Fix la saisie 5 qui renvoie 'la saisie est invalide' 
 
 import extensions.File;
 import extensions.CSVFile;
@@ -133,14 +134,18 @@ class App extends Program {
 
     int choixValideNbr(int nbrChoix) {
         println("- - - - - - - - - - - - - - - - -");
-        print("Choisissez une action (1-" + nbrChoix + ") : ");
+        print("Choisissez une action (1-" + nbrChoix + " ou 5 pour quitter) : ");
 
         while (true) {
             String input = readString();
             // Vérifie si l'entrée est non vide et contient un seul caractère numérique
-            if (length(input) == 1 && charAt(input, 0) >= '1' && charAt(input, 0) <= (char) ('0' + nbrChoix)) {
-                int choix = (int) charAt(input, 0) - '0';
-                return choix;
+            if (length(input) == 1 && charAt(input, 0) >= '1' && charAt(input, 0) <= (char) ('0' + nbrChoix) || input == "5") { // Modification ici
+                if (input == "5") {
+                    return 5; // Retourne 5 si l'utilisateur entre 5
+                } else {
+                    int choix = (int) charAt(input, 0) - '0';
+                    return choix;
+                }
             }
             println("La saisie est invalide !");
         }
