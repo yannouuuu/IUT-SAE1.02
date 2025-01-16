@@ -140,6 +140,20 @@ class App extends Program {
             println("La saisie est invalide !");
         }
     }
+    int choixValideNbrforSave(int nbrChoix) {
+        println("- - - - - - - - - - - - - - - - -");
+        print("Choisissez une action (1-" + nbrChoix + ") : ");
+
+        while (true) {
+            String input = readString();
+            // Vérifie si l'entrée est non vide et contient un seul caractère numérique
+            if (length(input) == 1 && charAt(input, 0) >= '1' && charAt(input, 0) <= (char)('0' + nbrChoix)) {
+                int choix = (int)charAt(input, 0) - '0';
+                return choix;
+            }
+            println("La saisie est invalide !");
+        }
+    }
 
     char choixDeQuitter() {
         println("- - - - - - - - - - - - - - - - -");
@@ -203,6 +217,15 @@ class App extends Program {
         decision.message = message;
         return decision;
     }
+    City newCity(String nom, int tour, int budget, int pollution, int bonheur) {
+        City city = new City();
+        city.nom = nom;
+        city.tour = tour;
+        city.budget = budget;
+        city.pollution = pollution;
+        city.bonheur = bonheur;
+        return city;
+    }
 
     Decisions[] loadDecision(String nomFile) {
         CSVFile deciAsString = loadCSV(nomFile);
@@ -219,6 +242,20 @@ class App extends Program {
         }
         return decisions;
     }
+    City[] loadCity(String nomFile) {
+        CSVFile deciAsString = loadCSV(nomFile);
+        City[] city = new City[rowCount(deciAsString) - 1];
+        for (int idxD = 1; idxD < length(city) + 1; idxD++) {
+            String nom = getCell(deciAsString, idxD, 0);
+            int tour = stringToInt(getCell(deciAsString, idxD, 1));
+            int budget = stringToInt(getCell(deciAsString, idxD, 2));
+            int pollution = stringToInt(getCell(deciAsString, idxD, 3));
+            int bonheur = stringToInt(getCell(deciAsString, idxD, 4));
+            City courant = newCity(nom, tour, budget, pollution, bonheur);
+            city[idxD - 1] = courant;
+        }
+        return city;
+    }
 
     int botPlay() {
         int choix = tirerAuHasard(4) + 1;
@@ -230,7 +267,6 @@ class App extends Program {
         // Charger les saves existantes
         CSVFile existingSaves = loadCSV("ressources/save.csv");
         int existingRows = rowCount(existingSaves);
-
         String[][] contenu = new String[existingRows + 1][5];
 
         for (int i = 0; i < existingRows; i++) {
@@ -238,12 +274,11 @@ class App extends Program {
                 contenu[i][j] = getCell(existingSaves, i, j);
             }
         }
-
-        contenu[existingRows - 1][0] = ville.nom;
-        contenu[existingRows - 1][1] = "" + ville.tour;
-        contenu[existingRows - 1][2] = "" + ville.budget;
-        contenu[existingRows - 1][3] = "" + ville.pollution;
-        contenu[existingRows - 1][4] = "" + ville.bonheur;
+        contenu[existingRows][0] = ville.nom;
+        contenu[existingRows][1] = "" + ville.tour;
+        contenu[existingRows][2] = "" + ville.budget;
+        contenu[existingRows][3] = "" + ville.pollution;
+        contenu[existingRows][4] = "" + ville.bonheur;
 
         saveCSV(contenu, "ressources/save.csv");
         println("Partie sauvegardée !");
@@ -263,7 +298,7 @@ class App extends Program {
             println((i + 1) + ". " + getCell(saveFile, i, 0));
         }
 
-        int choix = choixValideNbr(totalSaves);
+        int choix = choixValideNbrforSave(totalSaves);
         ville.nom = getCell(saveFile, choix - 1, 0);
         ville.tour = stringToInt(getCell(saveFile, choix - 1, 1));
         ville.budget = stringToInt(getCell(saveFile, choix - 1, 2));
