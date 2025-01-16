@@ -193,7 +193,7 @@ class App extends Program {
         ville.bonheur = 85;
         return ville;
     }
-
+    
     int tirerAuHasard(int max) {
         return (int)(random() * max);
     }
@@ -264,46 +264,53 @@ class App extends Program {
     }
 
     void sauvegarderPartie(City ville) {
-        String[][] contenu = {
-            {ville.nom, "" + ville.tour, "" + ville.budget, "" + ville.pollution, "" + ville.bonheur}
-        };
+        // Load existing saves
+        CSVFile existingSaves = loadCSV("ressources/save.csv");
+        int existingRows = rowCount(existingSaves);
         
-        // Vérifier si le fichier est prêt, sinon il sera créé par saveCSV
-        File saveFile = newFile("ressources/save.csv");
-        if (!ready(saveFile)) {
-            println("Création du fichier de sauvegarde...");
+        // Create a new array to hold all saves including the new one
+        String[][] contenu = new String[existingRows + 1][5];
+        
+        // Copy existing saves into the new array
+        for (int i = 0; i < existingRows; i++) {
+            for (int j = 0; j < 5; j++) {
+                contenu[i][j] = getCell(existingSaves, i, j);
+            }
         }
         
+        // Add the new save at the end
+        contenu[existingRows][0] = ville.nom;
+        contenu[existingRows][1] = "" + ville.tour;
+        contenu[existingRows][2] = "" + ville.budget;
+        contenu[existingRows][3] = "" + ville.pollution;
+        contenu[existingRows][4] = "" + ville.bonheur;
+        
+        // Save all data back to the file
         saveCSV(contenu, "ressources/save.csv");
         println("Partie sauvegardée !");
     }
 
     void chargerPartie(City ville) {
-        File saveFile = newFile("ressources/save.csv");
-        if (!ready(saveFile)) {
+        CSVFile saveFile = loadCSV("ressources/save.csv");
+        int totalSaves = rowCount(saveFile);
+        
+        if (totalSaves == 0) {
             println("Aucune sauvegarde trouvée.");
             return;
         }
+        
         println("Parties sauvegardées :");
-        int index = 1;
-        while (ready(saveFile)) {
-            String line = readLine(saveFile);
-            println(index + ". " + extractionChamps(line, 0));
-            index++;
+        for (int i = 0; i < totalSaves; i++) {
+            println((i + 1) + ". " + getCell(saveFile, i, 0));
         }
-
-        int choix = choixValideNbrforSave(index - 1);
-        saveFile = newFile("ressources/save.csv");
-        for (int i = 0; i < choix; i++) {
-            String line = readLine(saveFile);
-            if (i == choix - 1) {
-                ville.nom = extractionChamps(line, 0);
-                ville.tour = stringToInt(extractionChamps(line, 1));
-                ville.budget = stringToInt(extractionChamps(line, 2));
-                ville.pollution = stringToInt(extractionChamps(line, 3));
-                ville.bonheur = stringToInt(extractionChamps(line, 4));
-            }
-        }
+        
+        int choix = choixValideNbrforSave(totalSaves);
+        ville.nom = getCell(saveFile, choix - 1, 0);
+        ville.tour = stringToInt(getCell(saveFile, choix - 1, 1));
+        ville.budget = stringToInt(getCell(saveFile, choix - 1, 2));
+        ville.pollution = stringToInt(getCell(saveFile, choix - 1, 3));
+        ville.bonheur = stringToInt(getCell(saveFile, choix - 1, 4));
+        
         println("Partie chargée !");
     }
 
