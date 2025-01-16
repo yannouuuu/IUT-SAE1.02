@@ -44,7 +44,7 @@ class App extends Program {
             println("3. " + num3.desc + " (" + num3.argent + " €, " + num3.pollution + " pollution, " + num3.bonheur + " bonheur)");
             println("4. " + num4.desc + " (" + num4.argent + " €, " + num4.pollution + " pollution, " + num4.bonheur + " bonheur)");
             println("---------------------------------");
-            println("5. Pour sauvegarder et quitter.");
+            println("Pour revenir au menu, appuyez sur 'q'");
             
             choix = choixValideNbr(5); // Remplacer par botPlay(); pour activer le systeme de bot
             if (choix == 1) {
@@ -217,6 +217,7 @@ class App extends Program {
         decision.message = message;
         return decision;
     }
+
     City newCity(String nom, int tour, int budget, int pollution, int bonheur) {
         City city = new City();
         city.nom = nom;
@@ -242,6 +243,7 @@ class App extends Program {
         }
         return decisions;
     }
+
     City[] loadCity(String nomFile) {
         CSVFile deciAsString = loadCSV(nomFile);
         City[] city = new City[rowCount(deciAsString) - 1];
@@ -276,11 +278,11 @@ class App extends Program {
             }
         }
 
-        contenu[existingRows][0] = ville.nom;
-        contenu[existingRows][1] = "" + ville.tour;
-        contenu[existingRows][2] = "" + ville.budget;
-        contenu[existingRows][3] = "" + ville.pollution;
-        contenu[existingRows][4] = "" + ville.bonheur;
+        contenu[existingRows - 1][0] = ville.nom;
+        contenu[existingRows - 1][1] = "" + ville.tour;
+        contenu[existingRows - 1][2] = "" + ville.budget;
+        contenu[existingRows - 1][3] = "" + ville.pollution;
+        contenu[existingRows - 1][4] = "" + ville.bonheur;
         
         saveCSV(contenu, "ressources/save.csv");
         println("Partie sauvegardée !");
