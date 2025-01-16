@@ -27,12 +27,23 @@ class App extends Program {
     final String EVENT = "./ressources/evenements.csv";
 
     void algorithm() {
+        jeu();
+    }
+
+    void initialiserJeu(City ville) {
+        clearScreen();
+        afficherTxt(TITRE);
+        afficherMenuStart();
+        int choix = choixValideNbr(4);
+        startSelect(choix, ville);
+    }
+    void jeu(){
         clearScreen();
         Decisions[] listeDecisions = loadDecision(DECISIONS);
         City ville = creerPartie();
         initialiserJeu(ville);
         int choix = -1;
-        while (ville.tour < 30 && ville.bonheur >= 50 && ville.pollution <= 100 && ville.budget >= 0) {
+        while (ville.tour < 30 && ville.bonheur >= 50 && ville.pollution <= 100 && ville.budget >= 0 && choix!=5) {
             clearScreen();
             pourcentageCorrect(ville);
             afficherTxt(TITRE);
@@ -47,19 +58,36 @@ class App extends Program {
             println("3. " + num3.desc + " (" + num3.argent + " €, " + num3.pollution + " pollution, " + num3.bonheur + " bonheur)");
             println("4. " + num4.desc + " (" + num4.argent + " €, " + num4.pollution + " pollution, " + num4.bonheur + " bonheur)");
             println("- - - - - - - - - - - - - - - - - - -");
-            println("Pour revenir au menu, entrez 5");
+            println("Pour revenir au menu et sauvegardez, entrez 5");
 
             choix = choixValideNbr(5); // Remplacer par botPlay(); pour activer le systeme de bot
-            appliquerChoix(choix, ville, num1, num2, num3, num4);
+            if (choix == 1) {
+                ville.tour++;
+                ville.budget = ville.budget + num1.argent;
+                ville.pollution = ville.pollution + num1.pollution;
+                ville.bonheur = ville.bonheur + num1.bonheur;
+                println(num1.message);
+          } else if (choix == 2) {
+                ville.tour++;
+                ville.budget = ville.budget + num2.argent;
+                ville.pollution = ville.pollution + num2.pollution;
+                ville.bonheur = ville.bonheur + num2.bonheur;
+                println(num2.message);
+          } else if (choix == 3) {
+            ville.tour++;
+            ville.budget = ville.budget + num3.argent;
+            ville.pollution = ville.pollution + num3.pollution;
+            ville.bonheur = ville.bonheur + num3.bonheur;
+            println(num3.message);
+          } else if (choix == 4) {
+            ville.tour++;
+            ville.budget = ville.budget + num4.argent;
+            ville.pollution = ville.pollution + num4.pollution;
+            ville.bonheur = ville.bonheur + num4.bonheur;
+            println(num4.message);
         }
         gererFinDePartie(ville);
     }
-
-    void initialiserJeu(City ville) {
-        afficherTxt(TITRE);
-        afficherMenuStart();
-        int choix = choixValideNbr(4);
-        startSelect(choix, ville);
     }
 
     // Fonction affichant le menu
@@ -93,57 +121,31 @@ class App extends Program {
         if (ville.bonheur < 50 || ville.pollution > 100 || ville.budget < 0) {
             afficherTxt(LOSE);
             delay(10000);
+            jeu();
         } else if (ville.tour >= 30) {
             afficherTxt(WIN);
             delay(10000);
+            jeu();
         } else {
             sauvegarderPartie(ville);
+            jeu();
         }
     }
 
-    void appliquerChoix(int choix, City ville, Decisions num1, Decisions num2, Decisions num3, Decisions num4){
-        if (choix == 1) {
-            ville.tour++;
-            ville.budget = ville.budget + num1.argent;
-            ville.pollution = ville.pollution + num1.pollution;
-            ville.bonheur = ville.bonheur + num1.bonheur;
-            println(num1.message);
-        } else if (choix == 2) {
-            ville.tour++;
-            ville.budget = ville.budget + num2.argent;
-            ville.pollution = ville.pollution + num2.pollution;
-            ville.bonheur = ville.bonheur + num2.bonheur;
-            println(num2.message);
-        } else if (choix == 3) {
-            ville.tour++;
-            ville.budget = ville.budget + num3.argent;
-            ville.pollution = ville.pollution + num3.pollution;
-            ville.bonheur = ville.bonheur + num3.bonheur;
-            println(num3.message);
-        } else if (choix == 4) {
-            ville.tour++;
-            ville.budget = ville.budget + num4.argent;
-            ville.pollution = ville.pollution + num4.pollution;
-            ville.bonheur = ville.bonheur + num4.bonheur;
-            println(num4.message);
-        } else if (choix == 5) {
-            sauvegarderPartie(ville);
-            
-        }
-    }
 
     int choixValideNbr(int nbrChoix) {
         println("- - - - - - - - - - - - - - - - -");
-        print("Choisissez une action (1-" + nbrChoix + " ou 5 pour quitter) : ");
-
+        print("Choisissez une action (1-" + nbrChoix + ") : ");
+        
         while (true) {
             String input = readString();
-            // Vérifie si l'entrée est non vide et contient un seul caractère numérique
-            if (length(input) == 1 && charAt(input, 0) >= '1' && charAt(input, 0) <= (char) ('0' + nbrChoix) || input == "5") { // Modification ici
-                if (input == "5") {
-                    return 5; // Retourne 5 si l'utilisateur entre 5
-                } else {
-                    int choix = (int) charAt(input, 0) - '0';
+            // Vérifie si l'entrée est vide
+            if (length(input) <= 1) {
+                // Convertit le caractère en ASCII
+                int choix = (int)charAt(input, 0) - '0';
+                
+                // Vérifie si le choix est dans la plage valide
+                if (choix >= 1 && choix <= nbrChoix) {
                     return choix;
                 }
             }
