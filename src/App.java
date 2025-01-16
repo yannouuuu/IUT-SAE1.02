@@ -194,8 +194,6 @@ class App extends Program {
         }
     }
 
-
-
     Decisions newDecisions(String nom, String desc, int argent, int pollution, int bonheur) {
         Decisions decision = new Decisions();
         decision.nom = nom;
@@ -215,10 +213,8 @@ class App extends Program {
             int argent = stringToInt(getCell(deciAsString, idxD, 2));
             int pollution = stringToInt(getCell(deciAsString, idxD, 3));
             int bonheur = stringToInt(getCell(deciAsString, idxD, 4));
-            if (rowCount(deciAsString) > idxD) {
-                String message = getCell(deciAsString, idxD, 5);
-            }
-            Decisions courant = newDecisions(nom, desc, argent, pollution, bonheur);
+            String message = getCell(deciAsString, idxD, 5);
+            Decisions courant = newDecisions(nom, desc, argent, pollution, bonheur, message);
             decisions[idxD - 1] = courant;
         }
         return decisions;
@@ -233,7 +229,7 @@ class App extends Program {
         evenement.bonheur = bonheur;
         return evenement;
     }
-    
+
     Evenements[] loadEvenements(String nomFile){
         CSVFile eventAsString = loadCSV(nomFile);
         Evenements[] evenements = new Evenements[rowCount(eventAsString) - 1];
