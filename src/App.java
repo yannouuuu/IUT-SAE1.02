@@ -194,13 +194,14 @@ class App extends Program {
         }
     }
 
-    Decisions newDecisions(String nom, String desc, int argent, int pollution, int bonheur) {
+    Decisions newDecisions(String nom, String desc, int argent, int pollution, int bonheur, String message) {
         Decisions decision = new Decisions();
         decision.nom = nom;
         decision.desc = desc;
         decision.argent = argent;
         decision.pollution = pollution;
         decision.bonheur = bonheur;
+        decision.message = message;
         return decision;
     }
 
@@ -214,7 +215,7 @@ class App extends Program {
             int pollution = stringToInt(getCell(deciAsString, idxD, 3));
             int bonheur = stringToInt(getCell(deciAsString, idxD, 4));
             String message = getCell(deciAsString, idxD, 5);
-            Decisions courant = newDecisions(nom, desc, argent, pollution, bonheur);
+            Decisions courant = newDecisions(nom, desc, argent, pollution, bonheur, message);
             decisions[idxD - 1] = courant;
         }
         return decisions;
@@ -245,6 +246,17 @@ class App extends Program {
         return evenements;
     }
 
+    void eventRandom(City ville){
+        Evenements[] listeEvent=loadEvenements(EVENT);
+        int nb=tirerAuHasard(101);
+        if(nb<=20){
+            Evenements event=listeEvent[(int) (random()*length(listeEvent))];
+            println(event.desc);
+            ville.budget=ville.budget-event.argent;
+            ville.pollution=ville.pollution-event.pollution;
+            ville.bonheur=ville.bonheur-event.bonheur;
+        }
+    }
 
     int botPlay() {
         int choix = tirerAuHasard(4) + 1;
