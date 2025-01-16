@@ -1,74 +1,74 @@
 action,description,impact_argent,impact_pollution,impact_bonheur,message
-construire_usine,Construction d'une Usine,-5000,+20,-10,Vous avez construit une usine
-organiser_festival,Organiser un festival pour la communauté,-2500,+5,+25,Vous avez organisé un festival
-planter_arbre,Planter un arbre,-2000,-15,+15,Vous avez planté un arbre
-taxer,Taxer les industries,+2000,0,-10,Vous avez taxé les industries
-installer_panneaux_solaires,Installation de panneaux solaires,-10000,-30,+20,Vous avez installé des panneaux solaires
-construire_ecole,Construction d'une nouvelle école,-8000,0,+35,Vous avez construit une école
-lancer_campagne_recyclage,Lancer une campagne de recyclage,-1500,-25,+15,Vous avez lancé une campagne de recyclage
-subventionner_transport_vert,Subventionner les transports écologiques,-5000,-40,+10,Vous avez subventionné les transports verts
-moderniser_agriculture,Modernisation de l'agriculture,-7500,-20,+5,Vous avez modernisé l'agriculture
-developper_energie_renouvelable,Développement des énergies renouvelables,-15000,-50,+25,Vous avez développé des énergies renouvelables
-construire_bibliotheque,Construction d'une bibliothèque municipale,-6000,0,+20,Vous avez construit une bibliothèque
-creer_parc_naturel,Création d'un parc naturel,-4500,-10,+30,Vous avez créé un parc naturel
-investir_recherche_medicale,Investissement en recherche médicale,-12000,0,+15,Vous avez investi dans la recherche médicale
-reduire_taxes_pme,Réduction des taxes pour les PME,+5000,0,+5,Vous avez réduit les taxes pour les PME
-construire_centre_sportif,Construction d'un centre sportif,-9000,0,+25,Vous avez construit un centre sportif
-lancer_programme_education,Lancement d'un programme éducatif,-3500,0,+20,Vous avez lancé un programme éducatif
-moderniser_reseau_routier,Modernisation du réseau routier,-15000,+10,-5,Vous avez modernisé le réseau routier
-developper_agriculture_bio,Développement de l'agriculture biologique,-5500,-15,+20,Vous avez développé l'agriculture biologique
-creer_centre_culturel,Création d'un centre culturel,-7000,0,+30,Vous avez créé un centre culturel
-installer_bornes_recharge_electrique,Installation de bornes de recharge électrique,-8500,-20,+15,Vous avez installé des bornes de recharge électrique
-augmenter_salaire_minimum,Augmentation du salaire minimum,0,0,+40,Vous avez augmenté le salaire minimum
-construire_hopital,Construction d'un nouvel hôpital,-20000,0,+35,Vous avez construit un hôpital
-lancer_programme_sante_publique,Lancement d'un programme de santé publique,-6000,0,+25,Vous avez lancé un programme de santé publique
-proteger_forets,Protection des forêts,-3000,-50,+20,Vous avez protégé les forêts
-creer_zone_piétonne,Création d'une zone piétonne,-2500,-5,+15,Vous avez créé une zone piétonne
-investir_energie_solaire,Investissement dans l'énergie solaire,-12000,-40,+25,Vous avez investi dans l'énergie solaire
-developper_transport_public,Développement des transports publics,-18000,-30,+35,Vous avez développé les transports publics
-subventionner_vehicules_electriques,Subvention pour véhicules électriques,-7000,-25,+20,Vous avez subventionné les véhicules électriques
-creer_jardin_communautaire,Création d'un jardin communautaire,-1500,-5,+25,Vous avez créé un jardin communautaire
-lancer_programme_insertion,Lancement d'un programme d'insertion sociale,-4000,0,+30,Vous avez lancé un programme d'insertion sociale
-moderniser_systeme_educatif,Modernisation du système éducatif,-9000,0,+35,Vous avez modernisé le système éducatif
-construire_centre_recherche,Construction d'un centre de recherche,-15000,0,+20,Vous avez construit un centre de recherche
-developper_commerce_local,Développement du commerce local,+3000,0,+15,Vous avez développé le commerce local
-installer_cameras_securite,Installation de caméras de sécurité,-5000,0,-10,Vous avez installé des caméras de sécurité
-creer_residence_seniors,Création d'une résidence pour seniors,-12000,0,+25,Vous avez créé une résidence pour seniors
-lancer_programme_innovation,Lancement d'un programme d'innovation,-8000,0,+20,Vous avez lancé un programme d'innovation
-subventionner_agriculture,Subvention à l'agriculture,+4000,-10,+15,Vous avez subventionné l'agriculture
-investir_numerique,Investissement dans le numérique,-10000,0,+25,Vous avez investi dans le numérique
-construire_centre_petite_enfance,Construction d'un centre pour la petite enfance,-7500,0,+30,Vous avez construit un centre pour la petite enfance
-lancer_programme_environnemental,Lancement d'un programme environnemental,-6000,-35,+25,Vous avez lancé un programme environnemental
-developper_energie_eolienne,Développement de l'énergie éolienne,-14000,-40,+20,Vous avez développé l'énergie éolienne
-creer_espace_coworking,Création d'un espace de coworking,-4000,0,+15,Vous avez créé un espace de coworking
-moderniser_systeme_sante,Modernisation du système de santé,-16000,0,+35,Vous avez modernisé le système de santé
-subventionner_logement_social,Subvention pour le logement social,-9000,0,+25,Vous avez subventionné le logement social
-lancer_programme_numerique,Lancement d'un programme numérique,-5500,0,+20,Vous avez lancé un programme numérique
-proteger_patrimoine,Protection du patrimoine culturel,-3500,0,+30,Vous avez protégé le patrimoine culturel
-creer_centre_formation,Création d'un centre de formation professionnelle,-6000,0,+25,Vous avez créé un centre de formation
-installer_wifi_public,Installation du WiFi public gratuit,-4500,0,+15,Vous avez installé le WiFi public
-developper_tourisme_local,Développement du tourisme local,+5000,-5,+20,Vous avez développé le tourisme local
-construire_centre_jeunesse,Construction d'un centre pour la jeunesse,-5000,0,+35,Vous avez construit un centre pour la jeunesse
-lancer_programme_solidarite,Lancement d'un programme de solidarité,-3000,0,+40,Vous avez lancé un programme de solidarité
-moderniser_infrastructure_digitale,Modernisation de l'infrastructure digitale,-11000,0,+25,Vous avez modernisé l'infrastructure digitale
-subventionner_entrepreneuriat,Subvention à l'entrepreneuriat,+3500,0,+20,Vous avez subventionné l'entrepreneuriat
-creer_centre_mediation,Création d'un centre de médiation sociale,-2500,0,+30,Vous avez créé un centre de médiation sociale
-investir_recherche_technologique,Investissement en recherche technologique,-13000,0,+25,Vous avez investi en recherche technologique
-developper_agriculture_urbaine,Développement de l'agriculture urbaine,-4000,-10,+20,Vous avez développé l'agriculture urbaine
-construire_centre_handicap,Construction d'un centre pour personnes handicapées,-8500,0,+35,Vous avez construit un centre pour personnes handicapées
-lancer_programme_cybersecurite,Lancement d'un programme de cybersécurité,-7000,0,+15,Vous avez lancé un programme de cybersécurité
-creer_zone_natureelle,Création d'une zone naturelle protégée,-6000,-40,+25,Vous avez créé une zone naturelle protégée
-moderniser_gestion_dechets,Modernisation de la gestion des déchets,-9000,-30,+20,Vous avez modernisé la gestion des déchets
-subventionner_energie_verte,Subvention pour l'énergie verte,-8000,-35,+25,Vous avez subventionné l'énergie verte
-lancer_programme_biodiversite,Lancement d'un programme de biodiversité,-5500,-25,+30,Vous avez lancé un programme de biodiversité
-developper_economie_circulaire,Développement de l'économie circulaire,-6000,-20,+25,Vous avez développé l'économie circulaire
-creer_centre_innovation_sociale,Création d'un centre d'innovation sociale,-4500,0,+20,Vous avez créé un centre d'innovation sociale
-investir_robotique,Investissement dans la robotique,-12000,0,+15,Vous avez investi dans la robotique
-construire_centre_artistique,Construction d'un centre artistique,-7000,0,+35,Vous avez construit un centre artistique
-lancer_programme_education_numerique,Lancement d'un programme d'éducation numérique,-5000,0,+25,Vous avez lancé un programme d'éducation numérique
-proteger_especes_menacees,Protection des espèces menacées,-4000,-35,+30,Vous avez protégé les espèces menacées
-creer_centre_bien_etre,Création d'un centre de bien-être social,-3500,0,+20,Vous avez créé un centre de bien-être social
-developper_intelligence_artificielle,Développement de l'intelligence artificielle,-15000,0,+25,Vous avez développé l'intelligence artificielle
-moderniser_systeme_juridique,Modernisation du système juridique,-10000,0,+15,Vous avez modernisé le système juridique
-subventionner_culture,Subvention à la culture,-6000,0,+35,Vous avez subventionné la culture
-lancer_programme_sante_mentale,Lancement d'un programme de santé mentale,-5500,0,+40,Vous avez lancé un programme de santé mentale
+construire_usine,Construction d'une Usine,-3000,+10,-5,Vous avez construit une usine
+organiser_festival,Organiser un festival pour la communauté,-1500,+2,+20,Vous avez organisé un festival
+planter_arbre,Planter un arbre,-1000,-10,+10,Vous avez planté un arbre
+taxer,Taxer les industries,+1500,0,-5,Vous avez taxé les industries
+installer_panneaux_solaires,Installation de panneaux solaires,-7000,-20,+15,Vous avez installé des panneaux solaires
+construire_ecole,Construction d'une nouvelle école,-5000,0,+25,Vous avez construit une école
+lancer_campagne_recyclage,Lancer une campagne de recyclage,-1000,-20,+10,Vous avez lancé une campagne de recyclage
+subventionner_transport_vert,Subventionner les transports écologiques,-3000,-30,+5,Vous avez subventionné les transports verts
+moderniser_agriculture,Modernisation de l'agriculture,-5000,-15,+3,Vous avez modernisé l'agriculture
+developper_energie_renouvelable,Développement des énergies renouvelables,-10000,-40,+20,Vous avez développé des énergies renouvelables
+construire_bibliotheque,Construction d'une bibliothèque municipale,-4000,0,+15,Vous avez construit une bibliothèque
+creer_parc_naturel,Création d'un parc naturel,-3000,-5,+20,Vous avez créé un parc naturel
+investir_recherche_medicale,Investissement en recherche médicale,-8000,0,+10,Vous avez investi dans la recherche médicale
+reduire_taxes_pme,Réduction des taxes pour les PME,+3000,0,+3,Vous avez réduit les taxes pour les PME
+construire_centre_sportif,Construction d'un centre sportif,-6000,0,+20,Vous avez construit un centre sportif
+lancer_programme_education,Lancement d'un programme éducatif,-2500,0,+15,Vous avez lancé un programme éducatif
+moderniser_reseau_routier,Modernisation du réseau routier,-10000,+5,-3,Vous avez modernisé le réseau routier
+developper_agriculture_bio,Développement de l'agriculture biologique,-4000,-10,+15,Vous avez développé l'agriculture biologique
+creer_centre_culturel,Création d'un centre culturel,-5000,0,+20,Vous avez créé un centre culturel
+installer_bornes_recharge_electrique,Installation de bornes de recharge électrique,-6000,-15,+10,Vous avez installé des bornes de recharge électrique
+augmenter_salaire_minimum,Augmentation du salaire minimum,0,0,+30,Vous avez augmenté le salaire minimum
+construire_hopital,Construction d'un nouvel hôpital,-15000,0,+25,Vous avez construit un hôpital
+lancer_programme_sante_publique,Lancement d'un programme de santé publique,-4000,0,+20,Vous avez lancé un programme de santé publique
+proteger_forets,Protection des forêts,-2000,-40,+15,Vous avez protégé les forêts
+creer_zone_piétonne,Création d'une zone piétonne,-1500,-3,+10,Vous avez créé une zone piétonne
+investir_energie_solaire,Investissement dans l'énergie solaire,-8000,-30,+20,Vous avez investi dans l'énergie solaire
+developper_transport_public,Développement des transports publics,-12000,-20,+25,Vous avez développé les transports publics
+subventionner_vehicules_electriques,Subvention pour véhicules électriques,-5000,-20,+15,Vous avez subventionné les véhicules électriques
+creer_jardin_communautaire,Création d'un jardin communautaire,-1000,-3,+20,Vous avez créé un jardin communautaire
+lancer_programme_insertion,Lancement d'un programme d'insertion sociale,-3000,0,+25,Vous avez lancé un programme d'insertion sociale
+moderniser_systeme_educatif,Modernisation du système éducatif,-6000,0,+25,Vous avez modernisé le système éducatif
+construire_centre_recherche,Construction d'un centre de recherche,-10000,0,+15,Vous avez construit un centre de recherche
+developper_commerce_local,Développement du commerce local,+2000,0,+10,Vous avez développé le commerce local
+installer_cameras_securite,Installation de caméras de sécurité,-3000,0,-5,Vous avez installé des caméras de sécurité
+creer_residence_seniors,Création d'une résidence pour seniors,-8000,0,+20,Vous avez créé une résidence pour seniors
+lancer_programme_innovation,Lancement d'un programme d'innovation,-5000,0,+15,Vous avez lancé un programme d'innovation
+subventionner_agriculture,Subvention à l'agriculture,+3000,-5,+10,Vous avez subventionné l'agriculture
+investir_numerique,Investissement dans le numérique,-7000,0,+20,Vous avez investi dans le numérique
+construire_centre_petite_enfance,Construction d'un centre pour la petite enfance,-5000,0,+25,Vous avez construit un centre pour la petite enfance
+lancer_programme_environnemental,Lancement d'un programme environnemental,-4000,-25,+20,Vous avez lancé un programme environnemental
+developper_energie_eolienne,Développement de l'énergie éolienne,-10000,-30,+15,Vous avez développé l'énergie éolienne
+creer_espace_coworking,Création d'un espace de coworking,-3000,0,+10,Vous avez créé un espace de coworking
+moderniser_systeme_sante,Modernisation du système de santé,-12000,0,+25,Vous avez modernisé le système de santé
+subventionner_logement_social,Subvention pour le logement social,-6000,0,+20,Vous avez subventionné le logement social
+lancer_programme_numerique,Lancement d'un programme numérique,-4000,0,+15,Vous avez lancé un programme numérique
+proteger_patrimoine,Protection du patrimoine culturel,-2500,0,+20,Vous avez protégé le patrimoine culturel
+creer_centre_formation,Création d'un centre de formation professionnelle,-4000,0,+20,Vous avez créé un centre de formation
+installer_wifi_public,Installation du WiFi public gratuit,-3000,0,+10,Vous avez installé le WiFi public
+developper_tourisme_local,Développement du tourisme local,+3000,-3,+15,Vous avez développé le tourisme local
+construire_centre_jeunesse,Construction d'un centre pour la jeunesse,-3000,0,+25,Vous avez construit un centre pour la jeunesse
+lancer_programme_solidarite,Lancement d'un programme de solidarité,-2000,0,+30,Vous avez lancé un programme de solidarité
+moderniser_infrastructure_digitale,Modernisation de l'infrastructure digitale,-8000,0,+20,Vous avez modernisé l'infrastructure digitale
+subventionner_entrepreneuriat,Subvention à l'entrepreneuriat,+2000,0,+15,Vous avez subventionné l'entrepreneuriat
+creer_centre_mediation,Création d'un centre de médiation sociale,-1500,0,+20,Vous avez créé un centre de médiation sociale
+investir_recherche_technologique,Investissement en recherche technologique,-9000,0,+20,Vous avez investi en recherche technologique
+developper_agriculture_urbaine,Développement de l'agriculture urbaine,-3000,-5,+15,Vous avez développé l'agriculture urbaine
+construire_centre_handicap,Construction d'un centre pour personnes handicapées,-6000,0,+25,Vous avez construit un centre pour personnes handicapées
+lancer_programme_cybersecurite,Lancement d'un programme de cybersécurité,-5000,0,+10,Vous avez lancé un programme de cybersécurité
+creer_zone_natureelle,Création d'une zone naturelle protégée,-4000,-30,+20,Vous avez créé une zone naturelle protégée
+moderniser_gestion_dechets,Modernisation de la gestion des déchets,-6000,-20,+15,Vous avez modernisé la gestion des déchets
+subventionner_energie_verte,Subvention pour l'énergie verte,-6000,-25,+20,Vous avez subventionné l'énergie verte
+lancer_programme_biodiversite,Lancement d'un programme de biodiversité,-4000,-20,+25,Vous avez lancé un programme de biodiversité
+developper_economie_circulaire,Développement de l'économie circulaire,-4000,-15,+20,Vous avez développé l'économie circulaire
+creer_centre_innovation_sociale,Création d'un centre d'innovation sociale,-3000,0,+15,Vous avez créé un centre d'innovation sociale
+investir_robotique,Investissement dans la robotique,-8000,0,+10,Vous avez investi dans la robotique
+construire_centre_artistique,Construction d'un centre artistique,-5000,0,+25,Vous avez construit un centre artistique
+lancer_programme_education_numerique,Lancement d'un programme d'éducation numérique,-3000,0,+20,Vous avez lancé un programme d'éducation numérique
+proteger_especes_menacees,Protection des espèces menacées,-3000,-25,+20,Vous avez protégé les espèces menacées
+creer_centre_bien_etre,Création d'un centre de bien-être social,-2500,0,+15,Vous avez créé un centre de bien-être social
+developper_intelligence_artificielle,Développement de l'intelligence artificielle,-10000,0,+20,Vous avez développé l'intelligence artificielle
+moderniser_systeme_juridique,Modernisation du système juridique,-7000,0,+10,Vous avez modernisé le système juridique
+subventionner_culture,Subvention à la culture,-4000,0,+25,Vous avez subventionné la culture
+lancer_programme_sante_mentale,Lancement d'un programme de santé mentale,-4000,0,+30,Vous avez lancé un programme de santé mentale
