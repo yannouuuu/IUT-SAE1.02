@@ -132,15 +132,10 @@ class App extends Program {
         
         while (true) {
             String input = readString();
-            // Vérifie si l'entrée est vide
-            if (length(input) <= 1) {
-                // Convertit le caractère en ASCII
+            // Vérifie si l'entrée est non vide et contient un seul caractère numérique
+            if (length(input) == 1 && charAt(input, 0) >= '1' && charAt(input, 0) <= (char)('0' + nbrChoix)) {
                 int choix = (int)charAt(input, 0) - '0';
-                
-                // Vérifie si le choix est dans la plage valide
-                if (choix >= 1 && choix <= nbrChoix) {
-                    return choix;
-                }
+                return choix;
             }
             println("La saisie est invalide !");
         }
@@ -151,15 +146,10 @@ class App extends Program {
         
         while (true) {
             String input = readString();
-            // Vérifie si l'entrée est vide
-            if (length(input) > 0) {
-                // Convertit le caractère en ASCII
+            // Vérifie si l'entrée est non vide et contient un seul caractère numérique
+            if (length(input) == 1 && charAt(input, 0) >= '1' && charAt(input, 0) <= (char)('0' + nbrChoix)) {
                 int choix = (int)charAt(input, 0) - '0';
-                
-                // Vérifie si le choix est dans la plage valide
-                if (choix >= 1 && choix <= nbrChoix) {
-                    return choix;
-                }
+                return choix;
             }
             println("La saisie est invalide !");
         }
