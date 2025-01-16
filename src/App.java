@@ -211,7 +211,7 @@ class App extends Program {
         }
         return decisions;
     }
-    
+
     Evenements newEvenements(String nom, String desc, int argent, int pollution, int bonheur) {
         Evenements evenement = new Evenements();
         evenement.nom = nom;
@@ -318,3 +318,4 @@ class App extends Program {
         }
         return ""; // En cas de problème (à priori impossible)
     }
+}
