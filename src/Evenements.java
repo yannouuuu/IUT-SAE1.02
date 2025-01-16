@@ -13,3 +13,11 @@
  * 
  * Auteurs : Yann RENARD, Yanis MEKKI
  */
+
+class Evenements{
+    String nom;
+    String desc;
+    int argent;
+    int pollution;
+    int bonheur;
+}
