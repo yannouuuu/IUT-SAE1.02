@@ -140,21 +140,7 @@ class App extends Program {
             println("La saisie est invalide !");
         }
     }
-    int choixValideNbrforSave(int nbrChoix) {
-        println("- - - - - - - - - - - - - - - - -");
-        print("Choisissez une action (1-" + nbrChoix + ") : ");
-        
-        while (true) {
-            String input = readString();
-            // Vérifie si l'entrée est non vide et contient un seul caractère numérique
-            if (length(input) == 1 && charAt(input, 0) >= '1' && charAt(input, 0) <= (char)('0' + nbrChoix)) {
-                int choix = (int)charAt(input, 0) - '0';
-                return choix;
-            }
-            println("La saisie est invalide !");
-        }
-    }
-
+    
     char choixDeQuitter() {
         println("- - - - - - - - - - - - - - - - -");
         println("Pour quitter la page de règles du jeu, appuyez sur 'q'");
@@ -302,7 +288,7 @@ class App extends Program {
             println((i + 1) + ". " + getCell(saveFile, i, 0));
         }
         
-        int choix = choixValideNbrforSave(totalSaves);
+        int choix = choixValideNbr(totalSaves);
         ville.nom = getCell(saveFile, choix - 1, 0);
         ville.tour = stringToInt(getCell(saveFile, choix - 1, 1));
         ville.budget = stringToInt(getCell(saveFile, choix - 1, 2));
