@@ -49,7 +49,7 @@ class App extends Program {
             println("- - - - - - - - - - - - - - - - - - -");
             println("Pour revenir au menu, entrez 5");
 
-            choix = choixValideNbr(4); // Remplacer par botPlay(); pour activer le systeme de bot
+            choix = choixValideNbr(5); // Remplacer par botPlay(); pour activer le systeme de bot
             appliquerChoix(choix, ville, num1, num2, num3, num4);
         }
         gererFinDePartie(ville);
@@ -128,7 +128,7 @@ class App extends Program {
             println(num4.message);
         } else if (choix == 5) {
             sauvegarderPartie(ville);
-            initialiserJeu(ville);
+            
         }
     }
 
@@ -264,10 +264,25 @@ class App extends Program {
             ville.budget = ville.budget - event.argent;
             ville.pollution = ville.pollution - event.pollution;
             ville.bonheur = ville.bonheur - event.bonheur;
-            println("Vous avez" +event.argent+ " argent");
-            println("Vous avez" +event.pollution+" pollution%");
-            println("Vous avez" +event.bonheur +" bonheur%");
-            delay(3000);
+            if(event.argent>=0){
+                println("Vous avez gagné " +event.argent+ "$ !");
+            }
+            else{
+                println("Vous avez perdu " +event.argent+ "$ !");
+            }
+            if(event.bonheur>=0){
+                println("Vous avez gagné " +event.bonheur+ "% de bonheur !");
+            }
+            else{
+                println("Vous avez perdu " +event.bonheur+ "% de bonheur !");
+            }
+            if(event.pollution>=0){
+                println("Vous avez gagné " +event.pollution+ "% de pollution !");
+            }
+            else{
+                println("Vous avez perdu " +event.pollution+ "% de pollution !");
+            }
+            delay(30000);
         }
     }
 
