@@ -264,28 +264,24 @@ class App extends Program {
     }
 
     void sauvegarderPartie(City ville) {
-        // Load existing saves
+        // Charger les saves existantes
         CSVFile existingSaves = loadCSV("ressources/save.csv");
         int existingRows = rowCount(existingSaves);
-        
-        // Create a new array to hold all saves including the new one
+
         String[][] contenu = new String[existingRows + 1][5];
         
-        // Copy existing saves into the new array
         for (int i = 0; i < existingRows; i++) {
             for (int j = 0; j < 5; j++) {
                 contenu[i][j] = getCell(existingSaves, i, j);
             }
         }
-        
-        // Add the new save at the end
+
         contenu[existingRows][0] = ville.nom;
         contenu[existingRows][1] = "" + ville.tour;
         contenu[existingRows][2] = "" + ville.budget;
         contenu[existingRows][3] = "" + ville.pollution;
         contenu[existingRows][4] = "" + ville.bonheur;
         
-        // Save all data back to the file
         saveCSV(contenu, "ressources/save.csv");
         println("Partie sauvegardée !");
     }
