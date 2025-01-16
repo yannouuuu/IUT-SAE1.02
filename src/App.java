@@ -47,7 +47,7 @@ class App extends Program {
             println("- - - - - - - - - - - - - - - - - - -");
             println("Pour revenir au menu, appuyez sur 'q'");
             
-            choix = choixValideNbr(5); // Remplacer par botPlay(); pour activer le systeme de bot
+            choix = choixValideNbr(4); // Remplacer par botPlay(); pour activer le systeme de bot
             if (choix == 1) {
                 ville.tour++;
                 ville.budget = ville.budget + num1.argent;
@@ -239,7 +239,11 @@ class App extends Program {
             int argent = stringToInt(getCell(deciAsString, idxD, 2));
             int pollution = stringToInt(getCell(deciAsString, idxD, 3));
             int bonheur = stringToInt(getCell(deciAsString, idxD, 4));
-            String message = getCell(deciAsString, idxD, 5);
+            if (rowCount(deciAsString) > idxD) {
+                String message = getCell(deciAsString, idxD, 5);
+            } else {
+                String message = ""; // or handle the case where the message is not available
+            }
             Decisions courant = newDecisions(nom, desc, argent, pollution, bonheur, message);
             decisions[idxD - 1] = courant;
         }
