@@ -35,6 +35,7 @@ class App extends Program {
             clearScreen();
             pourcentageCorrect(ville);
             afficherTxt(TITRE);
+            eventRandom(ville);
             afficherEtatJeu(ville);
             Decisions num1 = listeDecisions[(int) (random() * 73)];
             Decisions num2 = listeDecisions[(int) (random() * 73)];
@@ -252,12 +253,16 @@ class App extends Program {
     void eventRandom(City ville) {
         Evenements[] listeEvent = loadEvenements(EVENT);
         int nb = tirerAuHasard(101);
-        if (nb <= 20) {
+        if (nb <= 20 && ville.tour>1) {
             Evenements event = listeEvent[(int) (random() * length(listeEvent))];
             println(event.desc);
             ville.budget = ville.budget - event.argent;
             ville.pollution = ville.pollution - event.pollution;
             ville.bonheur = ville.bonheur - event.bonheur;
+            println("Vous avez" +event.argent+ " argent");
+            println("Vous avez" +event.pollution+" pollution%");
+            println("Vous avez" +event.bonheur +" bonheur%");
+            delay(3000);
         }
     }
 
