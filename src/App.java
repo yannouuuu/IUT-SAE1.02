@@ -44,7 +44,7 @@ class App extends Program {
             println("3. " + num3.desc + " (" + num3.argent + " €, " + num3.pollution + " pollution, " + num3.bonheur + " bonheur)");
             println("4. " + num4.desc + " (" + num4.argent + " €, " + num4.pollution + " pollution, " + num4.bonheur + " bonheur)");
             println("---------------------------------");
-            println("Pour revenir au menu, appuyez sur 'q'");
+            println("5. Pour sauvegarder et quitter.");
 
             choix = choixValideNbr(5); // Remplacer par botPlay(); pour activer le systeme de bot
             if (choix == 1) {
