@@ -194,18 +194,17 @@ class App extends Program {
         }
     }
 
-    Decisions newDecisions(String nom, String desc, int argent, int pollution, int bonheur, String message) {
+    Decisions newDecisions(String nom, String desc, int argent, int pollution, int bonheur) {
         Decisions decision = new Decisions();
         decision.nom = nom;
         decision.desc = desc;
         decision.argent = argent;
         decision.pollution = pollution;
         decision.bonheur = bonheur;
-        decision.message = message;
         return decision;
     }
 
-    Evenements newEvenements(String nom, String desc, int argent, int pollution, int bonheur, String message) {
+    Evenements newEvenements(String nom, String desc, int argent, int pollution, int bonheur) {
         Evenements evenement = new Evenements();
         evenement.nom = nom;
         evenement.desc = desc;
