@@ -48,40 +48,12 @@ class App extends Program {
             println("Pour revenir au menu, entrez 5");
 
             choix = choixValideNbr(4); // Remplacer par botPlay(); pour activer le systeme de bot
-            if (choix == 1) {
-                ville.tour++;
-                ville.budget = ville.budget + num1.argent;
-                ville.pollution = ville.pollution + num1.pollution;
-                ville.bonheur = ville.bonheur + num1.bonheur;
-                println(num1.message);
-            }
-            if (choix == 2) {
-                ville.tour++;
-                ville.budget = ville.budget + num2.argent;
-                ville.pollution = ville.pollution + num2.pollution;
-                ville.bonheur = ville.bonheur + num2.bonheur;
-                println(num2.message);
-            }
-            if (choix == 3) {
-                ville.tour++;
-                ville.budget = ville.budget + num3.argent;
-                ville.pollution = ville.pollution + num3.pollution;
-                ville.bonheur = ville.bonheur + num3.bonheur;
-                println(num3.message);
-            }
-            if (choix == 4) {
-                ville.tour++;
-                ville.budget = ville.budget + num4.argent;
-                ville.pollution = ville.pollution + num4.pollution;
-                ville.bonheur = ville.bonheur + num4.bonheur;
-                println(num4.message);
-            }
-            if (choix == 5) {
-                sauvegarderPartie(ville);
-                initialiserJeu(ville);
-            }
+            appliquerChoix(choix, ville, num1, num2, num3, num4);
         }
+        gererFinDePartie(ville);
+    }
 
+    void gererFinDePartie(City ville){
         if (ville.bonheur < 50 || ville.pollution > 100 || ville.budget < 0) {
             afficherTxt(LOSE);
             delay(10000);
@@ -90,6 +62,37 @@ class App extends Program {
             delay(10000);
         } else {
             sauvegarderPartie(ville);
+        }
+    }
+
+    void appliquerChoix(int choix, City ville, Decisions num1, Decisions num2, Decisions num3, Decisions num4){
+        if (choix == 1) {
+            ville.tour++;
+            ville.budget = ville.budget + num1.argent;
+            ville.pollution = ville.pollution + num1.pollution;
+            ville.bonheur = ville.bonheur + num1.bonheur;
+            println(num1.message);
+        } else if (choix == 2) {
+            ville.tour++;
+            ville.budget = ville.budget + num2.argent;
+            ville.pollution = ville.pollution + num2.pollution;
+            ville.bonheur = ville.bonheur + num2.bonheur;
+            println(num2.message);
+        } else if (choix == 3) {
+            ville.tour++;
+            ville.budget = ville.budget + num3.argent;
+            ville.pollution = ville.pollution + num3.pollution;
+            ville.bonheur = ville.bonheur + num3.bonheur;
+            println(num3.message);
+        } else if (choix == 4) {
+            ville.tour++;
+            ville.budget = ville.budget + num4.argent;
+            ville.pollution = ville.pollution + num4.pollution;
+            ville.bonheur = ville.bonheur + num4.bonheur;
+            println(num4.message);
+        } else if (choix == 5) {
+            sauvegarderPartie(ville);
+            initialiserJeu(ville);
         }
     }
 
