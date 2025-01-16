@@ -23,6 +23,7 @@ class App extends Program {
     final String DECISIONS = "./ressources/decisions.csv";
     final String WIN = "./ressources/win.txt";
     final String LOSE = "./ressources/lose.txt";
+    final String EVENT = "./ressources/evenements.csv";
 
     void algorithm() {
         clearScreen();
@@ -140,7 +141,7 @@ class App extends Program {
             println("La saisie est invalide !");
         }
     }
-    
+
     char choixDeQuitter() {
         println("- - - - - - - - - - - - - - - - -");
         println("Pour quitter la page de règles du jeu, appuyez sur 'q'");
@@ -204,14 +205,29 @@ class App extends Program {
         return decision;
     }
 
-    City newCity(String nom, int tour, int budget, int pollution, int bonheur) {
-        City city = new City();
-        city.nom = nom;
-        city.tour = tour;
-        city.budget = budget;
-        city.pollution = pollution;
-        city.bonheur = bonheur;
-        return city;
+    Evenements newEvenements(String nom, String desc, int argent, int pollution, int bonheur, String message) {
+        Evenements evenement = new Evenements();
+        evenement.nom = nom;
+        evenement.desc = desc;
+        evenement.argent = argent;
+        evenement.pollution = pollution;
+        evenement.bonheur = bonheur;
+        return evenement;
+    }
+
+    Evenements[] loadEvenements(String nomFile){
+        CSVFile eventAsString = loadCSV(nomFile);
+        Evenements[] evenements = new Evenements[rowCount(eventAsString) - 1];
+        for (int idxE = 1; idxE < length(evenements) + 1; idxE++) {
+            String nom = getCell(eventAsString, idxE, 0);
+            String desc = getCell(eventAsString, idxE, 1);
+            int argent = stringToInt(getCell(eventAsString, idxE, 2));
+            int pollution = stringToInt(getCell(eventAsString, idxE, 3));
+            int bonheur = stringToInt(getCell(eventAsString, idxE, 4));
+            Evenements courant = newEvenements(nom, desc, argent, pollution, bonheur, "");
+            evenements[idxE - 1] = courant;
+        }
+        return evenements;
     }
 
     Decisions[] loadDecision(String nomFile) {
