@@ -120,24 +120,28 @@ class App extends Program {
             ville.pollution = ville.pollution + num1.pollution;
             ville.bonheur = ville.bonheur + num1.bonheur;
             println(num1.message);
+            pourcentageCorrect(ville);
         } else if (choix == 2) {
             ville.tour++;
             ville.budget = ville.budget + num2.argent;
             ville.pollution = ville.pollution + num2.pollution;
             ville.bonheur = ville.bonheur + num2.bonheur;
             println(num2.message);
+            pourcentageCorrect(ville);
         } else if (choix == 3) {
             ville.tour++;
             ville.budget = ville.budget + num3.argent;
             ville.pollution = ville.pollution + num3.pollution;
             ville.bonheur = ville.bonheur + num3.bonheur;
             println(num3.message);
+            pourcentageCorrect(ville);
         } else if (choix == 4) {
             ville.tour++;
             ville.budget = ville.budget + num4.argent;
             ville.pollution = ville.pollution + num4.pollution;
             ville.bonheur = ville.bonheur + num4.bonheur;
             println(num4.message);
+            pourcentageCorrect(ville);
         }
     }
 
@@ -274,6 +278,8 @@ class App extends Program {
             ville.budget = ville.budget - event.argent;
             ville.pollution = ville.pollution - event.pollution;
             ville.bonheur = ville.bonheur - event.bonheur;
+            pourcentageCorrect(ville);
+            
             if(event.argent >= 0){
                 println("Vous avez gagné " + event.argent + "$ !");
             } else {
@@ -289,7 +295,7 @@ class App extends Program {
             } else {
                 println("Vous avez perdu " + event.pollution + "% de pollution !");
             }
-            delay(3000); // Réduit à 3 secondes au lieu de 30
+            delay(3000);
         }
     }
 
