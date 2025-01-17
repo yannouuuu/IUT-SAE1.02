@@ -9,7 +9,7 @@ Un jeu simple, amusant, et éducatif :
 - Chaque décision compte : saurez-vous bâtir une ville prospère et durable ?
 
 Conditions de victoire :
-🏆 Gagnez en atteignant 10 tours avec :
+🏆 Gagnez en atteignant 30 tours avec :
 - Un budget positif 🪙.
 - Une pollution maîtrisée (<50%) 🌱
 - Des citoyens heureux (>70%) 😊
@@ -20,7 +20,7 @@ Attention aux risques :
 - Tombe en faillite 💸
 - Descend sous 50% de bonheur 😔
 
-Nouveau ! 💰 À chaque tour, vous recevrez un bonus de 1500 € pour vous aider à gérer votre ville.
+Nouveau ! 💰 À chaque tour, vous recevrez un bonus de 800 € pour vous aider à gérer votre ville.
 
 Plongez dans l'aventure EcoManager dès maintenant !
 
