@@ -91,6 +91,8 @@ class App extends Program {
     }
 
     void startSelect(int choix, City ville) {
+        clearScreen();
+        afficherTxt(TITLE);
         if (choix == 1) {
             println("Quel est le nom de votre ville ?");
             print("> ");
@@ -108,21 +110,37 @@ class App extends Program {
     }
 
     // ============= GESTION DU JEU =============
-    void gererFinDePartie(City ville){
+    void gererFinDePartie(City ville) {
         if (ville.bonheur < 50 || ville.pollution > 100 || ville.budget < 0) {
             afficherTxt(LOSE);
-            supprimerSauvegarde(ville.nom);
+            if (sauvegardeExiste(ville.nom)) {
+                supprimerSauvegarde(ville.nom);
+            }
             delay(10000);
             jeu();
         } else if (ville.tour >= 30) {
             afficherTxt(WIN);
-            supprimerSauvegarde(ville.nom);
+            if (sauvegardeExiste(ville.nom)) {
+                supprimerSauvegarde(ville.nom);
+            }
             delay(10000);
             jeu();
         } else {
             sauvegarderPartie(ville);
             jeu();
         }
+    }
+
+    boolean sauvegardeExiste(String nomVille) {
+        CSVFile existingSaves = loadCSV("ressources/save.csv");
+        int existingRows = rowCount(existingSaves);
+        
+        for (int i = 0; i < existingRows; i++) {
+            if (getCell(existingSaves, i, 0).equals(nomVille)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     void appliquerDecision(City ville, int choix, Decisions num1, Decisions num2, Decisions num3, Decisions num4) {
@@ -478,6 +496,12 @@ class App extends Program {
         CSVFile existingSaves = loadCSV("ressources/save.csv");
         int existingRows = rowCount(existingSaves);
         
+        // Vérifiez s'il y a des sauvegardes avant de tenter de les supprimer
+        if (existingRows == 0) {
+            println("Aucune sauvegarde à supprimer.");
+            return;
+        }
+
         String[][] nouveauContenu = new String[existingRows - 1][5];
         int nouvelIndex = 0;
         
