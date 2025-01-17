@@ -97,6 +97,9 @@ class App extends Program {
             println("Quel est le nom de votre ville ?");
             print("> ");
             String nom = readString();
+            if (nom == null || length(nom) == 0) {
+                nom = "<default>";
+            }
             ville.nom = nom;
         } else if (choix == 2) {
             chargerPartie(ville);
@@ -181,6 +184,8 @@ class App extends Program {
                 }
             }
             println("La saisie est invalide !");
+            delay(2000);
+            print("Choisissez une action (1-" + nbrChoix + ") : ");
         }
     }
 
@@ -325,20 +330,21 @@ class App extends Program {
     }
 
     void afficherImpactEvenement(Evenements event) {
-        if(event.argent >= 0) {
-            println("Vous avez gagné " + event.argent + "$ !");
+        // Utilisation de couleurs pour les messages
+        if (event.argent >= 0) {
+            println(ANSI_GREEN + "Vous avez gagné " + event.argent + "$ !" + ANSI_RESET);
         } else {
-            println("Vous avez perdu " + (-event.argent) + "$ !");
+            println(ANSI_RED + "Vous avez perdu " + (-event.argent) + "$ !" + ANSI_RESET);
         }
-        if(event.bonheur >= 0) {
-            println("Vous avez gagné " + event.bonheur + "% de bonheur !");
+        if (event.bonheur >= 0) {
+            println(ANSI_GREEN + "Vous avez gagné " + event.bonheur + "% de bonheur !" + ANSI_RESET);
         } else {
-            println("Vous avez perdu " + (-event.bonheur) + "% de bonheur !");
+            println(ANSI_RED + "Vous avez perdu " + (-event.bonheur) + "% de bonheur !" + ANSI_RESET);
         }
-        if(event.pollution >= 0) {
-            println("Vous avez gagné " + event.pollution + "% de pollution !");
+        if (event.pollution >= 0) {
+            println(ANSI_GREEN + "Vous avez gagné " + event.pollution + "% de pollution !" + ANSI_RESET);
         } else {
-            println("Vous avez perdu " + (-event.pollution) + "% de pollution !");
+            println(ANSI_RED + "Vous avez perdu " + (-event.pollution) + "% de pollution !" + ANSI_RESET);
         }
     }
 
