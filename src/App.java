@@ -11,7 +11,7 @@
 // [x] Systeme sauvegarde
 // [x] Systeme de chargement de sauvegarde
 // [x] Systeme de bot
-// [] Fix la saisie 5 qui renvoie 'la saisie est invalide' 
+// [x] Fix la saisie 5 qui renvoie 'la saisie est invalide' 
 
 import extensions.File;
 import extensions.CSVFile;
@@ -25,6 +25,8 @@ class App extends Program {
     final String WIN = "./ressources/win.txt";
     final String LOSE = "./ressources/lose.txt";
     final String EVENT = "./ressources/evenements.csv";
+
+    int currentSaveIndex = -1;
 
     void algorithm() {
         jeu();
@@ -54,7 +56,7 @@ class App extends Program {
             Decisions[] decisionsProposees = genererDecisionsAleatoires(listeDecisions);
             afficherDecisions(decisionsProposees);
 
-            int choix = choixValideNbr(5); // Remplacer par botPlay(); pour activer le systeme de bot
+            int choix = choixValideNbr(5); // Remplacer par botPlay(ville ); pour activer le systeme de bot
             if (choix == 5) {
                 sauvegarderPartie(ville);
                 continuerJeu = false;
@@ -101,10 +103,12 @@ class App extends Program {
     void gererFinDePartie(City ville){
         if (ville.bonheur < 50 || ville.pollution > 100 || ville.budget < 0) {
             afficherTxt(LOSE);
+            supprimerSauvegarde(ville.nom);
             delay(10000);
             jeu();
         } else if (ville.tour >= 30) {
             afficherTxt(WIN);
+            supprimerSauvegarde(ville.nom);
             delay(10000);
             jeu();
         } else {
@@ -299,21 +303,93 @@ class App extends Program {
         }
     }
 
-    int botPlay() {
-        int choix = tirerAuHasard(4) + 1;
-        println("Le bot a choisi l'option : " + choix);
-        return choix;
+    int botPlay(City ville, Decisions[] decisions) {
+        // Situation critique : prioriser le problème le plus urgent
+        if (ville.bonheur <= 60) {
+            // Chercher la décision qui donne le plus de bonheur
+            int meilleurChoix = 1;
+            int meilleurBonheur = decisions[0].bonheur;
+            
+            for (int i = 1; i < 4; i++) {
+                if (decisions[i].bonheur > meilleurBonheur) {
+                    meilleurChoix = i + 1;
+                    meilleurBonheur = decisions[i].bonheur;
+                }
+            }
+            println("Le bot choisit l'option " + meilleurChoix + " pour augmenter le bonheur");
+            return meilleurChoix;
+        }
+        
+        if (ville.pollution >= 80) {
+            // Chercher la décision qui réduit le plus la pollution
+            int meilleurChoix = 1;
+            int meilleurePollution = decisions[0].pollution;
+            
+            for (int i = 1; i < 4; i++) {
+                if (decisions[i].pollution < meilleurePollution) {
+                    meilleurChoix = i + 1;
+                    meilleurePollution = decisions[i].pollution;
+                }
+            }
+            println("Le bot choisit l'option " + meilleurChoix + " pour réduire la pollution");
+            return meilleurChoix;
+        }
+        
+        if (ville.budget <= 10000) {
+            // Chercher la décision qui rapporte le plus d'argent
+            int meilleurChoix = 1;
+            int meilleurArgent = decisions[0].argent;
+            
+            for (int i = 1; i < 4; i++) {
+                if (decisions[i].argent > meilleurArgent) {
+                    meilleurChoix = i + 1;
+                    meilleurArgent = decisions[i].argent;
+                }
+            }
+            println("Le bot choisit l'option " + meilleurChoix + " pour augmenter le budget");
+            return meilleurChoix;
+        }
+        
+        // Situation normale : chercher la décision la plus équilibrée
+        int meilleurChoix = 1;
+        double meilleurScore = evaluerDecision(decisions[0]);
+        
+        for (int i = 1; i < 4; i++) {
+            double score = evaluerDecision(decisions[i]);
+            if (score > meilleurScore) {
+                meilleurChoix = i + 1;
+                meilleurScore = score;
+            }
+        }
+        
+        println("Le bot choisit l'option " + meilleurChoix + " pour maintenir l'équilibre");
+        return meilleurChoix;
+    }
+
+    double evaluerDecision(Decisions decision) {
+        // Calcule un score basé sur les impacts de la décision
+        // Donne plus de poids aux aspects positifs
+        double score = 0;
+        score += decision.argent / 1000.0;  // Convertit l'argent en points (1 point par 1000€)
+        score -= decision.pollution * 2;     // Pénalise fortement la pollution
+        score += decision.bonheur * 1.5;     // Favorise le bonheur
+        return score;
     }
 
     void sauvegarderPartie(City ville) {
-        // Charger les saves existantes
         CSVFile existingSaves = loadCSV("ressources/save.csv");
         int existingRows = rowCount(existingSaves);
+        
+        // Vérifier si la ville existe déjà dans les sauvegardes
+        currentSaveIndex = -1;
+        for (int i = 0; i < existingRows && currentSaveIndex == -1; i++) {
+            if (getCell(existingSaves, i, 0).equals(ville.nom)) {
+                currentSaveIndex = i;
+            }
+        }
 
         String[][] contenu;
-
         if (existingRows > 0) {
-            // Si des sauvegardes existent, on les charge dans un tableau
             contenu = new String[existingRows][5];
             for (int i = 0; i < existingRows; i++) {
                 for (int j = 0; j < 5; j++) {
@@ -321,17 +397,27 @@ class App extends Program {
                 }
             }
         } else {
-            // Sinon, on crée un nouveau tableau
             contenu = new String[1][5];
         }
 
-        // On écrase la sauvegarde sélectionnée
-        int saveIndex = choixValideNbr(existingRows); // On demande à l'utilisateur de choisir une sauvegarde à écraser
-        contenu[saveIndex - 1][0] = ville.nom;
-        contenu[saveIndex - 1][1] = "" + ville.tour;
-        contenu[saveIndex - 1][2] = "" + ville.budget;
-        contenu[saveIndex - 1][3] = "" + ville.pollution;
-        contenu[saveIndex - 1][4] = "" + ville.bonheur;
+        // Si la ville n'existe pas, créer une nouvelle entrée
+        if (currentSaveIndex == -1) {
+            String[][] nouveauContenu = new String[existingRows + 1][5];
+            for (int i = 0; i < existingRows; i++) {
+                for (int j = 0; j < 5; j++) {
+                    nouveauContenu[i][j] = contenu[i][j];
+                }
+            }
+            currentSaveIndex = existingRows;
+            contenu = nouveauContenu;
+        }
+
+        // Mettre à jour la sauvegarde
+        contenu[currentSaveIndex][0] = ville.nom;
+        contenu[currentSaveIndex][1] = "" + ville.tour;
+        contenu[currentSaveIndex][2] = "" + ville.budget;
+        contenu[currentSaveIndex][3] = "" + ville.pollution;
+        contenu[currentSaveIndex][4] = "" + ville.bonheur;
 
         saveCSV(contenu, "ressources/save.csv");
         println("Partie sauvegardée !");
@@ -352,11 +438,12 @@ class App extends Program {
         }
 
         int choix = choixValideNbr(totalSaves);
-        ville.nom = getCell(saveFile, choix - 1, 0);
-        ville.tour = stringToInt(getCell(saveFile, choix - 1, 1));
-        ville.budget = stringToInt(getCell(saveFile, choix - 1, 2));
-        ville.pollution = stringToInt(getCell(saveFile, choix - 1, 3));
-        ville.bonheur = stringToInt(getCell(saveFile, choix - 1, 4));
+        currentSaveIndex = choix - 1;
+        ville.nom = getCell(saveFile, currentSaveIndex, 0);
+        ville.tour = stringToInt(getCell(saveFile, currentSaveIndex, 1));
+        ville.budget = stringToInt(getCell(saveFile, currentSaveIndex, 2));
+        ville.pollution = stringToInt(getCell(saveFile, currentSaveIndex, 3));
+        ville.bonheur = stringToInt(getCell(saveFile, currentSaveIndex, 4));
 
         println("Partie chargée !");
     }
@@ -394,5 +481,25 @@ class App extends Program {
         }
         println("- - - - - - - - - - - - - - - - - - -");
         println("Pour revenir au menu et sauvegarder, entrez 5");
+    }
+
+    void supprimerSauvegarde(String nomVille) {
+        CSVFile existingSaves = loadCSV("ressources/save.csv");
+        int existingRows = rowCount(existingSaves);
+        
+        // Créer un nouveau tableau sans la ville à supprimer
+        String[][] nouveauContenu = new String[existingRows - 1][5];
+        int nouvelIndex = 0;
+        
+        for (int i = 0; i < existingRows; i++) {
+            if (!getCell(existingSaves, i, 0).equals(nomVille)) {
+                for (int j = 0; j < 5; j++) {
+                    nouveauContenu[nouvelIndex][j] = getCell(existingSaves, i, j);
+                }
+                nouvelIndex++;
+            }
+        }
+        
+        saveCSV(nouveauContenu, "ressources/save.csv");
     }
 }
