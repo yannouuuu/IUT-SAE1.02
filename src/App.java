@@ -42,52 +42,33 @@ class App extends Program {
         Decisions[] listeDecisions = loadDecision(DECISIONS);
         City ville = creerPartie();
         initialiserJeu(ville);
-        int choix = -1;
-        while (ville.tour < 30 && ville.bonheur >= 50 && ville.pollution <= 100 && ville.budget >= 0 && choix!=5) {
+        boolean continuerJeu = true;
+        
+        while (continuerJeu && ville.tour < 30 && ville.bonheur >= 50 && ville.pollution <= 100 && ville.budget >= 0) {
             clearScreen();
             pourcentageCorrect(ville);
             afficherTxt(TITRE);
-            afficherEtatJeu(ville);
             eventRandom(ville);
-            Decisions num1 = listeDecisions[(int) (random() * 73)];
-            Decisions num2 = listeDecisions[(int) (random() * 73)];
-            Decisions num3 = listeDecisions[(int) (random() * 73)];
-            Decisions num4 = listeDecisions[(int) (random() * 73)];
-            println("1. " + num1.desc + " (" + num1.argent + " €, " + num1.pollution + " pollution, " + num1.bonheur + " bonheur)");
-            println("2. " + num2.desc + " (" + num2.argent + " €, " + num2.pollution + " pollution, " + num2.bonheur + " bonheur)");
-            println("3. " + num3.desc + " (" + num3.argent + " €, " + num3.pollution + " pollution, " + num3.bonheur + " bonheur)");
-            println("4. " + num4.desc + " (" + num4.argent + " €, " + num4.pollution + " pollution, " + num4.bonheur + " bonheur)");
-            println("- - - - - - - - - - - - - - - - - - -");
-            println("Pour revenir au menu et sauvegardez, entrez 5");
+            afficherEtatJeu(ville);
+            
+            Decisions[] decisionsProposees = genererDecisionsAleatoires(listeDecisions);
+            afficherDecisions(decisionsProposees);
 
-            choix = choixValideNbr(5); // Remplacer par botPlay(); pour activer le systeme de bot
-            if (choix == 1) {
-                ville.tour++;
-                ville.budget = ville.budget + num1.argent;
-                ville.pollution = ville.pollution + num1.pollution;
-                ville.bonheur = ville.bonheur + num1.bonheur;
-                println(num1.message);
-          } else if (choix == 2) {
-                ville.tour++;
-                ville.budget = ville.budget + num2.argent;
-                ville.pollution = ville.pollution + num2.pollution;
-                ville.bonheur = ville.bonheur + num2.bonheur;
-                println(num2.message);
-          } else if (choix == 3) {
-            ville.tour++;
-            ville.budget = ville.budget + num3.argent;
-            ville.pollution = ville.pollution + num3.pollution;
-            ville.bonheur = ville.bonheur + num3.bonheur;
-            println(num3.message);
-          } else if (choix == 4) {
-            ville.tour++;
-            ville.budget = ville.budget + num4.argent;
-            ville.pollution = ville.pollution + num4.pollution;
-            ville.bonheur = ville.bonheur + num4.bonheur;
-            println(num4.message);
+            int choix = choixValideNbr(5); // Remplacer par botPlay(); pour activer le systeme de bot
+            if (choix == 5) {
+                sauvegarderPartie(ville);
+                continuerJeu = false;
+            } else {
+                appliquerDecision(ville, choix, decisionsProposees[0], decisionsProposees[1], 
+                                decisionsProposees[2], decisionsProposees[3]);
+            }
         }
+        
+        if (!continuerJeu) {
+            jeu(); // Retour au menu principal
+        } else {
+            gererFinDePartie(ville); // Gestion de la victoire/défaite
         }
-        gererFinDePartie(ville);
     }
 
     // Fonction affichant le menu
@@ -132,6 +113,33 @@ class App extends Program {
         }
     }
 
+    void appliquerDecision(City ville, int choix, Decisions num1, Decisions num2, Decisions num3, Decisions num4) {
+        if (choix == 1) {
+            ville.tour++;
+            ville.budget = ville.budget + num1.argent;
+            ville.pollution = ville.pollution + num1.pollution;
+            ville.bonheur = ville.bonheur + num1.bonheur;
+            println(num1.message);
+        } else if (choix == 2) {
+            ville.tour++;
+            ville.budget = ville.budget + num2.argent;
+            ville.pollution = ville.pollution + num2.pollution;
+            ville.bonheur = ville.bonheur + num2.bonheur;
+            println(num2.message);
+        } else if (choix == 3) {
+            ville.tour++;
+            ville.budget = ville.budget + num3.argent;
+            ville.pollution = ville.pollution + num3.pollution;
+            ville.bonheur = ville.bonheur + num3.bonheur;
+            println(num3.message);
+        } else if (choix == 4) {
+            ville.tour++;
+            ville.budget = ville.budget + num4.argent;
+            ville.pollution = ville.pollution + num4.pollution;
+            ville.bonheur = ville.bonheur + num4.bonheur;
+            println(num4.message);
+        }
+    }
 
     int choixValideNbr(int nbrChoix) {
         println("- - - - - - - - - - - - - - - - -");
@@ -139,8 +147,8 @@ class App extends Program {
         
         while (true) {
             String input = readString();
-            // Vérifie si l'entrée est vide
-            if (length(input) <= 1) {
+            // Vérifie si l'entrée n'est pas vide
+            if (input != null && length(input) > 0) {
                 // Convertit le caractère en ASCII
                 int choix = (int)charAt(input, 0) - '0';
                 
@@ -259,33 +267,29 @@ class App extends Program {
 
     void eventRandom(City ville) {
         Evenements[] listeEvent = loadEvenements(EVENT);
-        int nb = tirerAuHasard(101);
-        if (nb <= 20 && ville.tour>1) {
+        int nb = tirerAuHasard(100);
+        if (nb <= 20 && ville.tour > 1) {
             Evenements event = listeEvent[(int) (random() * length(listeEvent))];
             println(event.desc);
             ville.budget = ville.budget - event.argent;
             ville.pollution = ville.pollution - event.pollution;
             ville.bonheur = ville.bonheur - event.bonheur;
-            if(event.argent>=0){
-                println("Vous avez gagné " +event.argent+ "$ !");
+            if(event.argent >= 0){
+                println("Vous avez gagné " + event.argent + "$ !");
+            } else {
+                println("Vous avez perdu " + event.argent + "$ !");
             }
-            else{
-                println("Vous avez perdu " +event.argent+ "$ !");
+            if(event.bonheur >= 0){
+                println("Vous avez gagné " + event.bonheur + "% de bonheur !");
+            } else {
+                println("Vous avez perdu " + event.bonheur + "% de bonheur !");
             }
-            if(event.bonheur>=0){
-                println("Vous avez gagné " +event.bonheur+ "% de bonheur !");
+            if(event.pollution >= 0){
+                println("Vous avez gagné " + event.pollution + "% de pollution !");
+            } else {
+                println("Vous avez perdu " + event.pollution + "% de pollution !");
             }
-            else{
-                println("Vous avez perdu " +event.bonheur+ "% de bonheur !");
-            }
-            if(event.pollution>=0){
-                println("Vous avez gagné " +event.pollution+ "% de pollution !");
-            }
-            else{
-                println("Vous avez perdu " +event.pollution+ "% de pollution !");
-            }
-            delay(3000);
-            afficherEtatJeu(ville);
+            delay(3000); // Réduit à 3 secondes au lieu de 30
         }
     }
 
@@ -324,7 +328,7 @@ class App extends Program {
         contenu[saveIndex - 1][4] = "" + ville.bonheur;
 
         saveCSV(contenu, "ressources/save.csv");
-        println("Partie sauvegardée !");
+        println("Partie sauvegardée !");
     }
 
     void chargerPartie(City ville) {
@@ -367,5 +371,22 @@ class App extends Program {
             }
         }
         return ""; // En cas de problème (à priori impossible)
+    }
+
+    Decisions[] genererDecisionsAleatoires(Decisions[] listeDecisions) {
+        Decisions[] decisions = new Decisions[4];
+        for (int i = 0; i < 4; i++) {
+            decisions[i] = listeDecisions[(int) (random() * 73)];
+        }
+        return decisions;
+    }
+
+    void afficherDecisions(Decisions[] decisions) {
+        for (int i = 0; i < 4; i++) {
+            println((i+1) + ". " + decisions[i].desc + " (" + decisions[i].argent + " €, " 
+                    + decisions[i].pollution + " pollution, " + decisions[i].bonheur + " bonheur)");
+        }
+        println("- - - - - - - - - - - - - - - - - - -");
+        println("Pour revenir au menu et sauvegarder, entrez 5");
     }
 }
