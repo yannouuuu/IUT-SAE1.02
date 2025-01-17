@@ -112,7 +112,7 @@ cd IUT-SAE1.02/
 4. *Fin de partie* : Atteignez la victoire en maintenant un équilibre après 30 tours ou évitez les conditions de défaite.
 
 ## Exemple de gameplay
-![EcoManager Showcase](./shots/gameplay.png){: style="border-radius: 15px;" }
+![EcoManager Showcase](./shots/gameplay.png)
 
 ## Structure des fichiers
 ```plaintext
