@@ -64,7 +64,6 @@ class App extends Program {
                 appliquerDecision(ville, choix, decisionsProposees[0], decisionsProposees[1], 
                                 decisionsProposees[2], decisionsProposees[3]);
             }
-            eventRandom(ville);
         }
         
         if (!continuerJeu) {
@@ -166,6 +165,9 @@ class App extends Program {
             ville.budget += decisionChoisie.argent;
             ville.pollution += decisionChoisie.pollution;
             ville.bonheur += decisionChoisie.bonheur;
+            
+            // Ajout d'un bonus d'argent à chaque tour
+            ville.budget += 1500; // Bonus de 1500 € par tour
             println(decisionChoisie.message);
             pourcentageCorrect(ville);
         }
@@ -323,6 +325,7 @@ class App extends Program {
             ville.pollution -= event.pollution;
             ville.bonheur -= event.bonheur;
             pourcentageCorrect(ville);
+            
             afficherImpactEvenement(event);
             delay(3000);
             clearScreen();
@@ -566,6 +569,28 @@ class App extends Program {
         assertEquals(5, event.bonheur);
     }
 
+    void testBotPlay() {
+        City ville = new City();
+        Decisions[] decisions = new Decisions[4];
+        
+        // Test priorité bonheur
+        ville.bonheur = 55;
+        decisions[0] = newDecisions("d1", "desc1", 0, 0, 10, "");
+        decisions[1] = newDecisions("d2", "desc2", 0, 0, 5, "");
+        decisions[2] = newDecisions("d3", "desc3", 0, 0, 15, "");
+        decisions[3] = newDecisions("d4", "desc4", 0, 0, 8, "");
+        assertEquals(3, botPlay(ville, decisions));
+
+        // Test priorité pollution
+        ville.bonheur = 70;
+        ville.pollution = 85;
+        decisions[0] = newDecisions("d1", "desc1", 0, -10, 0, "");
+        decisions[1] = newDecisions("d2", "desc2", 0, -15, 0, "");
+        decisions[2] = newDecisions("d3", "desc3", 0, -5, 0, "");
+        decisions[3] = newDecisions("d4", "desc4", 0, -8, 0, "");
+        assertEquals(2, botPlay(ville, decisions));
+    }
+
     void testTirerAuHasard() {
         int max = 100;
         for (int i = 0; i < 1000; i++) {
@@ -647,7 +672,7 @@ class App extends Program {
         ville.pollution = 50;
         ville.bonheur = 75;
         
-        // Exécuter plusieurs fois pour tester la probabilité (pensez a enlever le delay de event random)
+        // Exécuter plusieurs fois pour tester la probabilité
         int eventCount = 0;
         for (int i = 0; i < 1000; i++) {
             City testVille = new City();
@@ -682,6 +707,33 @@ class App extends Program {
         
         // Test pour le bonheur
         assertEquals(3, choisirMeilleurOption(decisions, "bonheur"));
+    }
+
+    void testSauvegarderEtChargerPartie() {
+        // Créer une ville test
+        City ville = new City();
+        ville.nom = "VilleTest";
+        ville.tour = 5;
+        ville.budget = 50000;
+        ville.pollution = 30;
+        ville.bonheur = 75;
+
+        // Sauvegarder
+        sauvegarderPartie(ville);
+
+        // Créer une nouvelle ville pour le chargement
+        City villeChargee = new City();
+        chargerDonnees(villeChargee, loadCSV("ressources/save.csv"), 0);
+
+        // Vérifier que les données sont identiques
+        assertEquals(ville.nom, villeChargee.nom);
+        assertEquals(ville.tour, villeChargee.tour);
+        assertEquals(ville.budget, villeChargee.budget);
+        assertEquals(ville.pollution, villeChargee.pollution);
+        assertEquals(ville.bonheur, villeChargee.bonheur);
+
+        // Nettoyer après le test
+        supprimerSauvegarde("VilleTest");
     }
 
     void testSupprimerSauvegarde() {
