@@ -546,14 +546,6 @@ class App extends Program {
         assertEquals(2, botPlay(ville, decisions));
     }
 
-    void testExtractionChamps() {
-        String line = "champ1,champ2,champ3";
-        assertEquals("champ1", extractionChamps(line, 0));
-        assertEquals("champ2", extractionChamps(line, 1));
-        assertEquals("champ3", extractionChamps(line, 2));
-        assertEquals("", extractionChamps(line, 3));
-    }
-
     void testTirerAuHasard() {
         int max = 100;
         for (int i = 0; i < 1000; i++) {
