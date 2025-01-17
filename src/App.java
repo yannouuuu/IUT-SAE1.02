@@ -47,8 +47,8 @@ class App extends Program {
             clearScreen();
             pourcentageCorrect(ville);
             afficherTxt(TITRE);
-            eventRandom(ville);
             afficherEtatJeu(ville);
+            eventRandom(ville);
             Decisions num1 = listeDecisions[(int) (random() * 73)];
             Decisions num2 = listeDecisions[(int) (random() * 73)];
             Decisions num3 = listeDecisions[(int) (random() * 73)];
@@ -86,8 +86,8 @@ class App extends Program {
             ville.bonheur = ville.bonheur + num4.bonheur;
             println(num4.message);
         }
+        }
         gererFinDePartie(ville);
-    }
     }
 
     // Fonction affichant le menu
@@ -284,7 +284,8 @@ class App extends Program {
             else{
                 println("Vous avez perdu " +event.pollution+ "% de pollution !");
             }
-            delay(30000);
+            delay(3000);
+            afficherEtatJeu(ville);
         }
     }
 
