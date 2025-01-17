@@ -50,13 +50,12 @@ class App extends Program {
             clearScreen();
             pourcentageCorrect(ville);
             afficherTxt(TITLE);
-            eventRandom(ville);
             afficherEtatJeu(ville);
             
             Decisions[] decisionsProposees = genererDecisionsAleatoires(listeDecisions);
             afficherDecisions(decisionsProposees);
 
-            int choix = choixValideNbr(5); // Remplacer par botPlay(ville); pour activer le systeme de bot
+            int choix = choixValideNbr(5); // Remplacer par botPlay(ville, listeDecisions); pour activer le systeme de bot
             if (choix == 5) {
                 sauvegarderPartie(ville);
                 continuerJeu = false;
@@ -64,6 +63,7 @@ class App extends Program {
                 appliquerDecision(ville, choix, decisionsProposees[0], decisionsProposees[1], 
                                 decisionsProposees[2], decisionsProposees[3]);
             }
+            eventRandom(ville);
         }
         
         if (!continuerJeu) {
@@ -353,76 +353,16 @@ class App extends Program {
 
     // ============= SYSTÈME DE BOT =============
     int botPlay(City ville, Decisions[] decisions) {
-        // Système de priorités pour le bot :
-        // 1. Si le bonheur est critique (<= 60), privilégier les décisions augmentant le bonheur
-        // 2. Si la pollution est élevée (>= 80), privilégier la réduction de pollution
-        // 3. Si le budget est faible (<= 10000), privilégier les gains d'argent
-        // 4. Sinon, choisir l'option la plus équilibrée
-        if (ville.bonheur <= 60) {
-            return choisirMeilleurOption(decisions, "bonheur");
-        }
-        if (ville.pollution >= 80) {
-            return choisirMeilleurOption(decisions, "pollution");
-        }
-        if (ville.budget <= 10000) {
-            return choisirMeilleurOption(decisions, "budget");
-        }
-        return choisirOptionEquilibree(decisions);
-    }
-
-    int choisirMeilleurOption(Decisions[] decisions, String critere) {
-        int meilleurChoix = 1;
-        int meilleurScore = getScore(decisions[0], critere);
+        // Choix aléatoire entre 1 et 4
+        int choix = tirerAuHasard(4) + 1; // tirerAuHasard() retourne un nombre entre 0 et 3, donc on ajoute 1 pour obtenir un nombre entre 1 et 4
         
-        for (int i = 1; i < 4; i++) {
-            int score = getScore(decisions[i], critere);
-            if (critere.equals("pollution") ? score < meilleurScore : score > meilleurScore) {
-                meilleurChoix = i + 1;
-                meilleurScore = score;
-            }
-        }
-        println("Le bot choisit l'option " + meilleurChoix + " pour optimiser " + critere);
-        return meilleurChoix;
-    }
-
-    int getScore(Decisions decision, String critere) {
-        if (critere.equals("bonheur")) {
-            return decision.bonheur;
-        }
-        if (critere.equals("pollution")) {
-            return decision.pollution; 
-        }
-        if (critere.equals("budget")) {
-            return decision.argent;
-        }
-        return 0;
-    }
-
-    int choisirOptionEquilibree(Decisions[] decisions) {
-        int meilleurChoix = 1;
-        double meilleurScore = evaluerDecision(decisions[0]);
+        // Log du choix du bot
+        println("Le bot a choisi l'option " + choix);
         
-        for (int i = 1; i < 4; i++) {
-            double score = evaluerDecision(decisions[i]);
-            if (score > meilleurScore) {
-                meilleurChoix = i + 1;
-                meilleurScore = score;
-            }
-        }
-        println("Le bot choisit l'option " + meilleurChoix + " pour maintenir l'équilibre");
-        return meilleurChoix;
-    }
+        // Ajout d'un délai avant de retourner le choix (sinon on ne voit rien et ce n'est pas pratique)
+        delay(1500); 
 
-    double evaluerDecision(Decisions decision) {
-        // Système de scoring pour évaluer l'équilibre d'une décision :
-        // - L'argent est pondéré par 1/1000 pour normaliser son impact
-        // - La pollution a un impact négatif doublé
-        // - Le bonheur est légèrement plus important avec un multiplicateur de 1.5
-        double score = 0;
-        score += decision.argent / 1000.0;
-        score -= decision.pollution * 2;
-        score += decision.bonheur * 1.5;
-        return score;
+        return choix;
     }
 
     // ============= GESTION DES SAUVEGARDES =============
@@ -567,28 +507,6 @@ class App extends Program {
         assertEquals(1000, event.argent);
         assertEquals(10, event.pollution);
         assertEquals(5, event.bonheur);
-    }
-
-    void testBotPlay() {
-        City ville = new City();
-        Decisions[] decisions = new Decisions[4];
-        
-        // Test priorité bonheur
-        ville.bonheur = 55;
-        decisions[0] = newDecisions("d1", "desc1", 0, 0, 10, "");
-        decisions[1] = newDecisions("d2", "desc2", 0, 0, 5, "");
-        decisions[2] = newDecisions("d3", "desc3", 0, 0, 15, "");
-        decisions[3] = newDecisions("d4", "desc4", 0, 0, 8, "");
-        assertEquals(3, botPlay(ville, decisions));
-
-        // Test priorité pollution
-        ville.bonheur = 70;
-        ville.pollution = 85;
-        decisions[0] = newDecisions("d1", "desc1", 0, -10, 0, "");
-        decisions[1] = newDecisions("d2", "desc2", 0, -15, 0, "");
-        decisions[2] = newDecisions("d3", "desc3", 0, -5, 0, "");
-        decisions[3] = newDecisions("d4", "desc4", 0, -8, 0, "");
-        assertEquals(2, botPlay(ville, decisions));
     }
 
     void testTirerAuHasard() {
