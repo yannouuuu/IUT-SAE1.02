@@ -20,6 +20,15 @@ class App extends Program {
     final String LOSE = "./ressources/lose.txt";
     final String EVENT = "./ressources/evenements.csv";
 
+    // Constantes de couleur ANSI
+    final String ANSI_RESET = "\u001B[0m";
+    final String ANSI_RED = "\u001B[31m";
+    final String ANSI_GREEN = "\u001B[32m";
+    final String ANSI_YELLOW = "\u001B[33m";
+    final String ANSI_BLUE = "\u001B[34m";
+    final String ANSI_PURPLE = "\u001B[35m";
+    final String ANSI_CYAN = "\u001B[36m";
+
     int currentSaveIndex = -1;
 
     // ============= MÉTHODES PRINCIPALES =============
@@ -74,11 +83,11 @@ class App extends Program {
     }
 
     void afficherMenuStart() {
-        println("Choisissez une option :");
-        println("1. Nouvelle ville");
-        println("2. Charger une partie");
-        println("3. Afficher les règles du jeu");
-        println("4. Quitter");
+        println(ANSI_CYAN + "Choisissez une option :" + ANSI_RESET);
+        println(ANSI_YELLOW + "1. " + ANSI_RESET + "Nouvelle ville");
+        println(ANSI_YELLOW + "2. " + ANSI_RESET + "Charger une partie");
+        println(ANSI_YELLOW + "3. " + ANSI_RESET + "Afficher les règles du jeu");
+        println(ANSI_YELLOW + "4. " + ANSI_RESET + "Quitter");
     }
 
     void startSelect(int choix, City ville) {
@@ -170,12 +179,12 @@ class App extends Program {
 
     void afficherEtatJeu(City ville) {
         println("Nom de la ville");
-        println("╰┈➤ " + ville.nom);
+        println("╰┈➤ " + ANSI_CYAN + ville.nom + ANSI_RESET);
         println("---------------------------------");
-        println(" ❈ Tour : " + ville.tour);
-        println(" ❈ Budget : " + ville.budget + " €");
-        println(" ❈ Pollution : " + ville.pollution + "%");
-        println(" ❈ Bonheur : " + ville.bonheur + "%");
+        println(" ❈ Tour : " + ANSI_YELLOW + ville.tour + ANSI_RESET);
+        println(" ❈ Budget : " + ANSI_GREEN + ville.budget + " €" + ANSI_RESET);
+        println(" ❈ Pollution : " + ANSI_PURPLE + ville.pollution + "%" + ANSI_RESET);
+        println(" ❈ Bonheur : " + ANSI_BLUE + ville.bonheur + "%" + ANSI_RESET);
         println("---------------------------------");
     }
 
@@ -188,11 +197,13 @@ class App extends Program {
 
     void afficherDecisions(Decisions[] decisions) {
         for (int i = 0; i < 4; i++) {
-            println((i+1) + ". " + decisions[i].desc + " (" + decisions[i].argent + " €, " 
-                    + decisions[i].pollution + " pollution, " + decisions[i].bonheur + " bonheur)");
+            println(ANSI_YELLOW + (i+1) + ". " + ANSI_RESET + decisions[i].desc + " (" + 
+                    ANSI_GREEN + decisions[i].argent + " €" + ANSI_RESET + ", " + 
+                    ANSI_PURPLE + decisions[i].pollution + " pollution" + ANSI_RESET + ", " + 
+                    ANSI_BLUE + decisions[i].bonheur + " bonheur" + ANSI_RESET + ")");
         }
         println("- - - - - - - - - - - - - - - - - - -");
-        println("Pour revenir au menu et sauvegarder, entrez 5");
+        println(ANSI_PURPLE + "Pour revenir au menu et sauvegarder, entrez 5" + ANSI_RESET);
     }
 
     // ============= GESTION DES DONNÉES =============
@@ -291,6 +302,7 @@ class App extends Program {
             
             afficherImpactEvenement(event);
             delay(3000);
+            clearScreen();
         }
     }
 
