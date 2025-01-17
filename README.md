@@ -33,7 +33,7 @@ Ce projet s'inscrit dans le cadre de la SAE 1.02 du BUT Informatique et vise à 
 
 ### **À faire absolument (version minimale) :**
 - [x] **Mode texte uniquement** pour le jeu.  
-- [x] Contrôle robuste de saisie pour éviter les erreurs/crashs.  
+- [ ] Contrôle robuste de saisie pour éviter les erreurs/crashs.  
 - [x] Présentation de choix simples :  
   - [x] Construire une usine.  
   - [x] Planter des arbres.  
@@ -55,11 +55,11 @@ Ce projet s'inscrit dans le cadre de la SAE 1.02 du BUT Informatique et vise à 
   - [x] Subventionner les transports en commun.  
   - [x] Taxer les industries.  
   - [x] Actions spécifiques selon le contexte.  
-- [x] **Système d’événements aléatoires :**  
-  - [x] Grèves.  
-  - [x] Inondations.  
-  - [x] Manifestations écologistes.  
-- [x] Sauvegarde et chargement de la partie.  
+- [ ] **Système d’événements aléatoires :**  
+  - [ ] Grèves.  
+  - [ ] Inondations.  
+  - [ ] Manifestations écologistes.  
+- [ ] Sauvegarde et chargement de la partie.  
 
 ### **Ambitieux (difficile à réaliser dans le délai) :**
 - [ ] **Mode graphique basique** : carte ASCII représentant les zones de la ville.  
