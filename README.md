@@ -109,24 +109,10 @@ cd IUT-SAE1.02/
 1. *Lancer le jeu* : Exécutez la commande ```./run.sh``` après compilation.
 2. *Menu principal* : Choisissez entre une nouvelle partie, charger une sauvegarde ou quitter.
 3. *Tour de jeu* : Prenez des décisions via les options proposées (ex. : construire une usine, planter des arbres). // Observez les impacts sur les trois variables principales (Budget, Pollution, Bonheur).
-4. *Fin de partie* : Atteignez la victoire en maintenant un équilibre après 10 tours ou évitez les conditions de défaite.
+4. *Fin de partie* : Atteignez la victoire en maintenant un équilibre après 30 tours ou évitez les conditions de défaite.
 
 ## Exemple de gameplay
-Exemple d'affichage en cours de jeu
-```bash
--------------------------
-Tour 1
-Budget : 45000 €
-Pollution : 20 %
-Bonheur : 85 %
--------------------------
-Actions disponibles :
-1. Construire une usine (-5000 €, +20% pollution, -10% bonheur)
-2. Planter des arbres (-2000 €, -10% pollution, +15% bonheur)
-3. Organiser un festival (-3000 €, +5% bonheur)
--------------------------
-Choisissez une action (1-3 ou 'q' pour sauvegarder la partie) : 1
-```
+![EcoManager Showcase](./shots/gameplay.png){: style="border-radius: 15px;" }
 
 ## Structure des fichiers
 ```plaintext
