@@ -55,11 +55,11 @@ Ce projet s'inscrit dans le cadre de la SAE 1.02 du BUT Informatique et vise à 
   - [x] Subventionner les transports en commun.  
   - [x] Taxer les industries.  
   - [x] Actions spécifiques selon le contexte.  
-- [ ] **Système d’événements aléatoires :**  
-  - [ ] Grèves.  
-  - [ ] Inondations.  
-  - [ ] Manifestations écologistes.  
-- [ ] Sauvegarde et chargement de la partie.  
+- [x] **Système d’événements aléatoires :**  
+  - [x] Grèves.  
+  - [x] Inondations.  
+  - [x] Manifestations écologistes.  
+- [x] Sauvegarde et chargement de la partie.  
 
 ### **Ambitieux (difficile à réaliser dans le délai) :**
 - [ ] **Mode graphique basique** : carte ASCII représentant les zones de la ville.  
