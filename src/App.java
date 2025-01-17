@@ -169,14 +169,14 @@
              pourcentageCorrect(ville);
 
             // Ajout d'un bonus d'argent à chaque tour
-            ville.budget += 1500; // Bonus de 1500 € par tour
+            ville.budget += 800; // Bonus de 800 € par tour
          }
      }
  
      // ============= INTERFACE UTILISATEUR =============
      int choixValideNbr(int nbrChoix) {
          println("- - - - - - - - - - - - - - - - -");
-         print("Choisissez une action (1-" + nbrChoix + ") : ");
+         print(ANSI_BLACK_BG + ANSI_WHITE + "Choisissez une action (1-" + nbrChoix + ") :" + ANSI_RESET + " ");
          
          while (true) {
              String input = readString();
@@ -188,7 +188,7 @@
              }
              println("La saisie est invalide !");
              delay(2000);
-             print("Choisissez une action (1-" + nbrChoix + ") : ");
+             print(ANSI_BLACK_BG + ANSI_WHITE + "Choisissez une action (1-" + nbrChoix + ") :" + ANSI_RESET + " ");
          }
      }
  
@@ -205,7 +205,7 @@
  
      void afficherEtatJeu(City ville) {
          println("Nom de la ville");
-         println("╰┈➤ " + ANSI_CYAN + ville.nom + ANSI_RESET);
+         println("╰┈➤  " + ANSI_CYAN_BG + ANSI_WHITE + ville.nom + ANSI_RESET);
          println("---------------------------------");
          println(" ❈ Tour : " + ANSI_YELLOW + ville.tour + ANSI_RESET);
          println(" ❈ Budget : " + ANSI_GREEN + ville.budget + " €" + ANSI_RESET);
@@ -229,7 +229,7 @@
                      ANSI_BLUE + decisions[i].bonheur + " bonheur" + ANSI_RESET + ")");
          }
          println("- - - - - - - - - - - - - - - - - - -");
-         println(ANSI_PURPLE + "Pour revenir au menu et sauvegarder, entrez 5" + ANSI_RESET);
+         println(ANSI_BLACK + "Pour revenir au menu et sauvegarder, entrez 5." + ANSI_RESET);
      }
  
      // ============= GESTION DES DONNÉES =============
@@ -263,19 +263,29 @@
          decision.message = message;
          return decision;
      }
- 
+
      Decisions[] loadDecision(String nomFile) {
+         // Charge le contenu du fichier CSV dans une variable
          CSVFile deciAsString = loadCSV(nomFile);
+         
+         // Crée un tableau de décisions avec une taille basée sur le nombre de lignes dans le fichier CSV
          Decisions[] decisions = new Decisions[rowCount(deciAsString) - 1];
+         
+         // Parcourt chaque ligne du fichier CSV à partir de la deuxième ligne (idxD = 1)
          for (int idxD = 1; idxD < length(decisions) + 1; idxD++) {
+             // Récupère les valeurs de chaque colonne pour créer une décision
              String nom = getCell(deciAsString, idxD, 0);
              String desc = getCell(deciAsString, idxD, 1);
              int argent = stringToInt(getCell(deciAsString, idxD, 2));
              int pollution = stringToInt(getCell(deciAsString, idxD, 3));
              int bonheur = stringToInt(getCell(deciAsString, idxD, 4));
              String message = getCell(deciAsString, idxD, 5);
+             
+             // Crée une nouvelle décision et l'ajoute au tableau
              decisions[idxD - 1] = newDecisions(nom, desc, argent, pollution, bonheur, message);
          }
+         
+         // Retourne le tableau de décisions chargées
          return decisions;
      }
  
@@ -317,6 +327,10 @@
          // 20% de chance qu'un événement aléatoire se produise après le premier tour
          int nb = tirerAuHasard(100);
          if (nb <= 20 && ville.tour > 1) {
+             // Effacer l'écran avant d'afficher l'événement
+             clearScreen();
+             afficherTxt(TITLE); // Afficher le titre EcoManager
+
              // Sélection aléatoire d'un événement et application de ses effets
              Evenements event = listeEvent[(int) (random() * length(listeEvent))];
              println(event.desc);
@@ -327,7 +341,7 @@
              pourcentageCorrect(ville);
              
              afficherImpactEvenement(event);
-             delay(3000);
+             delay(4000);
              clearScreen();
          }
      }
@@ -353,76 +367,16 @@
  
      // ============= SYSTÈME DE BOT =============
      int botPlay(City ville, Decisions[] decisions) {
-         // Système de priorités pour le bot :
-         // 1. Si le bonheur est critique (<= 60), privilégier les décisions augmentant le bonheur
-         // 2. Si la pollution est élevée (>= 80), privilégier la réduction de pollution
-         // 3. Si le budget est faible (<= 10000), privilégier les gains d'argent
-         // 4. Sinon, choisir l'option la plus équilibrée
-         if (ville.bonheur <= 60) {
-             return choisirMeilleurOption(decisions, "bonheur");
-         }
-         if (ville.pollution >= 80) {
-             return choisirMeilleurOption(decisions, "pollution");
-         }
-         if (ville.budget <= 10000) {
-             return choisirMeilleurOption(decisions, "budget");
-         }
-         return choisirOptionEquilibree(decisions);
-     }
- 
-     int choisirMeilleurOption(Decisions[] decisions, String critere) {
-         int meilleurChoix = 1;
-         int meilleurScore = getScore(decisions[0], critere);
+         // Choix aléatoire entre 1 et 4
+         int choix = tirerAuHasard(4) + 1; // tirerAuHasard() retourne un nombre entre 0 et 3, donc on ajoute 1 pour obtenir un nombre entre 1 et 4
          
-         for (int i = 1; i < 4; i++) {
-             int score = getScore(decisions[i], critere);
-             if (critere.equals("pollution") ? score < meilleurScore : score > meilleurScore) {
-                 meilleurChoix = i + 1;
-                 meilleurScore = score;
-             }
-         }
-         println("Le bot choisit l'option " + meilleurChoix + " pour optimiser " + critere);
-         return meilleurChoix;
-     }
- 
-     int getScore(Decisions decision, String critere) {
-         if (critere.equals("bonheur")) {
-             return decision.bonheur;
-         }
-         if (critere.equals("pollution")) {
-             return decision.pollution; 
-         }
-         if (critere.equals("budget")) {
-             return decision.argent;
-         }
-         return 0;
-     }
- 
-     int choisirOptionEquilibree(Decisions[] decisions) {
-         int meilleurChoix = 1;
-         double meilleurScore = evaluerDecision(decisions[0]);
+         // Log du choix du bot
+         println("Le bot a choisi l'option " + choix);
          
-         for (int i = 1; i < 4; i++) {
-             double score = evaluerDecision(decisions[i]);
-             if (score > meilleurScore) {
-                 meilleurChoix = i + 1;
-                 meilleurScore = score;
-             }
-         }
-         println("Le bot choisit l'option " + meilleurChoix + " pour maintenir l'équilibre");
-         return meilleurChoix;
-     }
- 
-     double evaluerDecision(Decisions decision) {
-         // Système de scoring pour évaluer l'équilibre d'une décision :
-         // - L'argent est pondéré par 1/1000 pour normaliser son impact
-         // - La pollution a un impact négatif doublé
-         // - Le bonheur est légèrement plus important avec un multiplicateur de 1.5
-         double score = 0;
-         score += decision.argent / 1000.0;
-         score -= decision.pollution * 2;
-         score += decision.bonheur * 1.5;
-         return score;
+         // Ajout d'un délai avant de retourner le choix (sinon on ne voit rien et ce n'est pas pratique)
+         delay(1500); 
+
+         return choix;
      }
  
      // ============= GESTION DES SAUVEGARDES =============
@@ -670,23 +624,6 @@
          assertTrue(eventCount < 250);
      }
  
-     void testChoisirMeilleurOption() {
-         Decisions[] decisions = new Decisions[4];
-         decisions[0] = newDecisions("d1", "desc1", 1000, 10, 5, "");
-         decisions[1] = newDecisions("d2", "desc2", 2000, 5, 10, "");
-         decisions[2] = newDecisions("d3", "desc3", 500, 15, 15, "");
-         decisions[3] = newDecisions("d4", "desc4", 1500, 8, 8, "");
- 
-         // Test pour le budget
-         assertEquals(2, choisirMeilleurOption(decisions, "budget"));
-         
-         // Test pour la pollution (plus petit = meilleur)
-         assertEquals(2, choisirMeilleurOption(decisions, "pollution"));
-         
-         // Test pour le bonheur
-         assertEquals(3, choisirMeilleurOption(decisions, "bonheur"));
-     }
- 
      void testSauvegarderEtChargerPartie() {
          // Créer une ville test
          City ville = new City();
@@ -732,6 +669,21 @@
              }
          }
          assertFalse(found);
+     }
+ 
+     void testBotPlay() {
+         City ville = new City();
+         Decisions[] decisions = new Decisions[4];
+         // Initialiser des décisions fictives pour le test
+         for (int i = 0; i < 4; i++) {
+             decisions[i] = newDecisions("Decision " + (i + 1), "Description " + (i + 1), 1000, 10, 5, "Message " + (i + 1));
+         }
+
+         // Appeler la fonction botPlay
+         int choix = botPlay(ville, decisions);
+
+         // Vérifier que le choix est entre 1 et 4
+         assertTrue(choix >= 1 && choix <= 4);
      }
  }
  
