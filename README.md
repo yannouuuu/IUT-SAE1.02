@@ -33,7 +33,7 @@ Ce projet s'inscrit dans le cadre de la SAE 1.02 du BUT Informatique et vise à 
 
 ### **À faire absolument (version minimale) :**
 - [x] **Mode texte uniquement** pour le jeu.  
-- [ ] Contrôle robuste de saisie pour éviter les erreurs/crashs.  
+- [x] Contrôle robuste de saisie pour éviter les erreurs/crashs.  
 - [x] Présentation de choix simples :  
   - [x] Construire une usine.  
   - [x] Planter des arbres.  
